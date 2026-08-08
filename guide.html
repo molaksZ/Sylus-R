@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>新手引导 · N109 攻略站</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <style>
+        /* ========== 主题变量 ========== */
+        :root {
+            --bg-page: #1a2633;
+            --bg-card: #263340;
+            --bg-nav: #0f1a24;
+            --bg-sidebar: #0f1a24;
+            --text-primary: #f5e6d3;
+            --text-secondary: #c9b8a8;
+            --text-heading: #f7e8d0;
+            --accent-gold: #e8b84c;
+            --accent-orange: #d98c3a;
+            --accent-red: #b84a3a;
+            --border-color: #5c3a21;
+            --shadow-color: #1a0e08;
+            --btn-bg: #b84a3a;
+            --btn-text: #f5e6d3;
+            --text-shadow-enabled: 2px 2px 0 var(--shadow-color);
+            --sidebar-width: 180px;
+            --topnav-height: 60px;
+            --dot-pattern: radial-gradient(circle, rgba(200,180,160,0.05) 1px, transparent 1px);
+            --card-shadow: 0 4px 0 0 var(--border-color);
+            --font-base: 18px;
+            --font-small: 15px;
+            --font-title: 30px;
+        }
+        .light-mode {
+            --bg-page: #f2ebe0;
+            --bg-card: #ffffff;
+            --bg-nav: #e6dccc;
+            --bg-sidebar: #e6dccc;
+            --text-primary: #2c241c;
+            --text-secondary: #5a4e42;
+            --text-heading: #1a1a1a;
+            --accent-gold: #b88a3a;
+            --accent-orange: #c47a2a;
+            --accent-red: #a03a2a;
+            --border-color: #b8a898;
+            --shadow-color: transparent;
+            --btn-bg: #a03a2a;
+            --btn-text: #f5e6d3;
+            --text-shadow-enabled: none;
+            --card-shadow: 0 4px 0 0 var(--border-color);
+            --dot-pattern: radial-gradient(circle, rgba(120,100,80,0.08) 1px, transparent 1px);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.25s, color 0.25s, border 0.25s, box-shadow 0.25s; image-rendering: pixelated; }
+        body {
+            font-family: 'Press Start 2P', 'Courier New', monospace;
+            background: var(--bg-page);
+            color: var(--text-primary);
+            font-size: var(--font-base);
+            line-height: 1.9;
+            min-height: 100vh;
+            padding-top: var(--topnav-height);
+            padding-left: var(--sidebar-width);
+            background-image: var(--dot-pattern);
+            background-size: 20px 20px;
+        }
+        a { color: var(--accent-gold); text-decoration: none; }
+        a:hover { color: var(--accent-orange); }
+
+        /* ========== 顶部导航 ========== */
+        .top-nav {
+            position: fixed; top: 0; left: 0; right: 0; height: var(--topnav-height);
+            background: var(--bg-nav); border-bottom: 4px solid var(--border-color);
+            box-shadow: 0 4px 0 0 var(--bg-page); padding: 0 24px;
+            display: flex; align-items: center; justify-content: space-between; z-index: 100;
+            flex-wrap: wrap; gap: 6px; background-image: var(--dot-pattern); background-size: 20px 20px;
+        }
+        .top-nav .logo { font-size: 22px; font-weight: bold; color: var(--accent-gold); text-shadow: var(--text-shadow-enabled); letter-spacing: 1px; white-space: nowrap; }
+        .top-nav .logo span { background: var(--accent-red); color: #f5e6d3; padding: 2px 10px; font-size: 12px; border: 2px solid var(--border-color); margin-left: 8px; text-shadow: none; }
+        .top-nav-links { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+        .top-nav-links a { color: var(--text-secondary); font-size: 17px; padding: 4px 0; border-bottom: 3px solid transparent; transition: none; white-space: nowrap; }
+        .top-nav-links a:hover { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
+        .top-nav-links a.active { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
+        .top-nav .theme-toggle { background: var(--btn-bg); color: var(--btn-text); border: 3px solid var(--border-color); padding: 4px 16px; font-family: inherit; font-size: 15px; cursor: pointer; box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a; transition: 0.05s linear; text-shadow: none; white-space: nowrap; }
+        .top-nav .theme-toggle:active { transform: translate(2px,2px); box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a; }
+
+        /* ========== 侧边栏 ========== */
+        .sidebar {
+            position: fixed; top: var(--topnav-height); left: 0; bottom: 0; width: var(--sidebar-width);
+            background: var(--bg-sidebar); border-right: 4px solid var(--border-color);
+            box-shadow: 4px 0 0 0 var(--bg-page); padding: 24px 14px;
+            display: flex; flex-direction: column; z-index: 90; overflow-y: auto;
+            transition: transform 0.3s ease; background-image: var(--dot-pattern); background-size: 20px 20px;
+        }
+        .sidebar .sidebar-title { font-size: 15px; color: var(--text-secondary); opacity: 0.6; letter-spacing: 2px; padding-bottom: 12px; border-bottom: 3px solid var(--border-color); margin-bottom: 16px; }
+        .sidebar-nav { display: flex; flex-direction: column; gap: 4px; }
+        .sidebar-nav a { color: var(--text-secondary); font-size: 17px; padding: 6px 12px; border: 3px solid transparent; transition: none; display: block; }
+        .sidebar-nav a:hover { color: var(--accent-gold); background: var(--bg-card); border-color: var(--border-color); }
+        .sidebar-nav a.active { color: var(--accent-gold); background: var(--bg-card); border-color: var(--accent-gold); }
+        .sidebar-footer { margin-top: auto; font-size: 13px; color: var(--text-secondary); opacity: 0.4; border-top: 3px solid var(--border-color); padding-top: 14px; text-align: center; }
+
+        .menu-toggle { display: none; position: fixed; top: 10px; left: 10px; z-index: 110; background: var(--btn-bg); color: var(--btn-text); border: 3px solid var(--border-color); padding: 4px 14px; font-family: inherit; font-size: 16px; cursor: pointer; box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a; text-shadow: none; }
+        .menu-toggle:active { transform: translate(2px,2px); box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a; }
+        .sidebar-overlay { display: none; position: fixed; inset: 0; top: var(--topnav-height); background: rgba(0,0,0,0.5); z-index: 80; }
+
+        /* ========== 主内容 ========== */
+        .main-content { padding: 20px 28px 30px 28px; max-width: 1200px; margin: 0 auto; }
+        .page-title { margin-bottom: 28px; border-bottom: 4px solid var(--border-color); padding-bottom: 14px; }
+        .page-title h1 { font-size: var(--font-title); text-shadow: var(--text-shadow-enabled); color: var(--accent-gold); }
+        .page-title p { font-size: var(--font-small); color: var(--text-secondary); margin-top: 6px; }
+
+        /* ========== 四张界面图片 ========== */
+        .intro-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 30px; }
+        .intro-card {
+            background: var(--bg-card);
+            border: 4px solid var(--border-color);
+            box-shadow: inset 0 0 0 2px var(--bg-card), var(--card-shadow);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+            position: relative;
+        }
+        .intro-card:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 2px var(--bg-card), 0 6px 0 0 var(--border-color); border-color: var(--accent-gold); }
+        .intro-card .card-label {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(0,0,0,0.7);
+            padding: 3px 12px;
+            font-size: 12px;
+            color: var(--accent-gold);
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            z-index: 2;
+            backdrop-filter: blur(4px);
+        }
+        .intro-card .card-label .badge { background: var(--accent-red); color: #f5e6d3; padding: 0 6px; font-size: 10px; margin-left: 4px; border: 1px solid var(--border-color); border-radius: 2px; }
+        .intro-card .screenshot {
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            background: var(--bg-page);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .intro-card .screenshot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            image-rendering: pixelated;
+        }
+        .intro-card .click-hint { text-align: center; padding: 4px 0 6px 0; font-size: 11px; color: var(--text-secondary); opacity: 0.6; border-top: 1.5px solid var(--border-color); letter-spacing: 0.5px; background: var(--bg-card); }
+
+        /* ========== 引导模态框（左图右文，竖版图片） ========== */
+        .guide-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(6px); z-index: 3000; align-items: center; justify-content: center; padding: 30px; }
+        .guide-modal.open { display: flex; }
+        .guide-modal .modal-content { position: relative; max-width: 750px; width: 100%; max-height: 90vh; background: var(--bg-card); border: 4px solid var(--border-color); border-radius: 12px; overflow: hidden; box-shadow: 0 0 60px rgba(0,0,0,0.8); display: grid; grid-template-columns: 2fr 3fr; }
+        .guide-modal .modal-close { position: absolute; top: 10px; right: 10px; background: var(--accent-red); border: 3px solid var(--border-color); color: #f5e6d3; font-family: inherit; font-size: 20px; padding: 2px 14px; cursor: pointer; z-index: 20; line-height: 1.4; box-shadow: inset -2px -2px 0 #3a1a12, inset 2px 2px 0 #c06a5a; border-radius: 4px; }
+        .guide-modal .modal-close:active { transform: translate(2px,2px); box-shadow: inset 2px 2px 0 #3a1a12, inset -2px -2px 0 #c06a5a; }
+        .guide-modal .modal-image { background: #2a2a4a; display: flex; align-items: center; justify-content: center; overflow: hidden; aspect-ratio: 9/16; height: 100%; }
+        .guide-modal .modal-image img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
+        .guide-modal .modal-text { padding: 18px 20px 20px 20px; background: var(--bg-page); overflow-y: auto; font-size: var(--font-small); line-height: 2; color: var(--text-secondary); }
+        .guide-modal .modal-text .section-title { color: var(--accent-gold); font-size: calc(var(--font-small) + 2px); display: block; margin-top: 12px; margin-bottom: 4px; border-bottom: 1px solid var(--border-color); padding-bottom: 4px; }
+        .guide-modal .modal-text .highlight { color: var(--accent-gold); }
+        .guide-modal .modal-text .tag { display: inline-block; background: var(--accent-red); color: #f5e6d3; font-size: 11px; padding: 0 8px; border: 1px solid var(--border-color); border-radius: 3px; margin-right: 4px; }
+
+        /* ========== 场景一览 ========== */
+        .scene-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; margin-bottom: 10px; }
+        .scene-card { background: var(--bg-card); border: 4px solid var(--border-color); box-shadow: inset 0 0 0 2px var(--bg-card), var(--card-shadow); padding: 14px 10px; text-align: center; cursor: pointer; transition: none; background-image: var(--dot-pattern); background-size: 20px 20px; aspect-ratio: 3/4; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .scene-card:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 2px var(--bg-card), 0 6px 0 0 var(--border-color); border-color: var(--accent-gold); }
+        .scene-card .s-icon { font-size: 30px; margin-bottom: 4px; }
+        .scene-card .s-name { font-size: 15px; color: var(--accent-gold); text-shadow: var(--text-shadow-enabled); }
+        .scene-card .s-desc { font-size: 12px; color: var(--text-secondary); margin-top: 3px; line-height: 1.5; }
+
+        /* ========== 场景模态框 ========== */
+        .scene-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+        .scene-modal.open { display: flex; }
+        .scene-modal .modal-box { background: var(--bg-card); border: 6px solid var(--border-color); box-shadow: 0 0 0 3px var(--bg-page), 8px 8px 0 rgba(0,0,0,0.5); max-width: 1000px; width: 100%; max-height: 90vh; overflow-y: auto; display: grid; grid-template-columns: 5fr 3fr; gap: 0; position: relative; }
+        .scene-modal .modal-close-scene { position: absolute; top: 12px; right: 16px; background: var(--accent-red); border: 3px solid var(--border-color); color: #f5e6d3; font-family: inherit; font-size: 24px; padding: 4px 16px; cursor: pointer; z-index: 10; line-height: 1.4; box-shadow: inset -2px -2px 0 #3a1a12, inset 2px 2px 0 #c06a5a; }
+        .scene-modal .modal-close-scene:active { transform: translate(2px,2px); box-shadow: inset 2px 2px 0 #3a1a12, inset -2px -2px 0 #c06a5a; }
+        .scene-modal .modal-image { background: #2a2a4a; display: flex; align-items: center; justify-content: center; overflow: hidden; aspect-ratio: 4/3; width: 100%; min-height: 350px; }
+        .scene-modal .modal-image img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
+        .scene-modal .modal-info { padding: 24px 28px; display: flex; flex-direction: column; gap: 12px; }
+        .scene-modal .modal-info h2 { font-size: 24px; color: var(--accent-gold); text-shadow: var(--text-shadow-enabled); border-bottom: 3px solid var(--border-color); padding-bottom: 8px; }
+        .scene-modal .modal-info .desc { font-size: 17px; color: var(--text-secondary); line-height: 2; flex: 1; }
+        .scene-modal .modal-info .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+        .scene-modal .modal-info .tags span { background: var(--bg-nav); border: 2px solid var(--border-color); padding: 4px 14px; font-size: 13px; color: var(--text-secondary); }
+        .scene-modal .modal-info .tags .gold { color: var(--accent-gold); border-color: var(--accent-gold); }
+
+        /* ========== 底部 ========== */
+        .footer { margin-top: 40px; border-top: 4px solid var(--border-color); padding: 20px 0 14px; text-align: center; font-size: 15px; color: var(--text-secondary); }
+        .footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 6px; }
+        .footer-links a { color: var(--text-secondary); font-size: 15px; }
+        .footer-links a:hover { color: var(--accent-gold); }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 820px) {
+            body { padding-left: 0; padding-top: 70px; }
+            .top-nav { padding: 0 12px; height: auto; min-height: 56px; gap: 6px; }
+            .top-nav .logo { font-size: 18px; }
+            .top-nav-links { gap: 12px; }
+            .top-nav-links a { font-size: 16px; }
+            .top-nav .theme-toggle { font-size: 13px; padding: 3px 12px; }
+            .sidebar { transform: translateX(-100%); width: 200px; top: 56px; }
+            .sidebar.open { transform: translateX(0); }
+            .sidebar-overlay.open { display: block; }
+            .menu-toggle { display: block; }
+            .main-content { padding: 16px 14px 20px 14px; }
+            .intro-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+            .guide-modal .modal-content { grid-template-columns: 1fr; max-width: 450px; }
+            .guide-modal .modal-image { aspect-ratio: 9/16; max-height: 300px; }
+            .scene-modal .modal-box { grid-template-columns: 1fr; max-width: 600px; }
+            .scene-modal .modal-image { aspect-ratio: 4/3; min-height: 220px; }
+            .scene-modal .modal-info { padding: 18px 20px; }
+        }
+        @media (max-width: 480px) {
+            body { font-size: 17px; }
+            .top-nav .logo { font-size: 16px; }
+            .top-nav-links a { font-size: 14px; }
+            .page-title h1 { font-size: 26px; }
+            .intro-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .guide-modal { padding: 16px; }
+            .guide-modal .modal-content { max-width: 100%; }
+            .guide-modal .modal-image { aspect-ratio: 9/16; max-height: 220px; }
+            .guide-modal .modal-text { font-size: 14px; padding: 14px; }
+            .scene-modal .modal-image { min-height: 160px; }
+            .scene-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+            .scene-card { padding: 10px 8px; }
+            .scene-card .s-name { font-size: 13px; }
+            .scene-card .s-desc { font-size: 11px; }
+            .scene-modal .modal-info h2 { font-size: 20px; }
+            .scene-modal .modal-info .desc { font-size: 16px; }
+            .footer-links { flex-direction: column; gap: 6px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 移动端汉堡 ===== -->
+    <button class="menu-toggle" id="menuToggle" aria-label="切换侧边栏">☰</button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== 顶部导航 ===== -->
+    <header class="top-nav">
+        <div class="logo">🎮 攻略<span>站</span></div>
+        <div class="top-nav-links">
+            <a href="index.html">首页</a>
+            <a href="guide.html" class="active">新手引导</a>
+            <a href="gallery.html">图鉴</a>
+            <a href="tools.html">攻略</a>
+            <a href="activities.html">活动</a>
+            <a href="about.html">权责</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle">🌓 切换</button>
+    </header>
+
+    <!-- ===== 侧边栏 ===== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-title">📌 本页目录</div>
+        <nav class="sidebar-nav">
+            <a href="#intro" class="active">📖 基础介绍</a>
+            <a href="#scenes">🗺️ 场景一览</a>
+        </nav>
+        <div class="sidebar-footer">v1.0 · 像素攻略站</div>
+    </aside>
+
+    <!-- ===== 主内容 ===== -->
+    <main class="main-content">
+
+        <div class="page-title">
+            <h1>📖 新手引导</h1>
+            <p>点击下方界面图片，放大查看功能引导</p>
+        </div>
+
+        <!-- ===== 四张界面图片（直接显示真实图片） ===== -->
+        <section id="intro">
+            <div class="intro-grid">
+
+                <!-- 卡片1：操作与右上角 -->
+                <div class="intro-card" data-target="modal1">
+                    <span class="card-label">🎮 操作 · 右上角 <span class="badge">2项</span></span>
+                    <div class="screenshot">
+                        <img src="./images/guide-op-right.png" alt="操作与右上角" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22640%22 viewBox=%220 0 360 640%22%3E%3Crect width=%22360%22 height=%22640%22 fill=%22%232a3a5a%22/%3E%3Ctext x=%22180%22 y=%22320%22 font-size=%2228%22 text-anchor=%22middle%22 fill=%22%23e8b84c%22 font-family=%22sans-serif%22%3E%E6%93%8D%E4%BD%9C%C2%B7%E5%8F%B3%E4%B8%8A%E8%A7%92%3C/text%3E%3C/svg%3E'" />
+                    </div>
+                    <div class="click-hint">🖱️ 点击放大 · 查看引导</div>
+                </div>
+
+                <!-- 卡片2：左下角核心键 -->
+                <div class="intro-card" data-target="modal2">
+                    <span class="card-label">❤️ 左下角核心 <span class="badge">4项</span></span>
+                    <div class="screenshot">
+                        <img src="./images/guide-left-core.png" alt="左下角核心" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22640%22 viewBox=%220 0 360 640%22%3E%3Crect width=%22360%22 height=%22640%22 fill=%22%232a3a5a%22/%3E%3Ctext x=%22180%22 y=%22320%22 font-size=%2228%22 text-anchor=%22middle%22 fill=%22%23e8b84c%22 font-family=%22sans-serif%22%3E%E5%B7%A6%E4%B8%8B%E8%A7%92%E6%A0%B8%E5%BF%83%3C/text%3E%3C/svg%3E'" />
+                    </div>
+                    <div class="click-hint">🖱️ 点击放大 · 查看引导</div>
+                </div>
+
+                <!-- 卡片3：秦彻宝库 I -->
+                <div class="intro-card" data-target="modal3">
+                    <span class="card-label">💎 宝库 I <span class="badge">4项</span></span>
+                    <div class="screenshot">
+                        <img src="./images/guide-treasure-1.png" alt="秦彻宝库 I" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22640%22 viewBox=%220 0 360 640%22%3E%3Crect width=%22360%22 height=%22640%22 fill=%22%232a3a5a%22/%3E%3Ctext x=%22180%22 y=%22320%22 font-size=%2228%22 text-anchor=%22middle%22 fill=%22%23e8b84c%22 font-family=%22sans-serif%22%3E%E5%AE%9D%E5%BA%93%20I%3C/text%3E%3C/svg%3E'" />
+                    </div>
+                    <div class="click-hint">🖱️ 点击放大 · 查看引导</div>
+                </div>
+
+                <!-- 卡片4：秦彻宝库 II + 切换设置 -->
+                <div class="intro-card" data-target="modal4">
+                    <span class="card-label">💎 宝库 II · ⚙️ 切换 <span class="badge">8项</span></span>
+                    <div class="screenshot">
+                        <img src="./images/guide-treasure-2.png" alt="宝库 II · 切换" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22640%22 viewBox=%220 0 360 640%22%3E%3Crect width=%22360%22 height=%22640%22 fill=%22%232a3a5a%22/%3E%3Ctext x=%22180%22 y=%22320%22 font-size=%2228%22 text-anchor=%22middle%22 fill=%22%23e8b84c%22 font-family=%22sans-serif%22%3E%E5%AE%9D%E5%BA%93%20II%C2%B7%E5%88%87%E6%8D%A2%3C/text%3E%3C/svg%3E'" />
+                    </div>
+                    <div class="click-hint">🖱️ 点击放大 · 查看引导</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== 引导模态框 ===== -->
+        <div class="guide-modal" id="guideModal">
+            <div class="modal-content">
+                <button class="modal-close" id="modalClose">✕</button>
+                <div class="modal-image">
+                    <img id="modalGuideImg" src="" alt="功能截图" />
+                </div>
+                <div class="modal-text" id="modalText"></div>
+            </div>
+        </div>
+
+        <!-- ===== 17个场景方框 ===== -->
+        <section id="scenes">
+            <h2 style="font-size:22px; color:var(--accent-gold); text-shadow:var(--text-shadow-enabled); margin-bottom:16px; border-bottom:3px solid var(--border-color); padding-bottom:8px;">
+                🗺️ 场景一览
+            </h2>
+            <div class="scene-grid" id="sceneGrid"></div>
+        </section>
+
+        <!-- ===== 底部 ===== -->
+        <footer class="footer">
+            <div style="margin-bottom:8px;">📜 本攻略站由玩家自发维护 · 内容按 <strong>CC BY-NC-SA 4.0</strong> 协议提供</div>
+            <div class="footer-links">
+                <a href="about.html">免责声明</a>
+                <a href="manage.html">编辑教程</a>
+                <a href="#">反馈留言</a>
+                <a href="#">交流群：123456</a>
+            </div>
+            <div style="margin-top:10px; font-size:13px; opacity:0.5;">v1.0 · 像素攻略站</div>
+        </footer>
+
+    </main>
+
+    <!-- ===== 场景详情模态框 ===== -->
+    <div class="scene-modal" id="sceneModal">
+        <div class="modal-box">
+            <button class="modal-close-scene" id="modalCloseScene">✕</button>
+            <div class="modal-image">
+                <img id="modalImage" src="" alt="场景预览" />
+            </div>
+            <div class="modal-info">
+                <h2 id="modalTitleScene">场景名称</h2>
+                <div class="desc" id="modalDescScene">场景功能介绍</div>
+                <div class="tags" id="modalTagsScene"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JavaScript -->
+    <!-- ============================================================ -->
+    <script>
+        // ============================================================
+        // 1. 主题切换 & 侧边栏
+        // ============================================================
+        (function() {
+            const themeBtn = document.getElementById('themeToggle');
+            const current = localStorage.getItem('pixel-theme');
+            if (current === 'light') document.documentElement.classList.add('light-mode');
+            themeBtn.addEventListener('click', function() {
+                const html = document.documentElement;
+                html.classList.toggle('light-mode');
+                localStorage.setItem('pixel-theme', html.classList.contains('light-mode') ? 'light' : 'dark');
+            });
+
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            menuToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('open');
+                overlay.classList.toggle('open');
+            });
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('open');
+            });
+            document.querySelectorAll('.sidebar-nav a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 820) { sidebar.classList.remove('open');
+                        overlay.classList.remove('open'); }
+                });
+            });
+
+            const sections = [
+                { id: 'intro', link: document.querySelector('.sidebar-nav a[href="#intro"]') },
+                { id: 'scenes', link: document.querySelector('.sidebar-nav a[href="#scenes"]') }
+            ];
+            let timer = null;
+            window.addEventListener('scroll', function() {
+                if (timer) return;
+                timer = setTimeout(function() {
+                    let activeId = 'intro';
+                    let minDist = Infinity;
+                    sections.forEach(function(item) {
+                        const el = document.getElementById(item.id);
+                        if (el) {
+                            const rect = el.getBoundingClientRect();
+                            if (rect.top < 300 && rect.top > -300) {
+                                const dist = Math.abs(rect.top);
+                                if (dist < minDist) { minDist = dist;
+                                    activeId = item.id; }
+                            }
+                        }
+                    });
+                    sections.forEach(function(item) {
+                        if (item.link) {
+                            item.link.classList.toggle('active', item.id === activeId);
+                        }
+                    });
+                    timer = null;
+                }, 100);
+            });
+            setTimeout(function() {
+                document.querySelector('.sidebar-nav a[href="#intro"]')?.classList.add('active');
+            }, 300);
+        })();
+
+        // ============================================================
+        // 2. 引导内容（四张卡片）
+        // ============================================================
+        const guideImages = {
+            modal1: './images/guide-op-right.png',
+            modal2: './images/guide-left-core.png',
+            modal3: './images/guide-treasure-1.png',
+            modal4: './images/guide-treasure-2.png'
+        };
+
+        const modalData = {
+            modal1: {
+                title: '🎮 操作 · 右上角',
+                text: `
+                    <span class="section-title">🖱️ 基础场景操作</span>
+                    <span class="highlight">拖拽旋转：</span>长按屏幕背景拖拽，即可自由旋转观察房间每个角落。<br>
+                    <span class="highlight">滚轮缩放：</span>双指/滚轮放大缩小，看清细节。<br>
+                    <span class="highlight">点击走位：</span>点击地板，角色会自己走过去。<br>
+                    <span class="highlight">场景切换：</span>点击右上角 <span class="tag">？</span> 图标，在"空间"下拉菜单中可以一键切换到其他房间。<br>
+                    <span class="section-title">📩 右上角功能区</span>
+                    <span class="highlight">✉️ 邮箱：</span>接收日常消息和奖励的地方。<br>
+                    <span class="highlight">⚙️ 切换（？）：</span>游戏核心设置，包含服装、猫猫、作息等，稍后会详细介绍。
+                `
+            },
+            modal2: {
+                title: '❤️ 左下角核心键',
+                text: `
+                    <span class="section-title">左下角功能区（4个核心键）</span>
+                    <span class="highlight">❤️ 更新与作者：</span>查看作者的话、最新游戏更新通知。<br>
+                    <span class="highlight">🎵 陪伴与音乐：</span>播放舒缓音乐，辅助入眠。<br>
+                    <span class="highlight">💬 留言板：</span>和其他玩家交流，留下你的足迹（现有 <span class="highlight">34</span> 条留言）。<br>
+                    <span class="highlight">💎 秦彻宝库（菱形标）：</span>游戏里最强大的多功能菜单！下面为你重点讲解。
+                `
+            },
+            modal3: {
+                title: '💎 秦彻宝库 I',
+                text: `
+                    <span class="section-title">💎 宝库顶部信息</span>
+                    <span class="highlight">入驻暗点：</span>显示已陪伴天数（达 <span class="highlight">750</span> 天，前7天内可自行手动修改日期）。<br>
+                    <span class="highlight">当前资产：</span>显示你拥有的 <span class="highlight">宝石</span> 数量（当前 <span class="highlight">828</span> 颗）。<br>
+                    <span class="section-title">📦 宝库七大功能模块（上）</span>
+                    <span class="highlight">👤 暗点编制：</span>修改昵称、每日签到打卡、查看个人成就。<br>
+                    <span class="highlight">📝 我的记事本：</span>日常随笔记事、习惯打卡、设置倒数纪念日。<br>
+                    <span class="highlight">🍅 宝石番茄钟：</span>挂机刷宝石神器！开启后专注工作/学习，同时赚取钻石。<br>
+                    <span class="highlight">🧰 我的工具箱：</span>内置骰子、转盘（专治选择恐惧症）、小相框等趣味小工具。
+                `
+            },
+            modal4: {
+                title: '💎 宝库 II · ⚙️ 切换',
+                text: `
+                    <span class="section-title">📦 宝库七大功能模块（下）</span>
+                    <span class="highlight">📅 帮我记经期：</span>贴心的小助手，记录生理周期。<br>
+                    <span class="highlight">🛍️ 塔尔城神秘集市：</span>内置商店，售卖各种精美物品，物美价廉。<br>
+                    <span class="highlight">☁️ 云端连接器：</span>修改密码，生成多设备数据同步码，换设备不丢档。<br>
+                    <span class="section-title">⚙️ 核心设置：【切换功能】一览</span>
+                    <span class="highlight">👗 服装设置：</span>下拉切换主角"秦彻"的服装造型。<br>
+                    <span class="highlight">🏠 空间切换：</span>下拉切换当前场景（如：切换到"卧室"）。<br>
+                    <span class="highlight">🐱 小狸花：</span>勾选后，可自定义解锁并选择猫咪的颜色。<br>
+                    <span class="highlight">🚶 自动溜达：</span>勾选后，角色会自己自由漫步。<br>
+                    <span class="highlight">🛌 秦彻作息：</span>勾选后，角色会遵循真实作息（白天秦彻会睡觉）。<br>
+                    <span class="highlight">🏠 回到中央：</span>点击后，立刻将视角重置拉回房间正中央。
+                `
+            }
+        };
+
+        // 卡片点击 → 打开模态框
+        document.querySelectorAll('.intro-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const target = this.dataset.target;
+                const data = modalData[target];
+                if (!data) return;
+
+                document.getElementById('modalGuideImg').src = guideImages[target] || '';
+                document.getElementById('modalText').innerHTML = data.text;
+                document.getElementById('guideModal').classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // 关闭模态框
+        document.getElementById('modalClose').addEventListener('click', function() {
+            document.getElementById('guideModal').classList.remove('open');
+            document.body.style.overflow = '';
+        });
+        document.getElementById('guideModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.getElementById('guideModal').classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // ============================================================
+        // 3. 场景数据（17个）
+        // ============================================================
+        const SCENES = [
+            { id: 's1', name: '客厅', icon: '🛋️', desc: '基础互动场景', detail: '客厅是主界面的核心场景，秦彻会在这里随机出现。你可以在这里与他对话、互动，偶尔触发特殊事件。是日常陪伴的主要场景之一。', tags: ['日常', '互动'] },
+            { id: 's2', name: '卧室', icon: '🛏️', desc: '数羊小游戏 · 家具互动 · 小龙飞行', detail: '卧室是秦彻休息的地方，床头有「数羊小游戏」可以助眠。床边的家具可以互动，小龙也可以在房间里飞行。是一个温馨的私人空间。', tags: ['小游戏', '互动'] },
+            { id: 's3', name: '厨房', icon: '🍳', desc: '🌱 种菜小游戏 N109: Gardening', detail: '厨房场景开启后，可以进入「种菜小游戏」界面。种植作物、浇水施肥、收获果实，是金币和资源的重要来源之一。', tags: ['小游戏', '种植'] },
+            { id: 's4', name: '浴室', icon: '🛁', desc: '作息系统场景', detail: '浴室是作息系统的重要组成部分，秦彻会在这里进行日常洗漱。进入后可以触发不同的互动反馈，是了解秦彻作息的窗口。', tags: ['作息', '互动'] },
+            { id: 's5', name: '武器库', icon: '⚔️', desc: '展示/互动', detail: '武器库陈列着各种武器和装备，点击可以查看详情。部分武器会有特殊互动反馈，是了解秦彻战斗背景的重要场景。', tags: ['展示', '互动'] },
+            { id: 's6', name: '藏品室', icon: '🏺', desc: '存放珍贵资料', detail: '藏品室用于存放游戏内的珍贵物品和收集品。玩家可以在这里查看已获得的成就、特殊道具和纪念品。', tags: ['收集', '展示'] },
+            { id: 's7', name: '拳击室', icon: '🥊', desc: '运动互动', detail: '拳击室是秦彻进行拳击训练的地方，点击擂台可以触发打拳互动。挂机一段时间后，秦彻会自动进入擂台进行训练。', tags: ['运动', '互动'] },
+            { id: 's8', name: '龙窟', icon: '🐉', desc: '打卡功能', detail: '龙窟是神秘的古龙栖息地，进入后可以打卡记录。每次打卡都会留下记录，是探索龙族秘密的重要场景。', tags: ['打卡', '探索'] },
+            { id: 's9', name: '教堂', icon: '⛪', desc: '答案之书（需红宝石解锁）', detail: '教堂内藏有一本「答案之书」，用红宝石解锁后可以抽取秦彻的官方语录。每次打开都会随机出现一条经典台词。', tags: ['解锁', '语录'] },
+            { id: 's10', name: '私人影院', icon: '🎬', desc: '限时放映 · 电影票通过神秘集市获取', detail: '私人影院可以观看限时放映的影片。电影票需要通过「神秘集市」获取，是收集限定观影体验的特殊场景。', tags: ['限时', '观影'] },
+            { id: 's11', name: '暗点歌房', icon: '🎤', desc: '戳话筒唱歌 · 可看出场PV', detail: '暗点歌房是唱歌互动场景，点击话筒可以让秦彻随机演唱一首歌。演唱时会有专属PV动画和口型同步，是音乐爱好者的必去场景。', tags: ['唱歌', 'PV'] },
+            { id: 's12', name: '暗点修车坊', icon: '🏎️', desc: '🏎️ 赛车小游戏 N109 Boulevard', detail: '修车坊是赛车小游戏「N109 Boulevard」的入口。玩家可以进入后体验像素赛车竞速，挑战自己的最佳圈速。', tags: ['小游戏', '赛车'] },
+            { id: 's13', name: '地下温泉', icon: '♨️', desc: '泡汤互动 · 随机场景与服装', detail: '地下温泉是放松休闲的场景，点击水池可以让秦彻泡温泉。每次进入会随机搭配不同的场景和服装组合，增添探索趣味。', tags: ['休闲', '随机'] },
+            { id: 's14', name: '龙谷', icon: '🏞️', desc: '打卡功能', detail: '龙谷与龙窟不同，是一片开阔的野外场景，适合打卡拍照。点击坐点可以让秦彻坐下休息，是与自然互动的好去处。', tags: ['打卡', '自然'] },
+            { id: 's15', name: 'Elysium酒吧', icon: '🍸', desc: '交易系统（左上角）', detail: 'Elysium酒吧是暗点黑市的入口场景。左上角可以打开「情报柜台」和「暗点黑市」，进行物资交易和情报获取。', tags: ['交易', '黑市'] },
+            { id: 's16', name: '卡萨酒庄', icon: '🍷', desc: '互动场景', detail: '卡萨酒庄是秦彻的私人酒庄，充满复古优雅的氛围。可以在这里触发特殊的互动对话，是解锁舞会活动的前置场景。', tags: ['互动', '舞会'] },
+            { id: 's17', name: '蜜月沙滩', icon: '🏖️', desc: '🎣 钓鱼小游戏 N109: Fishing', detail: '蜜月沙滩是钓鱼小游戏的入口场景。点击进入后可以体验钓鱼玩法，不同时间段和鱼饵会钓到不同的鱼类，是收集图鉴的重要途径。', tags: ['小游戏', '钓鱼'] }
+        ];
+
+        // ============================================================
+        // 4. 渲染场景方框
+        // ============================================================
+        function renderScenes() {
+            const grid = document.getElementById('sceneGrid');
+            grid.innerHTML = '';
+            SCENES.forEach((scene, index) => {
+                const card = document.createElement('div');
+                card.className = 'scene-card';
+                card.dataset.index = index;
+                card.innerHTML = `
+                    <div class="s-icon">${scene.icon}</div>
+                    <div class="s-name">${scene.name}</div>
+                    <div class="s-desc">${scene.desc}</div>
+                `;
+                card.addEventListener('click', function() {
+                    openSceneModal(index);
+                });
+                grid.appendChild(card);
+            });
+        }
+
+        // ============================================================
+        // 5. 场景模态框控制
+        // ============================================================
+        const sceneModal = document.getElementById('sceneModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalTitleScene = document.getElementById('modalTitleScene');
+        const modalDescScene = document.getElementById('modalDescScene');
+        const modalTagsScene = document.getElementById('modalTagsScene');
+        const modalCloseScene = document.getElementById('modalCloseScene');
+
+        function openSceneModal(index) {
+            const scene = SCENES[index];
+            // 构建图片路径，处理特殊字符
+            const imgPath = `./images/scene_${scene.name}.png`;
+            modalImg.src = imgPath;
+            modalImg.onerror = function() {
+                this.src = `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"%3E%3Crect width="400" height="300" fill="%232a3a5a"/%3E%3Ctext x="200" y="165" font-size="24" text-anchor="middle" fill="%23e8b84c" font-family="sans-serif"%3E${scene.icon} ${scene.name}%3C/text%3E%3C/svg%3E`;
+            };
+            modalTitleScene.textContent = scene.icon + ' ' + scene.name;
+            modalDescScene.textContent = scene.detail;
+            modalTagsScene.innerHTML = scene.tags.map(t =>
+                `<span class="${t === '小游戏' || t === '解锁' || t === '限时' ? 'gold' : ''}">${t}</span>`
+            ).join('');
+            sceneModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSceneModal() {
+            sceneModal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        modalCloseScene.addEventListener('click', closeSceneModal);
+        sceneModal.addEventListener('click', function(e) {
+            if (e.target === this) closeSceneModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeSceneModal();
+        });
+
+        // ============================================================
+        // 6. 初始化
+        // ============================================================
+        renderScenes();
+
+        // ============================================================
+        // 7. 全局暴露
+        // ============================================================
+        window.openSceneModal = openSceneModal;
+        window.closeSceneModal = closeSceneModal;
+    </script>
+
+</body>
+</html>

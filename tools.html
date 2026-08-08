@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>攻略 · N109 攻略站</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <style>
+        /* ========== 主题变量 ========== */
+        :root {
+            --bg-page: #1a2633;
+            --bg-card: #263340;
+            --bg-nav: #0f1a24;
+            --bg-sidebar: #0f1a24;
+            --bg-right: #1e2c3a;
+            --text-primary: #f5e6d3;
+            --text-secondary: #c9b8a8;
+            --text-heading: #f7e8d0;
+            --accent-gold: #e8b84c;
+            --accent-orange: #d98c3a;
+            --accent-red: #b84a3a;
+            --border-color: #5c3a21;
+            --shadow-color: #1a0e08;
+            --btn-bg: #b84a3a;
+            --btn-text: #f5e6d3;
+            --text-shadow-enabled: 2px 2px 0 var(--shadow-color);
+            --sidebar-width: 180px;
+            --topnav-height: 60px;
+            --dot-pattern: radial-gradient(circle, rgba(200,180,160,0.05) 1px, transparent 1px);
+            --card-shadow: 0 4px 0 0 var(--border-color);
+            --font-base: 17px;
+            --font-small: 14px;
+            --nav-font: 17px;
+        }
+        .light-mode {
+            --bg-page: #f2ebe0;
+            --bg-card: #ffffff;
+            --bg-nav: #e6dccc;
+            --bg-sidebar: #e6dccc;
+            --bg-right: #f5efe8;
+            --text-primary: #2c241c;
+            --text-secondary: #5a4e42;
+            --text-heading: #1a1a1a;
+            --accent-gold: #b88a3a;
+            --accent-orange: #c47a2a;
+            --accent-red: #a03a2a;
+            --border-color: #b8a898;
+            --shadow-color: transparent;
+            --btn-bg: #a03a2a;
+            --btn-text: #f5e6d3;
+            --text-shadow-enabled: none;
+            --card-shadow: 0 4px 0 0 var(--border-color);
+            --dot-pattern: radial-gradient(circle, rgba(120,100,80,0.08) 1px, transparent 1px);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.25s, color 0.25s, border 0.25s, box-shadow 0.25s; image-rendering: pixelated; }
+        body {
+            font-family: 'Press Start 2P', 'Courier New', monospace;
+            background: var(--bg-page);
+            color: var(--text-primary);
+            font-size: var(--font-base);
+            line-height: 1.9;
+            min-height: 100vh;
+            padding-top: var(--topnav-height);
+            padding-left: var(--sidebar-width);
+            background-image: var(--dot-pattern);
+            background-size: 20px 20px;
+        }
+        a { color: var(--accent-gold); text-decoration: none; }
+        a:hover { color: var(--accent-orange); }
+
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--topnav-height);
+            background: var(--bg-nav);
+            border-bottom: 4px solid var(--border-color);
+            box-shadow: 0 4px 0 0 var(--bg-page);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            flex-wrap: wrap;
+            gap: 6px;
+            background-image: var(--dot-pattern);
+            background-size: 20px 20px;
+        }
+        .top-nav .logo { font-size: 20px; font-weight: bold; color: var(--accent-gold); text-shadow: var(--text-shadow-enabled); letter-spacing: 1px; white-space: nowrap; }
+        .top-nav .logo span { background: var(--accent-red); color: #f5e6d3; padding: 2px 10px; font-size: 11px; border: 2px solid var(--border-color); margin-left: 8px; text-shadow: none; }
+        .top-nav-links { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+        .top-nav-links a { color: var(--text-secondary); font-size: var(--nav-font); padding: 4px 0; border-bottom: 3px solid transparent; transition: none; white-space: nowrap; }
+        .top-nav-links a:hover { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
+        .top-nav-links a.active { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
+        .top-nav .theme-toggle { background: var(--btn-bg); color: var(--btn-text); border: 3px solid var(--border-color); padding: 4px 16px; font-family: inherit; font-size: 14px; cursor: pointer; box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a; transition: 0.05s linear; text-shadow: none; white-space: nowrap; }
+        .top-nav .theme-toggle:active { transform: translate(2px,2px); box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a; }
+
+        .sidebar {
+            position: fixed;
+            top: var(--topnav-height);
+            left: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--bg-sidebar);
+            border-right: 4px solid var(--border-color);
+            box-shadow: 4px 0 0 0 var(--bg-page);
+            padding: 24px 14px;
+            display: flex;
+            flex-direction: column;
+            z-index: 90;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            background-image: var(--dot-pattern);
+            background-size: 20px 20px;
+        }
+        .sidebar .sidebar-title { font-size: 14px; color: var(--text-secondary); opacity: 0.6; letter-spacing: 2px; padding-bottom: 12px; border-bottom: 3px solid var(--border-color); margin-bottom: 16px; }
+        .sidebar-nav { display: flex; flex-direction: column; gap: 4px; }
+        .sidebar-nav a { color: var(--text-secondary); font-size: 16px; padding: 6px 12px; border: 3px solid transparent; transition: none; display: block; }
+        .sidebar-nav a:hover { color: var(--accent-gold); background: var(--bg-card); border-color: var(--border-color); }
+        .sidebar-nav a.active { color: var(--accent-gold); background: var(--bg-card); border-color: var(--accent-gold); }
+        .sidebar-footer { margin-top: auto; font-size: 12px; color: var(--text-secondary); opacity: 0.4; border-top: 3px solid var(--border-color); padding-top: 14px; text-align: center; }
+
+        .menu-toggle { display: none; position: fixed; top: 10px; left: 10px; z-index: 110; background: var(--btn-bg); color: var(--btn-text); border: 3px solid var(--border-color); padding: 4px 14px; font-family: inherit; font-size: 16px; cursor: pointer; box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a; text-shadow: none; }
+        .menu-toggle:active { transform: translate(2px,2px); box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a; }
+        .sidebar-overlay { display: none; position: fixed; inset: 0; top: var(--topnav-height); background: rgba(0,0,0,0.5); z-index: 80; }
+
+        .main-content { padding: 20px 28px 30px 28px; max-width: 1200px; margin: 0 auto; }
+        .page-title { margin-bottom: 28px; border-bottom: 4px solid var(--border-color); padding-bottom: 14px; }
+        .page-title h1 { font-size: 28px; text-shadow: var(--text-shadow-enabled); color: var(--accent-gold); }
+        .page-title p { font-size: var(--font-small); color: var(--text-secondary); margin-top: 6px; }
+
+        .guide-module {
+            margin-bottom: 8px;
+            border: 4px solid var(--border-color);
+            background: var(--bg-card);
+            box-shadow: inset 0 0 0 2px var(--bg-card), var(--card-shadow);
+            overflow: hidden;
+            background-image: var(--dot-pattern);
+            background-size: 20px 20px;
+            border-radius: 4px;
+        }
+        .guide-module .module-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            cursor: pointer;
+            user-select: none;
+            background: var(--bg-card);
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
+            font-size: 20px;
+            color: var(--accent-gold);
+            text-shadow: var(--text-shadow-enabled);
+            transition: background 0.15s;
+        }
+        .guide-module .module-header:hover { background: var(--bg-nav); }
+        .guide-module .module-header .arrow { font-size: 18px; transition: transform 0.25s ease; color: var(--text-secondary); }
+        .guide-module .module-header .arrow.open { transform: rotate(90deg); }
+        .guide-module .module-body { padding: 0 20px 22px 20px; border-top: 3px solid var(--border-color); display: none; }
+        .guide-module .module-body.open { display: block; }
+
+        .sub-section {
+            margin-top: 14px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-nav);
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .sub-section .sub-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            cursor: pointer;
+            background: var(--bg-nav);
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
+            font-size: 16px;
+            color: var(--accent-orange);
+            text-shadow: var(--text-shadow-enabled);
+            transition: background 0.15s;
+        }
+        .sub-section .sub-header:hover { background: var(--bg-card); }
+        .sub-section .sub-header .arrow { font-size: 14px; transition: transform 0.25s ease; color: var(--text-secondary); }
+        .sub-section .sub-header .arrow.open { transform: rotate(90deg); }
+        .sub-section .sub-body { padding: 12px 16px 16px; border-top: 2px solid var(--border-color); display: none; }
+        .sub-section .sub-body.open { display: block; }
+
+        .guide-content { font-size: 15px; color: var(--text-secondary); line-height: 2; }
+        .guide-content p { margin-bottom: 8px; }
+        .guide-content ul { padding-left: 24px; list-style: none; }
+        .guide-content ul li::before { content: "▸ "; color: var(--accent-gold); }
+        .guide-content .highlight { color: var(--accent-gold); font-weight: bold; }
+        .guide-content .success { color: #8fdb8f; }
+        .guide-content .warning { color: #f08080; }
+        .guide-content .tag {
+            display: inline-block;
+            background: var(--accent-red);
+            color: #f5e6d3;
+            font-size: 10px;
+            padding: 0 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 2px;
+            margin-right: 4px;
+        }
+
+        .data-table-wrap { margin-top: 12px; overflow-x: auto; }
+        .data-table-wrap h4 {
+            color: var(--accent-orange);
+            font-size: 16px;
+            border-bottom: 2px dotted var(--border-color);
+            padding-bottom: 6px;
+            margin: 12px 0 8px;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            background: var(--bg-page);
+            border: 3px solid var(--border-color);
+        }
+        .data-table th {
+            background: var(--bg-nav);
+            color: var(--accent-gold);
+            padding: 6px 4px;
+            border: 2px solid var(--border-color);
+            text-align: center;
+            white-space: nowrap;
+            font-size: 11px;
+        }
+        .data-table td {
+            padding: 4px 3px;
+            border: 2px solid var(--border-color);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 11px;
+        }
+        .data-table .highlight-row td {
+            background: #1a3a1a !important;
+            color: #8fdb8f !important;
+            font-weight: bold;
+        }
+        .data-table .spec-tag {
+            display: inline-block;
+            font-size: 9px;
+            padding: 1px 6px;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            border-radius: 2px;
+        }
+        .data-table .spec-tag.qinche { border-color: #d4a0d4; color: #d4a0d4; }
+        .data-table .spec-tag.red { border-color: #e06060; color: #e06060; }
+
+        .footer { margin-top: 40px; border-top: 4px solid var(--border-color); padding: 20px 0 14px; text-align: center; font-size: 14px; color: var(--text-secondary); }
+        .footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 6px; }
+        .footer-links a { color: var(--text-secondary); font-size: 14px; }
+        .footer-links a:hover { color: var(--accent-gold); }
+
+        @media (max-width: 820px) {
+            body { padding-left: 0; padding-top: 70px; }
+            .top-nav { padding: 0 12px; height: auto; min-height: 56px; gap: 6px; }
+            .top-nav .logo { font-size: 17px; }
+            .top-nav-links { gap: 12px; }
+            .top-nav-links a { font-size: 15px; }
+            .top-nav .theme-toggle { font-size: 13px; padding: 3px 12px; }
+            .sidebar { transform: translateX(-100%); width: 200px; top: 56px; }
+            .sidebar.open { transform: translateX(0); }
+            .sidebar-overlay.open { display: block; }
+            .menu-toggle { display: block; }
+            .main-content { padding: 16px 14px 20px 14px; }
+            .guide-module .module-header { font-size: 17px; padding: 12px 16px; }
+            .sub-section .sub-header { font-size: 14px; padding: 8px 12px; }
+            .guide-content { font-size: 14px; }
+            .data-table { font-size: 10px; }
+            .data-table th, .data-table td { padding: 3px 2px; font-size: 9px; }
+        }
+        @media (max-width: 480px) {
+            body { font-size: 16px; }
+            .top-nav .logo { font-size: 15px; }
+            .top-nav-links a { font-size: 13px; }
+            .page-title h1 { font-size: 24px; }
+            .guide-module .module-header { font-size: 15px; padding: 10px 12px; }
+            .sub-section .sub-header { font-size: 13px; padding: 6px 10px; }
+            .guide-content { font-size: 13px; }
+            .data-table { font-size: 9px; }
+            .data-table th, .data-table td { padding: 2px 1px; font-size: 8px; }
+            .footer-links { flex-direction: column; gap: 6px; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="切换侧边栏">☰</button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <header class="top-nav">
+        <div class="logo">🎮 攻略<span>站</span></div>
+        <div class="top-nav-links">
+            <a href="index.html">首页</a>
+            <a href="guide.html">新手引导</a>
+            <a href="gallery.html">图鉴</a>
+            <a href="tools.html" class="active">攻略</a>
+            <a href="activities.html">活动</a>
+            <a href="about.html">权责</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle">🌓 切换</button>
+    </header>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-title">📌 本页目录</div>
+        <nav class="sidebar-nav">
+            <a href="#farm">🌱 农场</a>
+            <a href="#fishing">🎣 钓鱼</a>
+            <a href="#mine">💥 扫雷</a>
+            <a href="#sheep">🐑 数羊</a>
+            <a href="#race">🏎️ 赛车</a>
+            <a href="#book">📖 答案之书</a>
+            <a href="#market">◆ 黑市</a>
+            <a href="#economy">💰 宝石/金币</a>
+        </nav>
+        <div class="sidebar-footer">v1.0 · 像素攻略站</div>
+    </aside>
+
+    <main class="main-content">
+
+        <div class="page-title">
+            <h1>📝 攻略</h1>
+            <p>农场 · 钓鱼 · 扫雷 · 数羊 · 赛车 · 答案之书 · 黑市 · 经济</p>
+        </div>
+
+        <!-- ===== 农场 ===== -->
+        <div class="guide-module" id="farm">
+            <button class="module-header" data-module="farmBody">
+                <span>🌱 农场</span>
+                <span class="arrow" id="farmArrow">▶</span>
+            </button>
+            <div class="module-body" id="farmBody">
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="farmRuleBody"><span>📋 规则</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="farmRuleBody">
+                        <div class="guide-content">
+                            <p>农场是 N109: Gardening 种菜小游戏的核心玩法。</p>
+                            <ul>
+                                <li><span class="highlight">种子购买</span> — 在厨房商店用金币购买种子，不同种子价格和生长时间不同。</li>
+                                <li><span class="highlight">种植与浇水</span> — 点击土地播种，浇水可加速生长（每株限一次）。水壶等级越高加速效果越明显。</li>
+                                <li><span class="highlight">收获与图鉴</span> — 成熟后点击收获，获得作物和金币。目前共有 <span class="highlight">33 种基础植物</span> 及对应的异色品种，总计 <span class="highlight">91 个图鉴条目</span>。</li>
+                                <li><span class="highlight">异色品种</span> — 小概率长出异色作物（花苞阶段即可看出），售价为普通品种的 <span class="highlight">3 倍</span>，图鉴单独占一格。</li>
+                                <li><span class="highlight">好气鸦（宠物）</span> — 自动帮你浇水、收菜。升级可缩短干活间隔（Lv1 30分钟 → Lv5 2分钟），满级后有概率叼回稀有专属种子。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="farmGuideBody"><span>🚀 小技巧</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="farmGuideBody">
+                        <div class="guide-content">
+                            <p><span class="highlight">开荒阶段：</span>先种生菜和水稻（种后必浇水），攒够 800 金币后第一时间升级 <span class="success">好气鸦 Lv.2</span>（从 30 分钟降到 18 分钟）。前期绝对不要碰黑色曼陀罗、盲盒、升级水壶/铲子。</p>
+                            <p><span class="highlight">铺图鉴阶段：</span>按价格从低到高买齐：暖阳雏菊 → 郁金香 → 翠绿大白菜 → 绣球花 → 香甜马铃薯 → 钟楼风铃草。留 1~2 块空地等好气鸦叼回专属种子。</p>
+                            <p><span class="highlight">冲刺阶段：</span>卖光异色果实，购买高价格品种：脆甜西瓜（528）→ 烛台告解花（520）→ 幽灵草菇（680）→ 骨毒仙人掌（980）→ 缎带挽歌兰（1050）→ 荆棘十字藤（1250）。</p>
+                            <p><span class="highlight">浇水铁律：</span>很喜水（西瓜、草菇）必浇；浇水无效（仙人掌）千万别浇。好气鸦自动浇水也会受益于水壶等级。</p>
+                            <p><span class="warning">终极铁律：</span>金币永远优先买新种子，升级是后话。黑色曼陀罗留最后——只占图鉴一格，前期种它血亏。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="farmAchvBody"><span>🏅 成就</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="farmAchvBody">
+                        <div class="guide-content">
+                            <ul>
+                                <li><span class="highlight">暗点农场主</span> — 种花游戏满图鉴（收集全部 91 种植物及异色）</li>
+                                <li><span class="highlight">我要验牌</span> — 农场游戏开盲盒 100 次</li>
+                                <li><span class="highlight">塔尔城园丁</span> — 农场游戏里种满 100 朵黑色曼陀罗</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="farmTableBody"><span>📊 植物数据表</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="farmTableBody">
+                        <div class="data-table-wrap">
+                            <h4>🌱 全作物数据（33种基础 + 异色）</h4>
+                            <div id="farmTableContainer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 钓鱼 ===== -->
+        <div class="guide-module" id="fishing">
+            <button class="module-header" data-module="fishBody">
+                <span>🎣 钓鱼</span>
+                <span class="arrow" id="fishArrow">▶</span>
+            </button>
+            <div class="module-body" id="fishBody">
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="fishRuleBody"><span>📋 规则</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="fishRuleBody">
+                        <div class="guide-content">
+                            <p>钓鱼小游戏 N109: Fishing 在蜜月沙滩进行。当前共有 <span class="highlight">92 种鱼</span> 和 <span class="highlight">30 种垃圾</span>，总计 <span class="highlight">122 个图鉴条目</span>。</p>
+                            <ul>
+                                <li><span class="highlight">抛竿与收杆</span> — 抛竿后等待 1.5~5.5 秒出现提醒，光标扫过金色收杆区时点击收杆即可。收早了、收偏了或拖太久（15秒）都会失败。</li>
+                                <li><span class="highlight">鱼饵</span> — 普通鱼饵（10金币）钓 ★1-2；秘制鱼饵（30金币）可钓 ★3 及隐藏款。</li>
+                                <li><span class="highlight">体力</span> — 每竿消耗 1 点体力，上限 109 点，每天 0 点自动回满，每 10 分钟恢复 1 点。</li>
+                                <li><span class="highlight">鱼竿与渔网</span> — 鱼竿升级（Lv1→Lv5）可扩大金色收杆区（16%→34%），降低断杆率。渔网可一次捞多个（Lv1 一次 5 个，满级 10 个），但需要消耗对应数量的鱼饵和体力。</li>
+                                <li><span class="highlight">秦彻代钓</span> — 点击他头顶感叹号，4 小时后带回渔获，不消耗体力和鱼饵，有概率带回"秦彻专属"鱼种。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="fishGuideBody"><span>🚀 小技巧</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="fishGuideBody">
+                        <div class="guide-content">
+                            <p><span class="highlight">前期：</span>优先钓湖中的 1 星鱼（尤其是 9 种新增湖产），快速凑满 10 种解锁海图。</p>
+                            <p><span class="highlight">中期：</span>升级鱼竿到 Lv3，钓 2 星鱼（90 金币/条），收益开始超过种地。</p>
+                            <p><span class="highlight">后期：</span>满级鱼竿 + 秘制鱼饵 + 渔网，专钓 3 星鱼（400 金币/条）和隐藏款。</p>
+                            <p><span class="highlight">体力管理：</span>优先用体力钓鱼，体力用完后转为种地挂机。体力罐（400 金币 +30 体力）性价比高，建议常备。</p>
+                            <p><span class="highlight">地图与时段：</span>湖和海鱼种不同，白天/夜间鱼种也不同。鱿鱼修正为海·夜间，注意切换时段和地图收集图鉴。</p>
+                            <p><span class="highlight">秦彻专属鱼：</span>达氏鳇、皇带鱼、桶眼鱼、鬼蝠魟只能通过秦彻代钓获得，自己钓不到。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="fishAchvBody"><span>🏅 成就</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="fishAchvBody">
+                        <div class="guide-content">
+                            <ul>
+                                <li><span class="highlight">空军大师</span> — 连续 10 次钓鱼空军</li>
+                                <li><span class="highlight">环保大使</span> — 连续 10 次钓上来垃圾</li>
+                                <li><span class="highlight">倒霉鬼</span> — 连续 5 次钓鱼断杆</li>
+                                <li><span class="highlight">这是你的金斧头吗</span> — 第一次钓上来河神落下的金斧头</li>
+                                <li><span class="highlight">捕鱼达狸 / 今晚吃鱼 / 小猫钓鱼 / 这河狸吗？</span> — 累计钓鱼 1000 / 5000 / 10000 / 100000 次</li>
+                                <li><span class="highlight">守彻待鱼</span> — 累计让秦彻钓鱼 50 次</li>
+                                <li><span class="highlight">一网打尽 / 水里还有鱼吗？</span> — 累计用鱼网捞 1000 / 3000 次</li>
+                                <li><span class="highlight">哎呀手滑了</span> — 钓鱼累计 100 次脱钩</li>
+                                <li><span class="highlight">钱都喂了鱼 / 钓鱼是生活</span> — 钓鱼游戏里累计花费 200000 / 500000</li>
+                                <li><span class="highlight">水产户籍管理员</span> — 钓鱼游戏满图鉴（收集全部 92 种鱼）</li>
+                                <li><span class="highlight">废品回收大亨</span> — 钓鱼游戏里特殊物品满图鉴（收集全部 30 种垃圾）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="fishTableBody"><span>📊 鱼类数据表</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="fishTableBody">
+                        <div class="data-table-wrap">
+                            <div id="fishTableContainer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 扫雷 ===== -->
+        <div class="guide-module" id="mine">
+            <button class="module-header" data-module="mineBody">
+                <span>💥 扫雷</span>
+                <span class="arrow" id="mineArrow">▶</span>
+            </button>
+            <div class="module-body" id="mineBody">
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="mineRuleBody"><span>📋 规则</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="mineRuleBody">
+                        <div class="guide-content">
+                            <p>扫雷小游戏在武器库进行。点击格子翻开，数字表示周围 8 格的地雷数。</p>
+                            <ul>
+                                <li>翻到地雷则游戏结束。</li>
+                                <li>标记地雷（右键/长按）可防止误触。</li>
+                                <li>全部安全格翻开即为胜利。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="mineGuideBody"><span>🚀 小技巧</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="mineGuideBody">
+                        <div class="guide-content">
+                            <p><span class="highlight">开局策略：</span>优先点击角落和边缘，降低踩雷概率。</p>
+                            <p><span class="highlight">进阶技巧：</span>利用数字 1-8 推理未翻开格子的地雷分布。</p>
+                            <p><span class="highlight">标记法：</span>确定是雷的格子先标记，避免后续误触。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="mineAchvBody"><span>🏅 成就</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="mineAchvBody">
+                        <div class="guide-content">
+                            <ul>
+                                <li><span class="highlight">卡奥斯炸炸炸</span> — 扫雷玩了 100 局</li>
+                                <li><span class="highlight">扫雷界扫地僧</span> — 扫雷游戏 10 秒内通关</li>
+                                <li><span class="highlight">战术性自爆</span> — 开局 3 下之内踩中炸弹结束游戏（隐藏成就）</li>
+                                <li><span class="highlight">像素级微雕大师</span> — 扫雷游戏里完成第一组拼图</li>
+                                <li><span class="highlight">临空芯核批发商</span> — 扫雷累计获得 10000 个芯核</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 数羊 ===== -->
+        <div class="guide-module" id="sheep">
+            <button class="module-header" data-module="sheepBody">
+                <span>🐑 数羊</span>
+                <span class="arrow" id="sheepArrow">▶</span>
+            </button>
+            <div class="module-body" id="sheepBody">
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="sheepRuleBody"><span>📋 规则</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="sheepRuleBody">
+                        <div class="guide-content">
+                            <p>数羊小游戏在卧室床头柜手机中打开，点击"狼来了"图标进入。</p>
+                            <ul>
+                                <li>点击羊群进行计数，每数一只羊 +1 分。</li>
+                                <li>目标是尽可能多的数羊，排行榜按最高分排序。</li>
+                                <li>游戏结束后可查看本轮成绩。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="sheepGuideBody"><span>🚀 小技巧</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="sheepGuideBody">
+                        <div class="guide-content">
+                            <p><span class="highlight">保持节奏：</span>不要盲目狂点，看清羊群出现的位置再点击。</p>
+                            <p><span class="highlight">专注力：</span>游戏时间较短，集中注意力可以大幅提高分数。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="sheepAchvBody"><span>🏅 成就</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="sheepAchvBody">
+                        <div class="guide-content">
+                            <ul>
+                                <li><span class="highlight">根本睡不着</span> — 数羊超过 300 个</li>
+                                <li><span class="highlight">羊圈领袖</span> — 数羊游戏排行榜前 10 名</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 赛车 ===== -->
+        <div class="guide-module" id="race">
+            <button class="module-header" data-module="raceBody">
+                <span>🏎️ 赛车</span>
+                <span class="arrow" id="raceArrow">▶</span>
+            </button>
+            <div class="module-body" id="raceBody">
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="raceRuleBody"><span>📋 规则</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="raceRuleBody">
+                        <div class="guide-content">
+                            <p>赛车小游戏 N109 Boulevard 在暗点修车坊进行。</p>
+                            <ul>
+                                <li>方向键 / WASD 控制赛车移动。</li>
+                                <li>避开障碍物，收集赛道上的加速道具。</li>
+                                <li>完成一圈即为胜利，记录最佳圈速。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="raceGuideBody"><span>🚀 小技巧</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="raceGuideBody">
+                        <div class="guide-content">
+                            <p><span class="highlight">提前预判：</span>障碍物出现前会有提示，提前变道躲避。</p>
+                            <p><span class="highlight">道具利用：</span>加速道具尽量在直道上使用，弯道提前减速。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="raceAchvBody"><span>🏅 成就</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="raceAchvBody">
+                        <div class="guide-content">
+                            <ul>
+                                <li><span class="highlight">开到地老天荒</span> — 飙车单局时长超过 4 分钟</li>
+                                <li><span class="highlight">反向赛车手</span> — 飙车 10 秒钟内结束游戏</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 答案之书 ===== -->
+        <div class="guide-module" id="book">
+            <button class="module-header" data-module="bookBody">
+                <span>📖 答案之书</span>
+                <span class="arrow" id="bookArrow">▶</span>
+            </button>
+            <div class="module-body" id="bookBody">
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="bookRuleBody"><span>📋 规则</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="bookRuleBody">
+                        <div class="guide-content">
+                            <p>答案之书在教堂场景，需用红宝石解锁后使用。</p>
+                            <ul>
+                                <li>点击教堂中的书本，打开答案之书弹窗。</li>
+                                <li>点击"默念问题，再翻一次"抽取秦彻语录。</li>
+                                <li>每次抽取随机显示一条官方台词，共 <span class="highlight">59 条</span> 可收集。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="bookGuideBody"><span>🚀 小技巧</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="bookGuideBody">
+                        <div class="guide-content">
+                            <p><span class="highlight">收集控：</span>每次抽取不会立即重复上一条，可以连续抽取收集台词。</p>
+                            <p><span class="highlight">彩蛋：</span>部分台词与游戏内特定场景或剧情相关，值得细细品味。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="bookAchvBody"><span>🏅 成就</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="bookAchvBody">
+                        <div class="guide-content">
+                            <ul>
+                                <li><span class="highlight">答案之书收藏家</span> — 抽出全部 59 条语录（隐藏成就，需自行收集验证）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 黑市 ===== -->
+        <div class="guide-module" id="market">
+            <button class="module-header" data-module="marketBody">
+                <span>◆ 黑市</span>
+                <span class="arrow" id="marketArrow">▶</span>
+            </button>
+            <div class="module-body" id="marketBody">
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="marketRuleBody"><span>📋 规则</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="marketRuleBody">
+                        <div class="guide-content">
+                            <p>暗点黑市在 Elysium 酒吧左上角"情报柜台"进入。每周一 12:00 开市，周日 20:00 拍卖结算。</p>
+                            <ul>
+                                <li><span class="highlight">行情</span> — 每天上午 / 下午各更新一次市场价，价格走势受当周"剧本"影响（稳步走高/扑朔迷离/高开低走/拍卖爆冷等）。</li>
+                                <li><span class="highlight">字条</span> — 周三 / 五流出黑市传闻，70% 为真（指向当周剧本），30% 为烟雾弹。是判断行情的重要线索。</li>
+                                <li><span class="highlight">拍卖</span> — 周日 20:00 未卖出的物品自动按拍卖终价折成红宝石，可能暴富也可能血亏。</li>
+                                <li><span class="highlight">富豪榜</span> — 按本周交易浮盈实时排名，周日定档，前三名可获得专属徽章。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="marketGuideBody"><span>🚀 小技巧</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="marketGuideBody">
+                        <div class="guide-content">
+                            <p><span class="highlight">看字条，不梭哈：</span>字条是判断剧本走向的关键，但别全信（30% 是假的）。高抛低吸，别贪心。</p>
+                            <p><span class="highlight">持仓上限：</span>第3周起持仓上限为 10 枚，抛售即回额度，鼓励整周反复做波段。</p>
+                            <p><span class="highlight">保本策略：</span>如果不确定行情，可以在周六前卖出锁定利润，避免周日拍卖血亏。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="marketAchvBody"><span>🏅 成就</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="marketAchvBody">
+                        <div class="guide-content">
+                            <ul>
+                                <li><span class="highlight">黑市大佬</span> — 连续三周黑市股市榜单第一</li>
+                                <li><span class="highlight">华尔街之狸</span> — 连续五周黑市最终结算时盈利达 100 钻</li>
+                                <li><span class="highlight">天台风很大</span> — 连续三天亏损（隐藏成就）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 宝石/金币 ===== -->
+        <div class="guide-module" id="economy">
+            <button class="module-header" data-module="economyBody">
+                <span>💰 宝石/金币</span>
+                <span class="arrow" id="economyArrow">▶</span>
+            </button>
+            <div class="module-body" id="economyBody">
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="economyRuleBody"><span>📋 规则</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="economyRuleBody">
+                        <div class="guide-content">
+                            <p><span class="highlight">红宝石获取途径：</span></p>
+                            <ul>
+                                <li><span class="highlight">番茄钟专注</span> — 专注 25/40/60/120/240 分钟，获得 1/2/3/6/12 颗红宝石。</li>
+                                <li><span class="highlight">签到</span> — 每日签到可获得红宝石奖励。</li>
+                                <li><span class="highlight">成就解锁</span> — 达成特定成就可领取红宝石。</li>
+                                <li><span class="highlight">黑市交易</span> — 低买高卖赚取红宝石差价。</li>
+                            </ul>
+                            <p style="margin-top:12px;"><span class="highlight">金币获取途径：</span></p>
+                            <ul>
+                                <li><span class="highlight">种地</span> — 种植并收获作物，直接获得金币。</li>
+                                <li><span class="highlight">钓鱼</span> — 钓到鱼类和垃圾后出售换金币。</li>
+                                <li><span class="highlight">赛车</span> — 完成赛道获得金币奖励。</li>
+                                <li><span class="highlight">扫雷</span> — 胜利可获得金币。</li>
+                            </ul>
+                            <p><span class="highlight">注意：</span>种地和钓鱼的金币是 <span class="highlight">共用一本账</span>，可以灵活切换赚钱方式。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="economyGuideBody"><span>🚀 小技巧</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="economyGuideBody">
+                        <div class="guide-content">
+                            <p><span class="highlight">前期（金币 < 5000）</span> — 优先种地，种植生菜和水稻快速周转。同时钓齐湖中 1 星水产，快速解锁海图。</p>
+                            <p><span class="highlight">中期（金币 5000~50000）</span> — 升级鱼竿到 Lv3，开始钓 2 星鱼（90 金币/条）。继续种高性价比植物（如绣球花、马铃薯）。</p>
+                            <p><span class="highlight">后期（金币 50000+）</span> — 满级鱼竿 + 秘制鱼饵 + 渔网，专钓 3 星鱼（400 金币/条）。钓鱼单次收益远超种地，体力用完后种地挂机。</p>
+                            <p><span class="highlight">终极策略</span> — 满级鱼竿 + 鱼网，一次撒网捞多个，配合秘制鱼饵。体力不足时购买体力罐（400 金币 +30 体力）仍比种地效率高。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="economyAchvBody"><span>🏅 成就</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="economyAchvBody">
+                        <div class="guide-content">
+                            <ul>
+                                <li><span class="highlight">龙窟守财神</span> — 红宝石当前大于 5000 个</li>
+                                <li><span class="highlight">番茄大王</span> — 连续三天挂番茄钟 4 小时</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div style="margin-bottom:8px;">📜 本攻略站由玩家自发维护 · 内容按 <strong>CC BY-NC-SA 4.0</strong> 协议提供</div>
+            <div class="footer-links">
+                <a href="about.html">免责声明</a>
+                <a href="manage.html">编辑教程</a>
+                <a href="#">反馈留言</a>
+                <a href="#">交流群：123456</a>
+            </div>
+            <div style="margin-top:10px; font-size:12px; opacity:0.5;">v1.0 · 像素攻略站</div>
+        </footer>
+
+    </main>
+
+    <script>
+        // ============================================================
+        // 1. 主题切换 & 侧边栏
+        // ============================================================
+        (function() {
+            const themeBtn = document.getElementById('themeToggle');
+            const current = localStorage.getItem('pixel-theme');
+            if (current === 'light') document.documentElement.classList.add('light-mode');
+            themeBtn.addEventListener('click', function() {
+                const html = document.documentElement;
+                html.classList.toggle('light-mode');
+                localStorage.setItem('pixel-theme', html.classList.contains('light-mode') ? 'light' : 'dark');
+            });
+
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            menuToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('open');
+                overlay.classList.toggle('open');
+            });
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('open');
+            });
+            document.querySelectorAll('.sidebar-nav a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 820) { sidebar.classList.remove('open');
+                        overlay.classList.remove('open'); }
+                });
+            });
+
+            const sections = [
+                { id: 'farm', link: document.querySelector('.sidebar-nav a[href="#farm"]') },
+                { id: 'fishing', link: document.querySelector('.sidebar-nav a[href="#fishing"]') },
+                { id: 'mine', link: document.querySelector('.sidebar-nav a[href="#mine"]') },
+                { id: 'sheep', link: document.querySelector('.sidebar-nav a[href="#sheep"]') },
+                { id: 'race', link: document.querySelector('.sidebar-nav a[href="#race"]') },
+                { id: 'book', link: document.querySelector('.sidebar-nav a[href="#book"]') },
+                { id: 'market', link: document.querySelector('.sidebar-nav a[href="#market"]') },
+                { id: 'economy', link: document.querySelector('.sidebar-nav a[href="#economy"]') }
+            ];
+            let timer = null;
+            window.addEventListener('scroll', function() {
+                if (timer) return;
+                timer = setTimeout(function() {
+                    let activeId = 'farm';
+                    let minDist = Infinity;
+                    sections.forEach(function(item) {
+                        const el = document.getElementById(item.id);
+                        if (el) {
+                            const rect = el.getBoundingClientRect();
+                            if (rect.top < 300 && rect.top > -300) {
+                                const dist = Math.abs(rect.top);
+                                if (dist < minDist) { minDist = dist;
+                                    activeId = item.id; }
+                            }
+                        }
+                    });
+                    sections.forEach(function(item) {
+                        if (item.link) {
+                            item.link.classList.toggle('active', item.id === activeId);
+                        }
+                    });
+                    timer = null;
+                }, 100);
+            });
+            setTimeout(function() {
+                document.querySelector('.sidebar-nav a[href="#farm"]')?.classList.add('active');
+            }, 300);
+        })();
+
+        // ============================================================
+        // 2. 折叠控制
+        // ============================================================
+        document.querySelectorAll('[data-module]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-module');
+                const body = document.getElementById(targetId);
+                const arrow = this.querySelector('.arrow');
+                if (body) {
+                    body.classList.toggle('open');
+                    if (arrow) arrow.classList.toggle('open');
+                }
+            });
+        });
+
+        document.querySelectorAll('[data-sub]').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const targetId = this.getAttribute('data-sub');
+                const body = document.getElementById(targetId);
+                const arrow = this.querySelector('.arrow');
+                if (body) {
+                    body.classList.toggle('open');
+                    if (arrow) arrow.classList.toggle('open');
+                }
+            });
+        });
+
+        // ============================================================
+        // 3. 数据定义
+        // ============================================================
+        const plantTableData = [
+            { id:'qiangwei', name:'蔷薇花', cost:20, sell:22, grow:600000, water:'喜水', unlock:'初始', yield:2 },
+            { id:'shengcai', name:'生菜', cost:28, sell:29, grow:720000, water:'很喜水', unlock:'3次', yield:2 },
+            { id:'shuidao', name:'水稻', cost:35, sell:75, grow:900000, water:'喜水', unlock:'6次', yield:1 },
+            { id:'mantuo', name:'黑色曼陀罗', cost:109, sell:0, grow:120000, water:'喜水', unlock:'初始', yield:1 },
+            { id:'yujin', name:'郁金香', cost:60, sell:118, grow:1200000, water:'喜水', unlock:'14次', yield:1 },
+            { id:'chuju', name:'暖阳雏菊', cost:70, sell:146, grow:1500000, water:'喜水', unlock:'18次', yield:1 },
+            { id:'baicai', name:'翠绿大白菜', cost:90, sell:93, grow:1800000, water:'很喜水', unlock:'22次', yield:2 },
+            { id:'xiuqiu', name:'绣球花', cost:120, sell:260, grow:2400000, water:'很喜水', unlock:'30次', yield:1 },
+            { id:'yangmei', name:'琉璃杨梅', cost:130, sell:280, grow:2700000, water:'很喜水', unlock:'35次', yield:2 },
+            { id:'malingshu', name:'香甜马铃薯', cost:150, sell:171, grow:3000000, water:'不太喜水', unlock:'40次', yield:2 },
+            { id:'zhonglou', name:'钟楼风铃草', cost:240, sell:510, grow:3600000, water:'不太喜水', unlock:'52次', yield:1 },
+            { id:'linglan', name:'晨露铃兰', cost:270, sell:600, grow:4200000, water:'很喜水', unlock:'58次', yield:1 },
+            { id:'lanmei', name:'晨曦蓝莓', cost:290, sell:640, grow:4800000, water:'喜水', unlock:'62次', yield:2 },
+            { id:'dasuan', name:'炽热大蒜', cost:300, sell:248, grow:5400000, water:'不太喜水', unlock:'65次', yield:3 },
+            { id:'guhun', name:'骨魂玫瑰', cost:460, sell:1140, grow:7200000, water:'很喜水', unlock:'80次', yield:1, petOnly:true },
+            { id:'yayu', name:'鸦羽天竺葵', cost:500, sell:1320, grow:8400000, water:'喜水', unlock:'90次', yield:1, petOnly:true },
+            { id:'xigua', name:'脆甜西瓜', cost:528, sell:1420, grow:9000000, water:'很喜水', unlock:'95次', yield:1 },
+            { id:'maozhua', name:'猫爪暗蓝小菇', cost:700, sell:1720, grow:9900000, water:'很喜水', unlock:'100次', yield:1, petOnly:true },
+            { id:'zhutai', name:'烛台告解花', cost:520, sell:1760, grow:10800000, water:'不太喜水', unlock:'105次', yield:1 },
+            { id:'xungu', name:'幽灵草菇', cost:680, sell:1950, grow:11700000, water:'很喜水', unlock:'115次', yield:1 },
+            { id:'heizhua', name:'黑爪武蜡泉花', cost:820, sell:2170, grow:12240000, water:'喜水', unlock:'110次', yield:1, petOnly:true },
+            { id:'ziluolan', name:'紫罗兰', cost:750, sell:2150, grow:12600000, water:'喜水', unlock:'110次', yield:1 },
+            { id:'zhimeng', name:'织梦水仙', cost:900, sell:2620, grow:14400000, water:'很喜水', unlock:'120次', yield:1 },
+            { id:'longjiao', name:'噬魂紫龙角', cost:1000, sell:2790, grow:14760000, water:'不太喜水', unlock:'125次', yield:1, petOnly:true },
+            { id:'xianren', name:'骨毒仙人掌', cost:980, sell:2860, grow:15300000, water:'浇水无效', unlock:'130次', yield:1 },
+            { id:'wange', name:'缎带挽歌兰', cost:1050, sell:3100, grow:16200000, water:'喜水', unlock:'140次', yield:1 },
+            { id:'lingbo', name:'凌波水仙', cost:1150, sell:3350, grow:17100000, water:'很喜水', unlock:'150次', yield:1 },
+            { id:'jingji', name:'荆棘十字藤', cost:1250, sell:3650, grow:18000000, water:'不太喜水', unlock:'165次', yield:1 },
+            { id:'landie', name:'幻蝶蓝目菊', cost:1350, sell:3930, grow:18900000, water:'喜水', unlock:'180次', yield:1 },
+            { id:'wuhua', name:'织月无花果', cost:1450, sell:4220, grow:19800000, water:'不太喜水', unlock:'200次', yield:1 },
+            { id:'putao', name:'雾霜葡萄', cost:1550, sell:4520, grow:20700000, water:'很喜水', unlock:'220次', yield:1 },
+            { id:'yumei', name:'醉梦虞美人', cost:1650, sell:4730, grow:21000000, water:'很喜水', unlock:'240次', yield:1 },
+            { id:'tanhua', name:'月下昙花', cost:1800, sell:5040, grow:21600000, water:'喜水', unlock:'265次', yield:1 }
+        ];
+
+        const fishTableData = [
+            { id: 'lk01', name: '团头鲂·武昌鱼', star: 1, map: '湖', when: '白天', sell: 20 },
+            { id: 'lk02', name: '桂鱼', star: 1, map: '湖', when: '白天', sell: 20 },
+            { id: 'lk04', name: '罗非鱼', star: 1, map: '湖', when: '白天', sell: 20 },
+            { id: 'lk06', name: '草鱼', star: 1, map: '湖', when: '白天', sell: 20 },
+            { id: 'lk07', name: '鲢鱼', star: 1, map: '湖', when: '白天', sell: 20 },
+            { id: 'lk08', name: '鲤鱼', star: 1, map: '湖', when: '白天', sell: 20 },
+            { id: 'lk09', name: '鲫鱼', star: 1, map: '湖', when: '白天', sell: 20 },
+            { id: 'lk11', name: '鳙鱼', star: 1, map: '湖', when: '白天', sell: 20 },
+            { id: 'lk03', name: '泥鳅', star: 1, map: '湖', when: '夜间', sell: 20 },
+            { id: 'lk05', name: '翘嘴鲌', star: 1, map: '湖', when: '夜间', sell: 20 },
+            { id: 'lk10', name: '鲶鱼', star: 1, map: '湖', when: '夜间', sell: 20 },
+            { id: 'lk14', name: '黄辣丁', star: 1, map: '湖', when: '夜间', sell: 20 },
+            { id: 'lk15', name: '黑鱼', star: 1, map: '湖', when: '夜间', sell: 20 },
+            { id: 'lk13', name: '黄尾密鲴', star: 1, map: '湖', when: '夜间', sell: 20 },
+            { id: 'lk12', name: '鳡鱼', star: 1, map: '湖', when: '夜间', sell: 20 },
+            { id: 'lk16', name: '巨骨舌鱼', star: 2, map: '湖', when: '白天', sell: 90 },
+            { id: 'lk17', name: '柳条鱼', star: 2, map: '湖', when: '白天', sell: 90 },
+            { id: 'lk18', name: '胭脂鱼', star: 2, map: '湖', when: '白天', sell: 90 },
+            { id: 'lk26', name: '拟尖头鲷', star: 2, map: '湖', when: '白天', sell: 90 },
+            { id: 'lk27', name: '巨型唐鱼', star: 2, map: '湖', when: '白天', sell: 90 },
+            { id: 'lk28', name: '水虎鱼', star: 2, map: '湖', when: '白天', sell: 90 },
+            { id: 'lk20', name: '鸭嘴鲟', star: 2, map: '湖', when: '夜间', sell: 90 },
+            { id: 'lk19', name: '雀鳝', star: 2, map: '湖', when: '夜间', sell: 90 },
+            { id: 'lk29', name: '电鳗', star: 2, map: '湖', when: '夜间', sell: 90 },
+            { id: 'lk30', name: '花鳗鲡', star: 2, map: '湖', when: '夜间', sell: 90 },
+            { id: 'lk31', name: '史氏鲟', star: 2, map: '湖', when: '夜间', sell: 90 },
+            { id: 'lk21', name: '巨型高背鲤', star: 3, map: '湖', when: '白天', sell: 400 },
+            { id: 'lk22', name: '巨型黄蜡鲶', star: 3, map: '湖', when: '白天', sell: 400 },
+            { id: 'lk24', name: '达氏鳇', star: 3, map: '湖', when: '白天', sell: 400, spec: '秦彻专属' },
+            { id: 'lk23', name: '盲眼洞穴鱼', star: 3, map: '湖', when: '夜间', sell: 400 },
+            { id: 'lk25', name: '黄金河虎', star: 3, map: '湖', when: '夜间', sell: 400 },
+            // 以下已修正为海
+            { id: 'lk32', name: '阿根廷红虾', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'lk33', name: '海鳌虾', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'lk34', name: '海白菜', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'lk35', name: '扇贝', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'lk36', name: '水母', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'lk37', name: '甜虾', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'lk38', name: '利铂鲨', star: 3, map: '海', when: '白天', sell: 400 },
+            { id: 'lk39', name: '鬼角大嘴鱼', star: 3, map: '海', when: '白天', sell: 400 },
+            { id: 'se01', name: '三文鱼', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'se02', name: '太平洋蓝鳍金枪鱼', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'se03', name: '小黄鱼', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'se05', name: '梭子鱼', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'se06', name: '比目鱼', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'se08', name: '真鲷', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'se09', name: '翻车鱼', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'se10', name: '蓝黄梅鲷', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'se04', name: '带鱼', star: 1, map: '海', when: '夜间', sell: 20 },
+            { id: 'se07', name: '海鳗', star: 1, map: '海', when: '夜间', sell: 20 },
+            { id: 'se15', name: '鲱鱼', star: 1, map: '海', when: '夜间', sell: 20 },
+            { id: 'se14', name: '鲣鱼', star: 1, map: '海', when: '夜间', sell: 20 },
+            { id: 'se13', name: '鯕鲯', star: 1, map: '海', when: '夜间', sell: 20 },
+            { id: 'se12', name: '马面鱼', star: 1, map: '海', when: '夜间', sell: 20 },
+            { id: 'se11', name: '远东拟沙丁鱼', star: 1, map: '海', when: '夜间', sell: 20 },
+            { id: 'se20', name: '鮟鱇鱼', star: 2, map: '海', when: '白天', sell: 90 },
+            { id: 'se19', name: '皇带鱼', star: 2, map: '海', when: '白天', sell: 90, spec: '秦彻专属' },
+            { id: 'se18', name: '水滴鱼', star: 2, map: '海', when: '白天', sell: 90 },
+            { id: 'se16', name: '吞噬鳗', star: 2, map: '海', when: '夜间', sell: 90 },
+            { id: 'se17', name: '幽灵鲨', star: 2, map: '海', when: '夜间', sell: 90 },
+            { id: 'se25', name: '褶皱鲨', star: 3, map: '海', when: '白天', sell: 400 },
+            { id: 'se24', name: '毒蛇鱼', star: 3, map: '海', when: '白天', sell: 400 },
+            { id: 'se23', name: '桶眼鱼', star: 3, map: '海', when: '白天', sell: 400, spec: '秦彻专属' },
+            { id: 'se21', name: '哥布林鲨', star: 3, map: '海', when: '夜间', sell: 400 },
+            { id: 'se22', name: '巨口鱼', star: 3, map: '海', when: '夜间', sell: 400 },
+            { id: 'sb01', name: '伞嘴鱼', star: 3, map: '海', when: '白天', sell: 400 },
+            { id: 'sb03', name: '无鳞龙鱼', star: 3, map: '海', when: '白天', sell: 400 },
+            { id: 'sb05', name: '长吻银鲛', star: 3, map: '海', when: '白天', sell: 400 },
+            { id: 'sb02', name: '斑点长手鱼', star: 3, map: '海', when: '夜间', sell: 400 },
+            { id: 'sb04', name: '锯鲨', star: 3, map: '海', when: '夜间', sell: 400 },
+            { id: 'sb06', name: '鬼蝠魟', star: 3, map: '海', when: '夜间', sell: 400, spec: '秦彻专属' },
+            { id: 'fx01', name: '发条机械鱼', star: 3, map: '通用', when: '白天', sell: 400, spec: '隐藏·满级竿' },
+            { id: 'fx02', name: '宝石琉璃鱼', star: 3, map: '通用', when: '白天', sell: 400, spec: '隐藏·满级竿' },
+            { id: 'fx03', name: '星空发光鱼', star: 3, map: '通用', when: '白天', sell: 400, spec: '隐藏·满级竿' },
+            { id: 'fx04', name: '梦境云朵鱼', star: 3, map: '通用', when: '白天', sell: 400, spec: '隐藏·满级竿' },
+            { id: 'fx05', name: '飞天彩虹鱼', star: 3, map: '通用', when: '白天', sell: 400, spec: '隐藏·满级竿' },
+            { id: 'fx06', name: '幽灵骨骼鱼', star: 3, map: '通用', when: '夜间', sell: 400, spec: '隐藏·满级竿' },
+            { id: 'fx07', name: '时光齿轮鱼', star: 3, map: '通用', when: '夜间', sell: 400, spec: '隐藏·满级竿' },
+            { id: 'fx08', name: '漂浮气球鱼', star: 3, map: '通用', when: '夜间', sell: 400, spec: '隐藏·满级竿' },
+            { id: 'fx09', name: '熔岩焰火鱼', star: 3, map: '通用', when: '夜间', sell: 400, spec: '隐藏·满级竿' },
+            { id: 'fx10', name: '纸艺折纸鱼', star: 3, map: '通用', when: '夜间', sell: 400, spec: '隐藏·满级竿' },
+            { id: 'fx11', name: '霓虹水母鱼', star: 3, map: '通用', when: '夜间', sell: 400, spec: '隐藏·满级竿' },
+            { id: 'se34', name: '狼鳗', star: 2, map: '海', when: '夜间', sell: 90 },
+            { id: 'se35', name: '吞噬者黑鮟鱇', star: 3, map: '海', when: '夜间', sell: 400 },
+            { id: 'se36', name: '凶猛帆猎鱼', star: 3, map: '海', when: '白天', sell: 400 },
+            { id: 'se37', name: '长棘巨口鱼', star: 2, map: '海', when: '白天', sell: 90 }
+        ];
+
+        const junkTableData = [
+            { name: '弃置的共享单车车锁', sell: 1 },
+            { name: '挂满水草的塑料袋', sell: 1 },
+            { name: '挂着水草的假牙', sell: 1 },
+            { name: '断弦的破木吉他', sell: 1 },
+            { name: '浸水的旧轮胎', sell: 1 },
+            { name: '生锈的可乐罐', sell: 1 },
+            { name: '生锈的漏水铁桶', sell: 1 },
+            { name: '破旧破二只皮鞋', sell: 1 },
+            { name: '缠着鱼线的小黄鸭', sell: 1 },
+            { name: '生锈的铝制老式水壶', sell: 1 },
+            { name: '挂着水草的破雨伞', sell: 1 },
+            { name: '破裂的塑料泳圈', sell: 1 },
+            { name: '生锈的破旧平底锅', sell: 1 },
+            { name: '缠绕着水草的挂历', sell: 1 },
+            { name: '沾满泥巴的泡水毛绒拖鞋', sell: 1 },
+            { name: '掉落的勇者木剑', sell: 1 },
+            { name: '坏掉的魔法海螺', sell: 1 },
+            { name: '封印着水鬼的漂流瓶', sell: 1 },
+            { name: '河神落下的金斧头', sell: 3000 },
+            { name: '纯金爆米花', sell: 1 },
+            { name: '掉落的水晶假牙', sell: 1 },
+            { name: '遗失的精灵法杖前段', sell: 1 },
+            { name: '地理学家遗落的全息地球仪', sell: 700 },
+            { name: '跌落水底的微型UFO舱盖', sell: 1 },
+            { name: '赛博飞艇的后视镜', sell: 1 },
+            { name: '废弃的机械流浪体机械足', sell: 1 },
+            { name: '破损斗篷', sell: 1 },
+            { name: '临空市被偷的摩托车前轮', sell: 1 },
+            { name: '坠落水底的猎人能量核心', sell: 1 },
+            { name: '损坏的超时空传送拐杖', sell: 1 }
+        ];
+
+        // ============================================================
+        // 4. 水壶时间计算
+        // ============================================================
+        const WATER_BASE = [1.5, 1.65, 1.8, 1.95, 2.1];
+        const WATER_FINAL = { '不太喜水': 1.87, '喜水': 2.25, '很喜水': 2.64, '浇水无效': 1.0 };
+
+        function getMultipliers(waterType) {
+            if (waterType === '浇水无效') return [1, 1, 1, 1, 1];
+            const final = WATER_FINAL[waterType] || 1;
+            const ratio = final / 2.1;
+            return WATER_BASE.map(b => b * ratio);
+        }
+
+        function calcWaterTimes(seed) {
+            const baseSec = seed.grow / 1000;
+            const mults = getMultipliers(seed.water);
+            return mults.map(m => baseSec / m);
+        }
+
+        function fmtTime(ms) {
+            const s = Math.round(ms / 1000);
+            if (s < 60) return s + '秒';
+            const m = Math.floor(s / 60), sec = s % 60;
+            if (m < 60) return m + '分' + (sec > 0 ? sec + '秒' : '');
+            const h = Math.floor(m / 60), rm = m % 60;
+            let res = h + '小时';
+            if (rm > 0) res += rm + '分';
+            if (sec > 0) res += sec + '秒';
+            return res;
+        }
+
+        // ============================================================
+        // 5. 渲染植物表
+        // ============================================================
+        function renderPlantTable() {
+            const container = document.getElementById('farmTableContainer');
+            if (!container) return;
+
+            const filtered = plantTableData.filter(p => !p.petOnly);
+            let maxRatio = -Infinity;
+            const rows = filtered.map(p => {
+                const total = p.sell * p.yield;
+                const ratio = (p.cost > 0 && p.sell > 0) ? (total / p.cost) : 0;
+                const times = calcWaterTimes(p);
+                const timeStrs = times.map(t => fmtTime(t * 1000));
+                if (ratio > maxRatio) maxRatio = ratio;
+                return { ...p, total, ratio, timeStrs };
+            });
+
+            let html = '<table class="data-table"><thead><tr>';
+            const headers = ['名称', '种子价', '售价', '喜水', '基础', '水壶1级', '水壶2级', '水壶3级', '水壶4级', '水壶5级', '收成数', '总收益', '性价比', '解锁'];
+            headers.forEach(h => html += `<th>${h}</th>`);
+            html += '</tr></thead><tbody>';
+
+            rows.forEach(row => {
+                const isMax = (row.ratio === maxRatio && maxRatio > 0);
+                const cls = isMax ? 'highlight-row' : '';
+                html += `<tr class="${cls}">`;
+                html += `<td>${row.name}</td>`;
+                html += `<td>${row.cost}</td>`;
+                html += `<td>${row.sell}</td>`;
+                html += `<td>${row.water}</td>`;
+                html += `<td>${fmtTime(row.grow)}</td>`;
+                row.timeStrs.forEach(t => html += `<td>${t}</td>`);
+                html += `<td>${row.yield}</td>`;
+                html += `<td>${row.total}</td>`;
+                html += `<td>${row.ratio.toFixed(2)}</td>`;
+                html += `<td>${row.unlock}</td>`;
+                html += '</tr>';
+            });
+
+            html += '</tbody></table>';
+            const totalVariants = plantTableData.reduce((s, p) => s + (p.vars || 0), 0);
+            const totalEntries = plantTableData.length + totalVariants;
+            html += `<div style="margin-top:8px;font-size:12px;color:var(--text-secondary);">✨ 异色品种共 ${totalVariants} 种，图鉴总计 <strong style="color:var(--accent-gold);">${totalEntries}</strong> 条目</div>`;
+
+            container.innerHTML = html;
+        }
+
+        // ============================================================
+        // 6. 渲染鱼类表
+        // ============================================================
+        function renderFishTable() {
+            const container = document.getElementById('fishTableContainer');
+            if (!container) return;
+
+            const lake = fishTableData.filter(f => f.map === '湖');
+            const sea = fishTableData.filter(f => f.map === '海');
+            const anyFish = fishTableData.filter(f => f.map === '通用');
+
+            let html = '';
+            const renderGroup = (title, data) => {
+                if (!data.length) return;
+                html += `<h4>${title}（${data.length} 种）</h4><table class="data-table"><thead><tr><th>名称</th><th>星级</th><th>时段</th><th>售价</th><th>特殊</th></tr></thead><tbody>`;
+                data.forEach(f => {
+                    const star = '★'.repeat(f.star || 1);
+                    const spec = f.spec ? `<span class="spec-tag ${f.spec.includes('秦彻') ? 'qinche' : f.spec.includes('隐藏') ? 'red' : ''}">${f.spec}</span>` : '';
+                    html += `<tr><td>${f.name}</td><td>${star}</td><td>${f.when}</td><td>${f.sell}</td><td>${spec}</td></tr>`;
+                });
+                html += '</tbody></table>';
+            };
+
+            renderGroup('🌿 湖鱼/水产', lake);
+            renderGroup('🌊 海鱼', sea);
+            renderGroup('🌟 通用（湖/海）', anyFish);
+
+            html += `<h4>🗑️ 垃圾（${junkTableData.length} 种）</h4><table class="data-table"><thead><tr><th>名称</th><th>售价</th></tr></thead><tbody>`;
+            junkTableData.forEach(item => {
+                html += `<tr><td>${item.name}</td><td>${item.sell}</td></tr>`;
+            });
+            html += '</tbody></table>';
+
+            const totalFish = fishTableData.length;
+            const totalAll = totalFish + junkTableData.length;
+            html += `<div style="margin-top:8px;font-size:12px;color:var(--text-secondary);">🐟 鱼类 ${totalFish} 种 + 垃圾 ${junkTableData.length} 种 = <strong style="color:var(--accent-gold);">${totalAll}</strong> 种</div>`;
+
+            container.innerHTML = html;
+        }
+
+        // ============================================================
+        // 7. 初始化
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            renderPlantTable();
+            renderFishTable();
+        });
+    </script>
+
+</body>
+</html>

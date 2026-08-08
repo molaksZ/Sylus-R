@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>图鉴 · N109 攻略站</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <style>
+        /* ========== 主题变量 ========== */
+        :root {
+            --bg-page: #1a2633;
+            --bg-card: #263340;
+            --bg-nav: #0f1a24;
+            --bg-sidebar: #0f1a24;
+            --bg-right: #1e2c3a;
+            --text-primary: #f5e6d3;
+            --text-secondary: #c9b8a8;
+            --text-heading: #f7e8d0;
+            --accent-gold: #e8b84c;
+            --accent-orange: #d98c3a;
+            --accent-red: #b84a3a;
+            --border-color: #5c3a21;
+            --shadow-color: #1a0e08;
+            --btn-bg: #b84a3a;
+            --btn-text: #f5e6d3;
+            --text-shadow-enabled: 2px 2px 0 var(--shadow-color);
+            --sidebar-width: 180px;
+            --topnav-height: 60px;
+            --dot-pattern: radial-gradient(circle, rgba(200,180,160,0.05) 1px, transparent 1px);
+            --card-shadow: 0 4px 0 0 var(--border-color);
+            --font-base: 17px;
+            --font-small: 14px;
+            --nav-font: 17px;
+        }
+        .light-mode {
+            --bg-page: #f2ebe0;
+            --bg-card: #ffffff;
+            --bg-nav: #e6dccc;
+            --bg-sidebar: #e6dccc;
+            --bg-right: #f5efe8;
+            --text-primary: #2c241c;
+            --text-secondary: #5a4e42;
+            --text-heading: #1a1a1a;
+            --accent-gold: #b88a3a;
+            --accent-orange: #c47a2a;
+            --accent-red: #a03a2a;
+            --border-color: #b8a898;
+            --shadow-color: transparent;
+            --btn-bg: #a03a2a;
+            --btn-text: #f5e6d3;
+            --text-shadow-enabled: none;
+            --card-shadow: 0 4px 0 0 var(--border-color);
+            --dot-pattern: radial-gradient(circle, rgba(120,100,80,0.08) 1px, transparent 1px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background 0.25s, color 0.25s, border 0.25s, box-shadow 0.25s;
+            image-rendering: pixelated;
+        }
+        body {
+            font-family: 'Press Start 2P', 'Courier New', monospace;
+            background: var(--bg-page);
+            color: var(--text-primary);
+            font-size: var(--font-base);
+            line-height: 1.9;
+            min-height: 100vh;
+            padding-top: var(--topnav-height);
+            padding-left: var(--sidebar-width);
+            background-image: var(--dot-pattern);
+            background-size: 20px 20px;
+        }
+        a { color: var(--accent-gold); text-decoration: none; }
+        a:hover { color: var(--accent-orange); }
+
+        /* ========== 顶部导航 ========== */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--topnav-height);
+            background: var(--bg-nav);
+            border-bottom: 4px solid var(--border-color);
+            box-shadow: 0 4px 0 0 var(--bg-page);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            flex-wrap: wrap;
+            gap: 6px;
+            background-image: var(--dot-pattern);
+            background-size: 20px 20px;
+        }
+        .top-nav .logo { font-size: 20px; font-weight: bold; color: var(--accent-gold); text-shadow: var(--text-shadow-enabled); letter-spacing: 1px; white-space: nowrap; }
+        .top-nav .logo span { background: var(--accent-red); color: #f5e6d3; padding: 2px 10px; font-size: 11px; border: 2px solid var(--border-color); margin-left: 8px; text-shadow: none; }
+        .top-nav-links { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+        .top-nav-links a { color: var(--text-secondary); font-size: var(--nav-font); padding: 4px 0; border-bottom: 3px solid transparent; transition: none; white-space: nowrap; }
+        .top-nav-links a:hover { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
+        .top-nav-links a.active { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
+        .top-nav .theme-toggle { background: var(--btn-bg); color: var(--btn-text); border: 3px solid var(--border-color); padding: 4px 16px; font-family: inherit; font-size: 14px; cursor: pointer; box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a; transition: 0.05s linear; text-shadow: none; white-space: nowrap; }
+        .top-nav .theme-toggle:active { transform: translate(2px,2px); box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a; }
+
+        /* ========== 侧边栏 ========== */
+        .sidebar {
+            position: fixed;
+            top: var(--topnav-height);
+            left: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--bg-sidebar);
+            border-right: 4px solid var(--border-color);
+            box-shadow: 4px 0 0 0 var(--bg-page);
+            padding: 24px 14px;
+            display: flex;
+            flex-direction: column;
+            z-index: 90;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            background-image: var(--dot-pattern);
+            background-size: 20px 20px;
+        }
+        .sidebar .sidebar-title { font-size: 14px; color: var(--text-secondary); opacity: 0.6; letter-spacing: 2px; padding-bottom: 12px; border-bottom: 3px solid var(--border-color); margin-bottom: 16px; }
+        .sidebar-nav { display: flex; flex-direction: column; gap: 4px; }
+        .sidebar-nav a { color: var(--text-secondary); font-size: 16px; padding: 6px 12px; border: 3px solid transparent; transition: none; display: block; }
+        .sidebar-nav a:hover { color: var(--accent-gold); background: var(--bg-card); border-color: var(--border-color); }
+        .sidebar-nav a.active { color: var(--accent-gold); background: var(--bg-card); border-color: var(--accent-gold); }
+        .sidebar-footer { margin-top: auto; font-size: 12px; color: var(--text-secondary); opacity: 0.4; border-top: 3px solid var(--border-color); padding-top: 14px; text-align: center; }
+
+        .menu-toggle { display: none; position: fixed; top: 10px; left: 10px; z-index: 110; background: var(--btn-bg); color: var(--btn-text); border: 3px solid var(--border-color); padding: 4px 14px; font-family: inherit; font-size: 16px; cursor: pointer; box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a; text-shadow: none; }
+        .menu-toggle:active { transform: translate(2px,2px); box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a; }
+        .sidebar-overlay { display: none; position: fixed; inset: 0; top: var(--topnav-height); background: rgba(0,0,0,0.5); z-index: 80; }
+
+        /* ========== 主内容 ========== */
+        .main-content { padding: 20px 28px 30px 28px; max-width: 1200px; margin: 0 auto; }
+        .page-title { margin-bottom: 28px; border-bottom: 4px solid var(--border-color); padding-bottom: 14px; }
+        .page-title h1 { font-size: 28px; text-shadow: var(--text-shadow-enabled); color: var(--accent-gold); }
+        .page-title p { font-size: var(--font-small); color: var(--text-secondary); margin-top: 6px; }
+
+        /* ========== 手风琴折叠 ========== */
+        .accordion {
+            margin-bottom: 8px;
+            border: 4px solid var(--border-color);
+            background: var(--bg-card);
+            box-shadow: inset 0 0 0 2px var(--bg-card), var(--card-shadow);
+            overflow: hidden;
+            background-image: var(--dot-pattern);
+            background-size: 20px 20px;
+            border-radius: 4px;
+        }
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            cursor: pointer;
+            user-select: none;
+            background: var(--bg-card);
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
+            font-size: 19px;
+            color: var(--accent-gold);
+            text-shadow: var(--text-shadow-enabled);
+            transition: background 0.15s;
+        }
+        .accordion-header:hover { background: var(--bg-nav); }
+        .accordion-header .arrow { font-size: 18px; transition: transform 0.25s ease; color: var(--text-secondary); }
+        .accordion-header .arrow.open { transform: rotate(90deg); }
+        .accordion-body { padding: 16px 20px 22px 20px; border-top: 3px solid var(--border-color); display: none; }
+        .accordion-body.open { display: block; }
+
+        /* ========== 卡片网格 ========== */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 14px; }
+        .card {
+            background: var(--bg-card);
+            border: 4px solid var(--border-color);
+            box-shadow: inset 0 0 0 2px var(--bg-card), var(--card-shadow);
+            padding: 10px 6px;
+            text-align: center;
+            border-radius: 4px;
+            backdrop-filter: blur(4px);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .card:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 2px var(--bg-card), 0 6px 0 0 var(--border-color); border-color: var(--accent-gold); }
+        .card .img-wrap { width: 100%; aspect-ratio: 1/1; background: var(--bg-page); border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 4px; image-rendering: pixelated; }
+        .card .img-wrap img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+        .card .name { font-size: 14px; color: var(--accent-gold); text-shadow: var(--text-shadow-enabled); line-height: 1.3; }
+        .card .sub { font-size: 11px; color: var(--text-secondary); line-height: 1.5; }
+        .card .tag { display: inline-block; background: var(--accent-red); color: #f5e6d3; font-size: 10px; padding: 2px 10px; border: 2px solid var(--border-color); margin-top: 3px; border-radius: 2px; }
+        .card .tag.gold { background: var(--accent-gold); color: #1a2633; }
+        .card .tag.green { background: #4a8a4a; color: #f5e6d3; }
+        .card .tag.blue { background: #3a5a8a; color: #f5e6d3; }
+        .card .tag.purple { background: #6a4a8a; color: #f5e6d3; }
+        .card .tag.orange { background: var(--accent-orange); color: #1a2633; }
+
+        .card .floral-meaning { font-size: 10px; color: var(--accent-orange); line-height: 1.4; opacity: 0.8; }
+
+        /* ========== 成就卡片 ========== */
+        .achv-card .img-wrap { aspect-ratio: 4/1; }
+        .achv-card .img-wrap img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+
+        /* ========== 计数徽标 ========== */
+        .count-badge { font-size: 14px; color: var(--text-secondary); margin-left: 8px; font-weight: normal; }
+
+        /* ========== 底部 ========== */
+        .footer { margin-top: 40px; border-top: 4px solid var(--border-color); padding: 20px 0 14px; text-align: center; font-size: 14px; color: var(--text-secondary); }
+        .footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 6px; }
+        .footer-links a { color: var(--text-secondary); font-size: 14px; }
+        .footer-links a:hover { color: var(--accent-gold); }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 820px) {
+            body { padding-left: 0; padding-top: 70px; }
+            .top-nav { padding: 0 12px; height: auto; min-height: 56px; gap: 6px; }
+            .top-nav .logo { font-size: 17px; }
+            .top-nav-links { gap: 12px; }
+            .top-nav-links a { font-size: 15px; }
+            .top-nav .theme-toggle { font-size: 13px; padding: 3px 12px; }
+            .sidebar { transform: translateX(-100%); width: 200px; top: 56px; }
+            .sidebar.open { transform: translateX(0); }
+            .sidebar-overlay.open { display: block; }
+            .menu-toggle { display: block; }
+            .main-content { padding: 16px 14px 20px 14px; }
+            .grid { grid-template-columns: repeat(auto-fill, minmax(125px, 1fr)); gap: 10px; }
+            .accordion-header { font-size: 17px; padding: 12px 16px; }
+            .accordion-body { padding: 12px 14px 16px; }
+            .card .name { font-size: 13px; }
+            .card .sub { font-size: 10px; }
+        }
+        @media (max-width: 480px) {
+            body { font-size: 16px; }
+            .top-nav .logo { font-size: 15px; }
+            .top-nav-links a { font-size: 13px; }
+            .page-title h1 { font-size: 24px; }
+            .grid { grid-template-columns: repeat(auto-fill, minmax(105px, 1fr)); gap: 8px; }
+            .card { padding: 6px 4px; }
+            .card .name { font-size: 12px; }
+            .card .sub { font-size: 9px; }
+            .card .img-wrap { border-width: 1.5px; }
+            .accordion-header { font-size: 15px; padding: 10px 12px; }
+            .accordion-body { padding: 10px 10px 12px; }
+            .footer-links { flex-direction: column; gap: 6px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 移动端汉堡 ===== -->
+    <button class="menu-toggle" id="menuToggle" aria-label="切换侧边栏">☰</button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== 顶部导航 ===== -->
+    <header class="top-nav">
+        <div class="logo">🎮 攻略<span>站</span></div>
+        <div class="top-nav-links">
+            <a href="index.html">首页</a>
+            <a href="guide.html">新手引导</a>
+            <a href="gallery.html" class="active">图鉴</a>
+            <a href="tools.html">攻略</a>
+            <a href="activities.html">活动</a>
+            <a href="about.html">权责</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle">🌓 切换</button>
+    </header>
+
+    <!-- ===== 侧边栏 ===== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-title">📌 本页目录</div>
+        <nav class="sidebar-nav">
+            <a href="#plant" class="active">🌱 植物</a>
+            <a href="#fish">🐟 鱼类</a>
+            <a href="#achv">🏅 成就</a>
+        </nav>
+        <div class="sidebar-footer">v1.0 · 像素攻略站</div>
+    </aside>
+
+    <!-- ===== 主内容 ===== -->
+    <main class="main-content">
+
+        <div class="page-title">
+            <h1>📊 图鉴</h1>
+            <p>植物 · 鱼类 · 成就 — 点击标题展开/收起</p>
+        </div>
+
+        <!-- ===== 植物图鉴 ===== -->
+        <div class="accordion" id="plant">
+            <button class="accordion-header" data-accordion="plantBody">
+                <span>🌱 植物图鉴 <span class="count-badge" id="plantCount"></span></span>
+                <span class="arrow open" id="plantArrow">▶</span>
+            </button>
+            <div class="accordion-body open" id="plantBody">
+                <div class="grid" id="plantGrid"></div>
+            </div>
+        </div>
+
+        <!-- ===== 鱼类图鉴（含30种垃圾，总计118种） ===== -->
+        <div class="accordion" id="fish">
+            <button class="accordion-header" data-accordion="fishBody">
+                <span>🐟 鱼类图鉴 <span class="count-badge" id="fishCount"></span></span>
+                <span class="arrow" id="fishArrow">▶</span>
+            </button>
+            <div class="accordion-body" id="fishBody">
+                <div class="grid" id="fishGrid"></div>
+            </div>
+        </div>
+
+        <!-- ===== 成就图鉴 ===== -->
+        <div class="accordion" id="achv">
+            <button class="accordion-header" data-accordion="achvBody">
+                <span>🏅 成就图鉴 <span class="count-badge" id="achvCount"></span></span>
+                <span class="arrow" id="achvArrow">▶</span>
+            </button>
+            <div class="accordion-body" id="achvBody">
+                <div class="grid" id="achvGrid"></div>
+            </div>
+        </div>
+
+        <!-- ===== 底部 ===== -->
+        <footer class="footer">
+            <div style="margin-bottom:8px;">📜 本攻略站由玩家自发维护 · 内容按 <strong>CC BY-NC-SA 4.0</strong> 协议提供</div>
+            <div class="footer-links">
+                <a href="about.html">免责声明</a>
+                <a href="manage.html">编辑教程</a>
+                <a href="#">反馈留言</a>
+                <a href="#">交流群：123456</a>
+            </div>
+            <div style="margin-top:10px; font-size:12px; opacity:0.5;">v1.0 · 像素攻略站</div>
+        </footer>
+
+    </main>
+
+    <script>
+        // ============================================================
+        // 1. 主题切换 & 侧边栏
+        // ============================================================
+        (function() {
+            const themeBtn = document.getElementById('themeToggle');
+            const current = localStorage.getItem('pixel-theme');
+            if (current === 'light') document.documentElement.classList.add('light-mode');
+            themeBtn.addEventListener('click', function() {
+                const html = document.documentElement;
+                html.classList.toggle('light-mode');
+                localStorage.setItem('pixel-theme', html.classList.contains('light-mode') ? 'light' : 'dark');
+            });
+
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            menuToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('open');
+                overlay.classList.toggle('open');
+            });
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('open');
+            });
+            document.querySelectorAll('.sidebar-nav a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 820) { sidebar.classList.remove('open');
+                        overlay.classList.remove('open'); }
+                });
+            });
+
+            const sections = [
+                { id: 'plant', link: document.querySelector('.sidebar-nav a[href="#plant"]') },
+                { id: 'fish', link: document.querySelector('.sidebar-nav a[href="#fish"]') },
+                { id: 'achv', link: document.querySelector('.sidebar-nav a[href="#achv"]') }
+            ];
+            let timer = null;
+            window.addEventListener('scroll', function() {
+                if (timer) return;
+                timer = setTimeout(function() {
+                    let activeId = 'plant';
+                    let minDist = Infinity;
+                    sections.forEach(function(item) {
+                        const el = document.getElementById(item.id);
+                        if (el) {
+                            const rect = el.getBoundingClientRect();
+                            if (rect.top < 300 && rect.top > -300) {
+                                const dist = Math.abs(rect.top);
+                                if (dist < minDist) { minDist = dist;
+                                    activeId = item.id; }
+                            }
+                        }
+                    });
+                    sections.forEach(function(item) {
+                        if (item.link) {
+                            item.link.classList.toggle('active', item.id === activeId);
+                        }
+                    });
+                    timer = null;
+                }, 100);
+            });
+            setTimeout(function() {
+                document.querySelector('.sidebar-nav a[href="#plant"]')?.classList.add('active');
+            }, 300);
+        })();
+
+        // ============================================================
+        // 2. 手风琴折叠控制
+        // ============================================================
+        document.querySelectorAll('[data-accordion]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-accordion');
+                const body = document.getElementById(targetId);
+                const arrow = this.querySelector('.arrow');
+                if (body) {
+                    body.classList.toggle('open');
+                    if (arrow) arrow.classList.toggle('open');
+                }
+            });
+        });
+
+        // ============================================================
+        // 3. 数据
+        // ============================================================
+
+        // ---- 植物数据（91条目） ----
+        const PLANTS = [
+            { id: 'qiangwei', name: '蔷薇花', cost: 20, sell: 22, grow: 600000, water: 0.8, yield: 2, unlock: 0, vars: 0,
+                varNames: [], meaning: '浪漫的爱情' },
+            { id: 'shengcai', name: '生菜', cost: 28, sell: 29, grow: 720000, water: 1.5, yield: 2, unlock: 3, vars: 0,
+                varNames: [], meaning: '生生世世的爱' },
+            { id: 'shuidao', name: '水稻', cost: 35, sell: 75, grow: 900000, water: 1.1, yield: 1, unlock: 6, vars: 1,
+                varNames: ['月银星辉'], meaning: '孕育、丰收与成熟' },
+            { id: 'mantuo', name: '黑色曼陀罗', cost: 109, sell: 0, grow: 120000, water: 1.0, yield: 1, unlock: 0, vars: 0,
+                varNames: [], meaning: '不可预知的死亡' },
+            { id: 'yujin', name: '郁金香', cost: 60, sell: 118, grow: 1200000, water: 0.9, yield: 1, unlock: 14, vars: 2,
+                varNames: ['淡紫夜莺', '墨金虎豹'], meaning: '博爱、体贴与高雅' },
+            { id: 'chuju', name: '暖阳雏菊', cost: 70, sell: 146, grow: 1500000, water: 1.1, yield: 1, unlock: 18, vars: 2,
+                varNames: ['糖果霓虹', '暗夜银翼'], meaning: '天真、希望' },
+            { id: 'baicai', name: '翠绿大白菜', cost: 90, sell: 93, grow: 1800000, water: 1.4, yield: 2, unlock: 22, vars: 2,
+                varNames: ['翡翠白玉', '紫玉'], meaning: '百财' },
+            { id: 'xiuqiu', name: '绣球花', cost: 120, sell: 260, grow: 2400000, water: 1.3, yield: 1, unlock: 30, vars: 2,
+                varNames: ['熔岩烈阳', '虹霓暖阳'], meaning: '希望、忠贞' },
+            { id: 'yangmei', name: '琉璃杨梅', cost: 130, sell: 280, grow: 2700000, water: 1.2, yield: 2, unlock: 35, vars: 2,
+                varNames: ['荆棘刺骨', '冰晶日光'], meaning: '吉祥与清雅' },
+            { id: 'malingshu', name: '香甜马铃薯', cost: 150, sell: 171, grow: 3000000, water: 0.5, yield: 2, unlock: 40,
+                vars: 2, varNames: ['星辉深海', '熔岩炽焰'], meaning: '真诚与希望' },
+            { id: 'zhonglou', name: '钟楼风铃草', cost: 240, sell: 510, grow: 3600000, water: 0.4, yield: 1, unlock: 52,
+                vars: 2, varNames: ['水银', '锈蚀'], meaning: '来自远方的祝福' },
+            { id: 'linglan', name: '晨露铃兰', cost: 270, sell: 600, grow: 4200000, water: 1.3, yield: 1, unlock: 58,
+                vars: 2, varNames: ['幻境碧莹', '暮色夕阳'], meaning: '幸福归来' },
+            { id: 'lanmei', name: '晨曦蓝莓', cost: 290, sell: 640, grow: 4800000, water: 1.0, yield: 2, unlock: 62,
+                vars: 2, varNames: ['毒烬黑莓', '电光霓虹'], meaning: '我只爱你' },
+            { id: 'dasuan', name: '炽热大蒜', cost: 300, sell: 248, grow: 5400000, water: 0.3, yield: 3, unlock: 65,
+                vars: 1, varNames: ['赤焰火种'], meaning: '精力充沛' },
+            { id: 'guhun', name: '骨魂玫瑰', cost: 460, sell: 1140, grow: 7200000, water: 1.6, yield: 1, unlock: 80,
+                vars: 2, varNames: ['沸血', '霜骨'], meaning: '黑暗与挑战的爱' },
+            { id: 'yayu', name: '鸦羽天竺葵', cost: 500, sell: 1320, grow: 8400000, water: 1.1, yield: 1, unlock: 90,
+                vars: 2, varNames: ['绯红誓言', '纯白葵礼'], meaning: '偶然的相遇' },
+            { id: 'xigua', name: '脆甜西瓜', cost: 528, sell: 1420, grow: 9000000, water: 1.6, yield: 1, unlock: 95,
+                vars: 2, varNames: ['蔚海冰晶', '霓紫蜜月'], meaning: '生活的甜蜜' },
+            { id: 'maozhua', name: '猫爪暗蓝小菇', cost: 700, sell: 1720, grow: 9900000, water: 1.4, yield: 1, unlock: 100,
+                vars: 2, varNames: ['九命黑猫·血爪', '白猫幻梦·金爪'], meaning: '灵性与守护' },
+            { id: 'zhutai', name: '烛台告解花', cost: 620, sell: 1760, grow: 10800000, water: 0.7, yield: 1, unlock: 105,
+                vars: 2, varNames: ['熔焰烛影', '永恒凛冬'], meaning: '心想事成' },
+            { id: 'xungu', name: '幽灵蕈菇', cost: 680, sell: 1950, grow: 11700000, water: 1.5, yield: 1, unlock: 115,
+                vars: 2, varNames: ['血色幻象', '虚妄之影'], meaning: '神秘守护' },
+            { id: 'heizhua', name: '黑爪武蜡泉花', cost: 820, sell: 2170, grow: 12240000, water: 1.0, yield: 1, unlock: 110,
+                vars: 2, varNames: ['极夜黑耀', '幽冥蓝焰'], meaning: '坚毅与神秘' },
+            { id: 'ziluolan', name: '紫罗兰', cost: 750, sell: 2150, grow: 12600000, water: 1.0, yield: 1, unlock: 110,
+                vars: 2, varNames: ['翡翠苍穹', '日光香膏'], meaning: '永恒的美与爱' },
+            { id: 'zhimeng', name: '织梦水仙', cost: 900, sell: 2620, grow: 14400000, water: 1.2, yield: 1, unlock: 120,
+                vars: 2, varNames: ['噩梦', '月华'], meaning: '多情、想你' },
+            { id: 'longjiao', name: '噬魂紫龙角', cost: 1000, sell: 2790, grow: 14760000, water: 0.6, yield: 1, unlock: 125,
+                vars: 2, varNames: ['炼狱龙炎', '霜骨龙鳞'], meaning: '神秘与力量' },
+            { id: 'xianren', name: '骨毒仙人掌', cost: 980, sell: 2860, grow: 15300000, water: 0, yield: 1, unlock: 130,
+                vars: 2, varNames: ['蜜糖黑曜', '剧毒霓虹'], meaning: '坚强' },
+            { id: 'wange', name: '缎带挽歌兰', cost: 1050, sell: 3100, grow: 16200000, water: 0.9, yield: 1, unlock: 140,
+                vars: 2, varNames: ['旧日新娘', '暗夜挽歌'], meaning: '哀思与永恒' },
+            { id: 'lingbo', name: '凌波水仙', cost: 1150, sell: 3370, grow: 17100000, water: 1.5, yield: 1, unlock: 150,
+                vars: 2, varNames: ['寒河孤鲨', '琉璃金星'], meaning: '吉祥、高尚' },
+            { id: 'jingji', name: '荆棘十字藤', cost: 1250, sell: 3650, grow: 18000000, water: 0.4, yield: 1, unlock: 165,
+                vars: 2, varNames: ['刺棘血冠', '冰封圣滴'], meaning: '不羁而坚强的灵魂' },
+            { id: 'landie', name: '幻蝶蓝目菊', cost: 1350, sell: 3930, grow: 18900000, water: 1.1, yield: 1, unlock: 180,
+                vars: 2, varNames: ['紫毒蝶影', '冰晶蝶翼'], meaning: '沉默不语' },
+            { id: 'wuhua', name: '织月无花果', cost: 1450, sell: 4220, grow: 19800000, water: 0.8, yield: 1, unlock: 200,
+                vars: 2, varNames: ['噩梦黑心', '日光琥珀'], meaning: '丰富的人生' },
+            { id: 'putao', name: '雾霜葡萄', cost: 1550, sell: 4520, grow: 20700000, water: 1.3, yield: 1, unlock: 220,
+                vars: 2, varNames: ['深渊血焰', '星云冰晶'], meaning: '幸福与美满' },
+            { id: 'yumei', name: '醉梦虞美人', cost: 1650, sell: 4730, grow: 21000000, water: 1.2, yield: 1, unlock: 240,
+                vars: 2, varNames: ['深渊挽歌', '晨曦霞光'], meaning: '生离死别' },
+            { id: 'tanhua', name: '月下昙花', cost: 1800, sell: 5040, grow: 21600000, water: 0.9, yield: 1, unlock: 265,
+                vars: 2, varNames: ['绯血永夜', '幻月银辉'], meaning: '刹那间的美丽' }
+        ];
+
+        // ---- 鱼类数据（88种） ----
+        const FISH = [
+            'lk01', '团头鲂·武昌鱼', 1, 'lake', 'day',
+            'lk02', '桂鱼', 1, 'lake', 'day',
+            'lk04', '罗非鱼', 1, 'lake', 'day',
+            'lk06', '草鱼', 1, 'lake', 'day',
+            'lk07', '鲢鱼', 1, 'lake', 'day',
+            'lk08', '鲤鱼', 1, 'lake', 'day',
+            'lk09', '鲫鱼', 1, 'lake', 'day',
+            'lk11', '鳙鱼', 1, 'lake', 'day',
+            'lk03', '泥鳅', 1, 'lake', 'night',
+            'lk05', '翘嘴鲌', 1, 'lake', 'night',
+            'lk10', '鲶鱼', 1, 'lake', 'night',
+            'lk14', '黄辣丁', 1, 'lake', 'night',
+            'lk15', '黑鱼', 1, 'lake', 'night',
+            'lk13', '黄尾密鲴', 1, 'lake', 'night',
+            'lk12', '鳡鱼', 1, 'lake', 'night',
+            'lk16', '巨骨舌鱼', 2, 'lake', 'day',
+            'lk17', '柳条鱼', 2, 'lake', 'day',
+            'lk18', '胭脂鱼', 2, 'lake', 'day',
+            'lk26', '拟尖头鲷', 2, 'lake', 'day',
+            'lk27', '巨型唐鱼', 2, 'lake', 'day',
+            'lk28', '水虎鱼', 2, 'lake', 'day',
+            'lk20', '鸭嘴鲟', 2, 'lake', 'night',
+            'lk19', '雀鳝', 2, 'lake', 'night',
+            'lk29', '电鳗', 2, 'lake', 'night',
+            'lk30', '花鳗鲡', 2, 'lake', 'night',
+            'lk31', '史氏鲟', 2, 'lake', 'night',
+            'lk21', '巨型高背鲤', 3, 'lake', 'day',
+            'lk22', '巨型黄蜡鲶', 3, 'lake', 'day',
+            'lk24', '达氏鳇', 3, 'lake', 'day',
+            'lk23', '盲眼洞穴鱼', 3, 'lake', 'night',
+            'lk25', '黄金河虎', 3, 'lake', 'night',
+            'lk32', '阿根廷红虾', 1, 'sea', 'day',
+            'lk33', '海鳌虾', 1, 'sea', 'day',
+            'lk34', '海白菜', 1, 'sea', 'day',
+            'lk35', '扇贝', 1, 'sea', 'day',
+            'lk36', '水母', 1, 'sea', 'day',
+            'lk37', '甜虾', 1, 'sea', 'day',
+            'lk38', '利铂鲨', 3, 'sea', 'day',
+            'lk39', '鬼角大嘴鱼', 3, 'sea', 'day',
+            'lk40', '狼鳗', 3, 'lake', 'day',
+            'lk41', '吞噬者黑鮟鱇', 3, 'sea', 'night',
+            'lk42', '凶猛帆猎鱼', 3, 'sea', 'night',
+            'lk43', '长棘巨口鱼', 3, 'sea', 'night',
+            'se01', '三文鱼', 1, 'sea', 'day',
+            'se02', '太平洋蓝鳍金枪鱼', 1, 'sea', 'day',
+            'se03', '小黄鱼', 1, 'sea', 'day',
+            'se05', '梭子鱼', 1, 'sea', 'day',
+            'se06', '比目鱼', 1, 'sea', 'day',
+            'se08', '真鲷', 1, 'sea', 'day',
+            'se09', '翻车鱼', 1, 'sea', 'day',
+            'se10', '蓝黄梅鲷', 1, 'sea', 'day',
+            'se04', '带鱼', 1, 'sea', 'night',
+            'se07', '海鳗', 1, 'sea', 'night',
+            'se15', '鲱鱼', 1, 'sea', 'night',
+            'se14', '鲣鱼', 1, 'sea', 'night',
+            'se13', '鯕鲯', 1, 'sea', 'night',
+            'se12', '马面鱼', 1, 'sea', 'night',
+            'se11', '远东拟沙丁鱼', 1, 'sea', 'night',
+            'se20', '鮟鱇鱼', 2, 'sea', 'day',
+            'se19', '皇带鱼', 2, 'sea', 'day',
+            'se18', '水滴鱼', 2, 'sea', 'day',
+            'se16', '吞噬鳗', 2, 'sea', 'night',
+            'se17', '幽灵鲨', 2, 'sea', 'night',
+            'se25', '褶皱鲨', 3, 'sea', 'day',
+            'se24', '毒蛇鱼', 3, 'sea', 'day',
+            'se23', '桶眼鱼', 3, 'sea', 'day',
+            'se21', '哥布林鲨', 3, 'sea', 'night',
+            'se22', '巨口鱼', 3, 'sea', 'night',
+            'sb01', '伞嘴鱼', 3, 'sea', 'day',
+            'sb03', '无鳞龙鱼', 3, 'sea', 'day',
+            'sb05', '长吻银鲛', 3, 'sea', 'day',
+            'sb02', '斑点长手鱼', 3, 'sea', 'night',
+            'sb04', '锯鲨', 3, 'sea', 'night',
+            'sb06', '鬼蝠魟', 3, 'sea', 'night',
+            'fx01', '发条机械鱼', 3, 'any', 'day',
+            'fx02', '宝石琉璃鱼', 3, 'any', 'day',
+            'fx03', '星空发光鱼', 3, 'any', 'day',
+            'fx04', '梦境云朵鱼', 3, 'any', 'day',
+            'fx05', '飞天彩虹鱼', 3, 'any', 'day',
+            'fx06', '幽灵骨骼鱼', 3, 'any', 'night',
+            'fx07', '时光齿轮鱼', 3, 'any', 'night',
+            'fx08', '漂浮气球鱼', 3, 'any', 'night',
+            'fx09', '熔岩焰火鱼', 3, 'any', 'night',
+            'fx10', '纸艺折纸鱼', 3, 'any', 'night',
+            'fx11', '霓虹水母鱼', 3, 'any', 'night'
+        ];
+
+        // ---- 垃圾数据（30种，含新增3种） ----
+        const JUNK = [
+            'sp01', '弃置的共享单车车锁',
+            'sp02', '挂满水草的塑料袋',
+            'sp03', '挂着水草的假牙',
+            'sp04', '断弦的破木吉他',
+            'sp05', '浸水的旧轮胎',
+            'sp06', '生锈的可乐罐',
+            'sp07', '生锈的漏水铁桶',
+            'sp08', '破旧破二只皮鞋',
+            'sp09', '缠着鱼线的小黄鸭',
+            'sp10', '生锈的铝制老式水壶',
+            'sp11', '挂着水草的破雨伞',
+            'sp12', '破裂的塑料泳圈',
+            'sp13', '生锈的破旧平底锅',
+            'sp14', '缠绕着水草的挂历',
+            'sp15', '沾满泥巴的泡水毛绒拖鞋',
+            'sp16', '掉落的勇者木剑',
+            'sp17', '坏掉的魔法海螺',
+            'sp18', '封印着水鬼的漂流瓶',
+            'sp19', '河神落下的金斧头',
+            'sp20', '纯金爆米花',
+            'sp21', '掉落的水晶假牙',
+            'sp22', '遗失的精灵法杖前段',
+            'sp23', '地理学家遗落的全息地球仪',
+            'sp24', '跌落水底的微型UFO舱盖',
+            'sp25', '赛博飞艇的后视镜',
+            'sp26', '废弃的机械流浪体机械足',
+            'sp27', '破损斗篷',
+            // ---- 新增3种垃圾 ----
+            'sp28', '临空市被偷的摩托车前轮',
+            'sp29', '坠落水底的猎人能量核心',
+            'sp30', '损坏的超时空传送拐杖'
+        ];
+
+        // ---- 成就数据 ----
+        const ACHV_DEFS = {
+            sign50: { name: '打卡机转世', img: './achv/sign50.png', desc: '连续签到 50 天' },
+            monthfull: { name: '月度全勤打工人', img: './achv/monthfull.png', desc: '一个自然月全勤签到' },
+            mktking: { name: '黑市大佬', img: './achv/mktking.png', desc: '连续三周黑市股市榜单第一' },
+            farmdex: { name: '暗点农场主', img: './achv/farmdex.png', desc: '种花游戏满图鉴' },
+            sheep300: { name: '根本睡不着', img: './achv/sheep300.png', desc: '数羊超过 300 个' },
+            race4min: { name: '开到地老天荒', img: './achv/race4min.png', desc: '飙车单局时长超过 4 分钟' },
+            airforce10: { name: '空军大师', img: './achv/airforce10.png', desc: '连续 10 次钓鱼空军' },
+            eco10: { name: '环保大使', img: './achv/eco10.png', desc: '连续 10 次钓上来垃圾' },
+            unlucky: { name: '倒霉鬼', img: './achv/unlucky.png', desc: '连续 5 次钓鱼断杆' },
+            goldaxe: { name: '这是你的金斧头吗', img: './achv/goldaxe.png', desc: '第一次钓上来河神落下的金斧头' },
+            sign7: { name: '暗点新编', img: './achv/sign7.png', desc: '连续签到 7 天' },
+            rubies5k: { name: '龙窟守财神', img: './achv/rubies5k.png', desc: '红宝石当前大于 5000 个' },
+            pomoking: { name: '番茄大王', img: './achv/pomoking.png', desc: '连续三天挂番茄钟 4 小时' },
+            race10s: { name: '反向赛车手', img: './achv/race10s.png', desc: '飙车 10 秒钟内结束游戏' },
+            mktdown3: { name: '天台风很大', img: './achv/mktdown3.png', desc: '连续三天亏损' },
+            cast1k: { name: '捕鱼达狸', img: './achv/cast1k.png', desc: '累计钓鱼 1000 次' },
+            cast5k: { name: '今晚吃鱼', img: './achv/cast5k.png', desc: '累计钓鱼 5000 次' },
+            cast10k: { name: '小猫钓鱼', img: './achv/cast10k.png', desc: '累计钓鱼 10000 次' },
+            cast100k: { name: '这河狸吗？', img: './achv/cast100k.png', desc: '累计钓鱼 100000 次' },
+            idle50: { name: '守彻待鱼', img: './achv/idle50.png', desc: '累计让秦彻钓鱼 50 次' },
+            net1k: { name: '一网打尽', img: './achv/net1k.png', desc: '累计用鱼网捞 1000 次' },
+            net3k: { name: '水里还有鱼吗？', img: './achv/net3k.png', desc: '累计用鱼网捞 3000 次' },
+            escape100: { name: '哎呀手滑了', img: './achv/escape100.png', desc: '钓鱼累计 100 次脱钩' },
+            fishspend200k: { name: '钱都喂了鱼', img: './achv/fishspend200k.png', desc: '钓鱼游戏里累计花费 200000' },
+            fishspend500k: { name: '钓鱼是生活', img: './achv/fishspend500k.png', desc: '钓鱼游戏里累计花费 500000' },
+            sign365: { name: '和暗点老大的365天', img: './achv/sign365.png', desc: '累计打卡签到 365 天' },
+            poke50: { name: '出去不要打扰我睡觉', img: './achv/poke50.png', desc: '秦彻睡觉时累计戳醒他 50 次' },
+            box100: { name: '我要验牌', img: './achv/box100.png', desc: '农场游戏开盲盒 100 次' },
+            datura100: { name: '塔尔城园丁', img: './achv/datura100.png', desc: '农场游戏里种满 100 朵黑色曼陀罗' },
+            wallst5w: { name: '华尔街之狸', img: './achv/wallst5w.png', desc: '连续五周黑市最终结算时盈利达 100 钻' },
+            fishdex: { name: '水产户籍管理员', img: './achv/fishdex.png', desc: '钓鱼游戏满图鉴' },
+            junkdex: { name: '废品回收大亨', img: './achv/junkdex.png', desc: '钓鱼游戏里特殊物品满图鉴' },
+            msg50: { name: '唠嗑永动机', img: './achv/msg50.png', desc: '累计在留言板发言 50 次' },
+            sheep1st: { name: '羊圈领袖', img: './achv/sheep1st.png', desc: '数羊游戏排行榜前 10 名' },
+            cinema100: { name: '影院座椅已包浆', img: './achv/cinema100.png', desc: '电影院场景特殊排片观看 100 次' },
+            boomcore10k: { name: '临空芯核批发商', img: './achv/boomcore10k.png', desc: '扫雷累计获得 10000 个芯核' },
+            boompuz1: { name: '像素级微雕大师', img: './achv/boompuz1.png', desc: '扫雷游戏里完成第一组拼图' },
+            boomplay100: { name: '卡奥斯炸炸炸', img: './achv/boomplay100.png', desc: '扫雷玩了 100 局' },
+            boom10s: { name: '扫雷界扫地僧', img: './achv/boom10s.png', desc: '扫雷游戏 10 秒内通关' },
+            boomfirst: { name: '战术性自爆', img: './achv/boomfirst.png', desc: '开局 3 下之内踩中炸弹结束游戏' }
+        };
+
+        // ============================================================
+        // 4. 渲染函数
+        // ============================================================
+
+        function fmtGrow(ms) {
+            const totalSec = Math.floor(ms / 1000);
+            const hours = Math.floor(totalSec / 3600);
+            const mins = Math.floor((totalSec % 3600) / 60);
+            if (hours > 0 && mins > 0) return hours + '小时' + mins + '分';
+            if (hours > 0) return hours + '小时';
+            return mins + '分';
+        }
+
+        function fmtWater(w) {
+            if (w === 0) return '浇水无效';
+            if (w < 0.9) return '不太喜水';
+            if (w < 1.5) return '喜水';
+            return '很喜水';
+        }
+
+        function fmtUnlock(u) {
+            if (u === 0) return '初始';
+            return '收获' + u + '次解锁';
+        }
+
+        function starStr(n) { return '★'.repeat(n || 1) + '☆'.repeat(Math.max(0, 3 - (n || 1))); }
+
+        function mapLabel(m) {
+            if (m === 'lake') return '🌊 湖';
+            if (m === 'sea') return '🌊 海';
+            return '🌀 全水域';
+        }
+
+        function whenLabel(w) { return w === 'day' ? '☀️ 白天' : '🌙 夜间'; }
+
+        function plantImgPath(id, stage, variant) {
+            let key = 'p-' + id + '-' + stage;
+            if (variant && stage >= 3) key += 'v' + variant;
+            return './art/' + key + '.png';
+        }
+
+        function fishImgPath(id) { return './fishing_art/f-' + id + '.png'; }
+
+        function junkImgPath(id) { return './fishing_art/j-' + id + '.png'; }
+
+        // ---- 植物 ----
+        function renderPlants() {
+            const grid = document.getElementById('plantGrid');
+            let html = '';
+            let totalItems = 0;
+            PLANTS.forEach(p => {
+                totalItems++;
+                const sellPrice = p.sell || 0;
+                html += `
+                    <div class="card">
+                        <div class="img-wrap">
+                            <img src="${plantImgPath(p.id, 4, 0)}" alt="${p.name}" loading="lazy"
+                                 onerror="this.parentElement.innerHTML='<span style=\\'font-size:12px;color:var(--text-secondary);\\'>${p.name}</span>'">
+                        </div>
+                        <div class="name">${p.name}</div>
+                        <div class="sub">🪙 ${p.cost} → ${sellPrice}</div>
+                        <div class="sub">⏱ ${fmtGrow(p.grow)} · ${fmtWater(p.water)}</div>
+                        <div class="floral-meaning">🌸 ${p.meaning || '无'}</div>
+                        <span class="tag">${fmtUnlock(p.unlock)}</span>
+                    </div>
+                `;
+                for (let v = 1; v <= p.vars; v++) {
+                    totalItems++;
+                    const vname = p.varNames[v - 1] || ('异色' + v);
+                    const sp = p.sell * 3;
+                    html += `
+                        <div class="card">
+                            <div class="img-wrap">
+                                <img src="${plantImgPath(p.id, 4, v)}" alt="${vname}" loading="lazy"
+                                     onerror="this.parentElement.innerHTML='<span style=\\'font-size:12px;color:var(--text-secondary);\\'>${vname}</span>'">
+                            </div>
+                            <div class="name" style="color: var(--accent-gold);">✦ ${vname}</div>
+                            <div class="sub">🪙 ${p.cost} → ${sp}</div>
+                            <div class="sub">⏱ ${fmtGrow(p.grow)} · ${fmtWater(p.water)}</div>
+                            <div class="floral-meaning">🌸 ${p.meaning || '无'}</div>
+                            <span class="tag gold">异色</span>
+                        </div>
+                    `;
+                }
+            });
+            grid.innerHTML = html;
+            document.getElementById('plantCount').textContent = '(' + totalItems + '种)';
+        }
+
+        // ---- 鱼类（88种）+ 垃圾（30种）= 118种 ----
+        function renderFish() {
+            const grid = document.getElementById('fishGrid');
+            let html = '';
+            // 鱼类
+            for (let i = 0; i < FISH.length; i += 5) {
+                const id = FISH[i];
+                const name = FISH[i + 1];
+                const star = FISH[i + 2];
+                const map = FISH[i + 3];
+                const when = FISH[i + 4];
+                html += `
+                    <div class="card">
+                        <div class="img-wrap">
+                            <img src="${fishImgPath(id)}" alt="${name}" loading="lazy"
+                                 onerror="this.parentElement.innerHTML='<span style=\\'font-size:12px;color:var(--text-secondary);\\'>${name}</span>'">
+                        </div>
+                        <div class="name">${name}</div>
+                        <div class="sub">${mapLabel(map)} · ${whenLabel(when)}</div>
+                        <div class="sub">${starStr(star)}</div>
+                    </div>
+                `;
+            }
+            // 垃圾（30种）
+            for (let i = 0; i < JUNK.length; i += 2) {
+                const id = JUNK[i];
+                const name = JUNK[i + 1];
+                html += `
+                    <div class="card">
+                        <div class="img-wrap">
+                            <img src="${junkImgPath(id)}" alt="${name}" loading="lazy"
+                                 onerror="this.parentElement.innerHTML='<span style=\\'font-size:12px;color:var(--text-secondary);\\'>${name}</span>'">
+                        </div>
+                        <div class="name" style="color: var(--text-secondary);">🗑️ ${name}</div>
+                        <div class="sub">特殊物品</div>
+                        <span class="tag blue">垃圾</span>
+                    </div>
+                `;
+            }
+            grid.innerHTML = html;
+            document.getElementById('fishCount').textContent = '(' + (FISH.length / 5 + JUNK.length / 2) + '种)';
+        }
+
+        // ---- 成就 ----
+        function renderAchievements() {
+            const grid = document.getElementById('achvGrid');
+            let html = '';
+            const keys = Object.keys(ACHV_DEFS);
+            keys.forEach(key => {
+                const a = ACHV_DEFS[key];
+                const isHidden = a.hidden ? true : false;
+                html += `
+                    <div class="card achv-card">
+                        <div class="img-wrap">
+                            <img src="${a.img || './achv/placeholder.png'}" alt="${a.name}" loading="lazy"
+                                 onerror="this.parentElement.innerHTML='<span style=\\'font-size:12px;color:var(--text-secondary);\\'>${a.name}</span>'">
+                        </div>
+                        <div class="name">${a.name}</div>
+                        <div class="sub">${a.desc || ''}</div>
+                        ${isHidden ? '<span class="tag purple">隐藏</span>' : ''}
+                    </div>
+                `;
+            });
+            grid.innerHTML = html;
+            document.getElementById('achvCount').textContent = '(' + keys.length + '块)';
+        }
+
+        // ============================================================
+        // 5. 初始化
+        // ============================================================
+        renderPlants();
+        renderFish();
+        renderAchievements();
+
+        // 默认展开植物，收起鱼类和成就
+        document.getElementById('plantBody').classList.add('open');
+        document.getElementById('plantArrow').classList.add('open');
+        document.getElementById('fishBody').classList.remove('open');
+        document.getElementById('fishArrow').classList.remove('open');
+        document.getElementById('achvBody').classList.remove('open');
+        document.getElementById('achvArrow').classList.remove('open');
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>活动 · N109 攻略站</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --bg-page: #1a2633;
+            --bg-card: rgba(38, 51, 64, 0.92);
+            --bg-nav: rgba(15, 26, 36, 0.95);
+            --bg-sidebar: rgba(15, 26, 36, 0.92);
+            --text-primary: #f5e6d3;
+            --text-secondary: #c9b8a8;
+            --accent-gold: #e8b84c;
+            --accent-orange: #d98c3a;
+            --accent-red: #b84a3a;
+            --border-color: #5c3a21;
+            --shadow-color: #1a0e08;
+            --btn-bg: #b84a3a;
+            --btn-text: #f5e6d3;
+            --text-shadow-enabled: 2px 2px 0 var(--shadow-color);
+            --sidebar-width: 180px;
+            --topnav-height: 60px;
+            --dot-pattern: radial-gradient(circle, rgba(200,180,160,0.05) 1px, transparent 1px);
+            --card-shadow: 0 4px 0 0 var(--border-color);
+        }
+        .light-mode {
+            --bg-page: #f2ebe0;
+            --bg-card: rgba(255, 255, 255, 0.92);
+            --bg-nav: rgba(230, 220, 204, 0.95);
+            --bg-sidebar: rgba(230, 220, 204, 0.92);
+            --text-primary: #2c241c;
+            --text-secondary: #5a4e42;
+            --accent-gold: #b88a3a;
+            --accent-orange: #c47a2a;
+            --accent-red: #a03a2a;
+            --border-color: #b8a898;
+            --shadow-color: transparent;
+            --btn-bg: #a03a2a;
+            --btn-text: #f5e6d3;
+            --text-shadow-enabled: none;
+            --card-shadow: 0 4px 0 0 var(--border-color);
+            --dot-pattern: radial-gradient(circle, rgba(120,100,80,0.08) 1px, transparent 1px);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.25s, color 0.25s, border 0.25s, box-shadow 0.25s; image-rendering: pixelated; }
+        body {
+            font-family: 'Press Start 2P', 'Courier New', monospace;
+            background: var(--bg-page);
+            color: var(--text-primary);
+            font-size: 16px;
+            line-height: 1.8;
+            min-height: 100vh;
+            padding-top: var(--topnav-height);
+            padding-left: var(--sidebar-width);
+            background-image: var(--dot-pattern);
+            background-size: 20px 20px;
+            background-image: var(--dot-pattern), url('images/bg-body.jpg');
+            background-size: 20px 20px, cover;
+            background-attachment: fixed, fixed;
+        }
+        .light-mode body {
+            background-image: var(--dot-pattern), url('images/bg-body-light.jpg');
+        }
+        a { color: var(--accent-gold); text-decoration: none; }
+        a:hover { color: var(--accent-orange); }
+
+        .top-nav {
+            position: fixed; top: 0; left: 0; right: 0; height: var(--topnav-height);
+            background: var(--bg-nav); border-bottom: 4px solid var(--border-color);
+            box-shadow: 0 4px 0 0 var(--bg-page); padding: 0 24px;
+            display: flex; align-items: center; justify-content: space-between; z-index: 100;
+            flex-wrap: wrap; gap: 6px; backdrop-filter: blur(8px);
+        }
+        .top-nav .logo { font-size: 20px; font-weight: bold; color: var(--accent-gold); text-shadow: var(--text-shadow-enabled); letter-spacing: 1px; white-space: nowrap; }
+        .top-nav .logo span { background: var(--accent-red); color: #f5e6d3; padding: 2px 10px; font-size: 11px; border: 2px solid var(--border-color); margin-left: 8px; text-shadow: none; }
+        .top-nav-links { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+        .top-nav-links a { color: var(--text-secondary); font-size: 17px; padding: 4px 0; border-bottom: 3px solid transparent; transition: none; white-space: nowrap; }
+        .top-nav-links a:hover { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
+        .top-nav-links a.active { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
+        .top-nav .theme-toggle { background: var(--btn-bg); color: var(--btn-text); border: 3px solid var(--border-color); padding: 4px 16px; font-family: inherit; font-size: 14px; cursor: pointer; box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a; transition: 0.05s linear; text-shadow: none; white-space: nowrap; }
+        .top-nav .theme-toggle:active { transform: translate(2px, 2px); box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a; }
+
+        .sidebar {
+            position: fixed; top: var(--topnav-height); left: 0; bottom: 0; width: var(--sidebar-width);
+            background: var(--bg-sidebar); border-right: 4px solid var(--border-color);
+            box-shadow: 4px 0 0 0 var(--bg-page); padding: 24px 14px;
+            display: flex; flex-direction: column; z-index: 90; overflow-y: auto;
+            transition: transform 0.3s ease; backdrop-filter: blur(8px);
+        }
+        .sidebar .sidebar-title { font-size: 14px; color: var(--text-secondary); opacity: 0.6; letter-spacing: 2px; padding-bottom: 12px; border-bottom: 3px solid var(--border-color); margin-bottom: 16px; }
+        .sidebar-nav { display: flex; flex-direction: column; gap: 4px; }
+        .sidebar-nav a { color: var(--text-secondary); font-size: 16px; padding: 6px 12px; border: 3px solid transparent; transition: none; display: block; }
+        .sidebar-nav a:hover { color: var(--accent-gold); background: var(--bg-card); border-color: var(--border-color); }
+        .sidebar-nav a.active { color: var(--accent-gold); background: var(--bg-card); border-color: var(--accent-gold); }
+        .sidebar-footer { margin-top: auto; font-size: 12px; color: var(--text-secondary); opacity: 0.4; border-top: 3px solid var(--border-color); padding-top: 14px; text-align: center; }
+
+        .menu-toggle { display: none; position: fixed; top: 10px; left: 10px; z-index: 110; background: var(--btn-bg); color: var(--btn-text); border: 3px solid var(--border-color); padding: 4px 14px; font-family: inherit; font-size: 16px; cursor: pointer; box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a; text-shadow: none; }
+        .menu-toggle:active { transform: translate(2px, 2px); box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a; }
+        .sidebar-overlay { display: none; position: fixed; inset: 0; top: var(--topnav-height); background: rgba(0,0,0,0.5); z-index: 80; }
+
+        .main-content { padding: 20px 28px 30px 28px; max-width: 1200px; margin: 0 auto; min-height: calc(100vh - var(--topnav-height) - 60px); }
+
+        .page-title { margin-bottom: 28px; border-bottom: 4px solid var(--border-color); padding-bottom: 14px; }
+        .page-title h1 { font-size: 28px; text-shadow: var(--text-shadow-enabled); color: var(--accent-gold); }
+        .page-title p { font-size: 16px; color: var(--text-secondary); margin-top: 6px; }
+
+        .activity-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+        .activity-card {
+            background: var(--bg-card); border: 4px solid var(--border-color);
+            box-shadow: inset 0 0 0 2px var(--bg-card), var(--card-shadow);
+            padding: 20px; backdrop-filter: blur(4px);
+            transition: none;
+        }
+        .activity-card:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 2px var(--bg-card), 0 6px 0 0 var(--border-color); border-color: var(--accent-gold); }
+        .activity-card .icon { font-size: 40px; display: block; margin-bottom: 10px; }
+        .activity-card h3 { font-size: 18px; color: var(--accent-gold); text-shadow: var(--text-shadow-enabled); }
+        .activity-card p { font-size: 15px; color: var(--text-secondary); margin-top: 6px; line-height: 1.8; }
+        .activity-card .status { display: inline-block; background: var(--accent-red); color: #f5e6d3; font-size: 11px; padding: 2px 12px; border: 2px solid var(--border-color); margin-top: 10px; }
+        .activity-card .status.soon { background: var(--bg-nav); color: var(--text-secondary); }
+
+        .footer { margin-top: 40px; border-top: 4px solid var(--border-color); padding: 20px 0 14px; text-align: center; font-size: 14px; color: var(--text-secondary); }
+        .footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 6px; }
+        .footer-links a { color: var(--text-secondary); font-size: 14px; }
+        .footer-links a:hover { color: var(--accent-gold); }
+
+        @media (max-width: 820px) { body { padding-left: 0; padding-top: 70px; } .top-nav { padding: 0 12px; height: auto; min-height: 56px; gap: 6px; } .top-nav .logo { font-size: 16px; } .top-nav-links { gap: 12px; } .top-nav-links a { font-size: 14px; } .top-nav .theme-toggle { font-size: 12px; padding: 3px 12px; } .sidebar { transform: translateX(-100%); width: 200px; top: 56px; } .sidebar.open { transform: translateX(0); } .sidebar-overlay.open { display: block; } .menu-toggle { display: block; } .main-content { padding: 16px 14px 20px 14px; } .activity-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 480px) { body { font-size: 15px; } .top-nav .logo { font-size: 14px; } .top-nav-links a { font-size: 12px; } .page-title h1 { font-size: 24px; } .activity-grid { grid-template-columns: 1fr; } .footer-links { flex-direction: column; gap: 6px; } }
+    </style>
+</head>
+<body>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="切换侧边栏">☰</button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <header class="top-nav">
+        <div class="logo">🎮 攻略<span>站</span></div>
+        <div class="top-nav-links">
+            <a href="index.html">首页</a>
+            <a href="guide.html">新手引导</a>
+            <a href="gallery.html">图鉴</a>
+            <a href="tools.html">攻略</a>
+            <a href="activities.html" class="active">活动</a>
+            <a href="about.html">权责</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle">🌓 切换</button>
+    </header>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-title">📌 本页目录</div>
+        <nav class="sidebar-nav">
+            <a href="#ongoing" class="active">🔥 进行中</a>
+            <a href="#upcoming">📅 即将开始</a>
+            <a href="#past">📜 已结束</a>
+        </nav>
+        <div class="sidebar-footer">v1.0 · 像素攻略站</div>
+    </aside>
+
+    <main class="main-content">
+
+        <div class="page-title">
+            <h1>🎯 活动</h1>
+            <p>当前活动 · 即将开始 · 往期回顾</p>
+        </div>
+
+        <!-- 进行中 -->
+        <h2 style="font-size:20px; color:var(--accent-gold); text-shadow:var(--text-shadow-enabled); border-bottom:3px solid var(--border-color); padding-bottom:8px; margin-bottom:16px;" id="ongoing">🔥 进行中</h2>
+        <div class="activity-grid">
+            <div class="activity-card">
+                <span class="icon">🏆</span>
+                <h3>选梅大赛</h3>
+                <p>上传你的作品，让大家投票！每人可投5票，图片格式 JPG/PNG/WebP，最大 2MB。</p>
+                <span class="status">进行中</span>
+            </div>
+            <div class="activity-card">
+                <span class="icon">🎣</span>
+                <h3>彻夜渔语 · 钓鱼大赛</h3>
+                <p>蜜月沙滩钓鱼小游戏，钓到稀有鱼种获得额外奖励！</p>
+                <span class="status">进行中</span>
+            </div>
+        </div>
+
+        <!-- 即将开始 -->
+        <h2 style="font-size:20px; color:var(--accent-gold); text-shadow:var(--text-shadow-enabled); border-bottom:3px solid var(--border-color); padding-bottom:8px; margin-bottom:16px; margin-top:32px;" id="upcoming">📅 即将开始</h2>
+        <div class="activity-grid">
+            <div class="activity-card">
+                <span class="icon">🎨</span>
+                <h3>艺术展 · 限时联动</h3>
+                <p>与知名画师的联动活动，15张精选作品展出，敬请期待。</p>
+                <span class="status soon">即将开启</span>
+            </div>
+            <div class="activity-card">
+                <span class="icon">🏎️</span>
+                <h3>N109 Boulevard 锦标赛</h3>
+                <p>赛车小游戏限时竞速赛，挑战最快圈速，赢取限定奖励。</p>
+                <span class="status soon">即将开启</span>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div style="margin-bottom:8px;">📜 本攻略站由玩家自发维护 · 内容按 <strong>CC BY-NC-SA 4.0</strong> 协议提供</div>
+            <div class="footer-links">
+                <a href="about.html">免责声明</a>
+                <a href="manage.html">编辑教程</a>
+                <a href="#">反馈留言</a>
+                <a href="#">交流群：123456</a>
+            </div>
+            <div style="margin-top:10px; font-size:12px; opacity:0.5;">v1.0 · 像素攻略站</div>
+        </footer>
+
+    </main>
+
+    <script>
+        (function() {
+            const themeBtn = document.getElementById('themeToggle');
+            const current = localStorage.getItem('pixel-theme');
+            if (current === 'light') document.documentElement.classList.add('light-mode');
+            themeBtn.addEventListener('click', function() {
+                const html = document.documentElement;
+                html.classList.toggle('light-mode');
+                localStorage.setItem('pixel-theme', html.classList.contains('light-mode') ? 'light' : 'dark');
+            });
+
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            menuToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('open');
+                overlay.classList.toggle('open');
+            });
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('open');
+            });
+            document.querySelectorAll('.sidebar-nav a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 820) { sidebar.classList.remove('open');
+                        overlay.classList.remove('open'); }
+                });
+            });
+
+            const sections = [
+                { id: 'ongoing', link: document.querySelector('.sidebar-nav a[href="#ongoing"]') },
+                { id: 'upcoming', link: document.querySelector('.sidebar-nav a[href="#upcoming"]') },
+                { id: 'past', link: document.querySelector('.sidebar-nav a[href="#past"]') }
+            ];
+            let timer = null;
+            window.addEventListener('scroll', function() {
+                if (timer) return;
+                timer = setTimeout(function() {
+                    let activeId = 'ongoing';
+                    let minDist = Infinity;
+                    sections.forEach(function(item) {
+                        const el = document.getElementById(item.id);
+                        if (el) {
+                            const rect = el.getBoundingClientRect();
+                            if (rect.top < 300 && rect.top > -300) {
+                                const dist = Math.abs(rect.top);
+                                if (dist < minDist) { minDist = dist;
+                                    activeId = item.id; }
+                            }
+                        }
+                    });
+                    sections.forEach(function(item) {
+                        if (item.link) {
+                            item.link.classList.toggle('active', item.id === activeId);
+                        }
+                    });
+                    timer = null;
+                }, 100);
+            });
+            setTimeout(function() {
+                document.querySelector('.sidebar-nav a[href="#ongoing"]')?.classList.add('active');
+            }, 300);
+        })();
+    </script>
+
+</body>
+</html>
