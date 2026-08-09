@@ -6,8 +6,6 @@
     <title>数据管理 · N109 攻略站</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
     <style>
-        /* 复用与全站一致的主题变量（此处省略，实际会包含完整样式） */
-        /* 为节省篇幅，这里只展示核心结构，实际代码中会完整包含所有样式 */
         :root {
             --bg-page: #1a2633;
             --bg-card: #263340;
@@ -29,6 +27,8 @@
             --topnav-height: 60px;
             --dot-pattern: radial-gradient(circle, rgba(200,180,160,0.05) 1px, transparent 1px);
             --card-shadow: 0 4px 0 0 var(--border-color);
+            --nav-font-pc: 16px;
+            --nav-font-mobile: 13px;
         }
         .light-mode {
             --bg-page: #f2ebe0;
@@ -65,8 +65,171 @@
         }
         a { color: var(--accent-gold); text-decoration: none; }
         a:hover { color: var(--accent-orange); }
-        /* 导航、侧边栏等样式与全站一致，此处省略 */
-        /* 实际提供完整代码时，会包含全部样式。 */
+
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--topnav-height);
+            background: var(--bg-nav);
+            border-bottom: 4px solid var(--border-color);
+            box-shadow: 0 4px 0 0 var(--bg-page);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            flex-wrap: wrap;
+            gap: 6px;
+            background-image: var(--dot-pattern);
+            background-size: 20px 20px;
+        }
+        .top-nav .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--accent-gold);
+            text-shadow: var(--text-shadow-enabled);
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+        .top-nav .logo span {
+            background: var(--accent-red);
+            color: #f5e6d3;
+            padding: 2px 10px;
+            font-size: 11px;
+            border: 2px solid var(--border-color);
+            margin-left: 8px;
+            text-shadow: none;
+        }
+        .top-nav-links {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .top-nav-links a {
+            color: var(--text-secondary);
+            font-size: var(--nav-font-pc);
+            padding: 4px 0;
+            border-bottom: 3px solid transparent;
+            transition: none;
+            white-space: nowrap;
+        }
+        .top-nav-links a:hover {
+            color: var(--accent-gold);
+            border-bottom-color: var(--accent-gold);
+        }
+        .top-nav-links a.active {
+            color: var(--accent-gold);
+            border-bottom-color: var(--accent-gold);
+        }
+        .top-nav .theme-toggle {
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 3px solid var(--border-color);
+            padding: 4px 16px;
+            font-family: inherit;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a;
+            transition: 0.05s linear;
+            text-shadow: none;
+            white-space: nowrap;
+        }
+        .top-nav .theme-toggle:active {
+            transform: translate(2px, 2px);
+            box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: var(--topnav-height);
+            left: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--bg-sidebar);
+            border-right: 4px solid var(--border-color);
+            box-shadow: 4px 0 0 0 var(--bg-page);
+            padding: 24px 14px;
+            display: flex;
+            flex-direction: column;
+            z-index: 90;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            background-image: var(--dot-pattern);
+            background-size: 20px 20px;
+        }
+        .sidebar .sidebar-title {
+            font-size: 14px;
+            color: var(--text-secondary);
+            opacity: 0.6;
+            letter-spacing: 2px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--border-color);
+            margin-bottom: 16px;
+        }
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .sidebar-nav a {
+            color: var(--text-secondary);
+            font-size: 16px;
+            padding: 6px 12px;
+            border: 3px solid transparent;
+            transition: none;
+            display: block;
+        }
+        .sidebar-nav a:hover {
+            color: var(--accent-gold);
+            background: var(--bg-card);
+            border-color: var(--border-color);
+        }
+        .sidebar-nav a.active {
+            color: var(--accent-gold);
+            background: var(--bg-card);
+            border-color: var(--accent-gold);
+        }
+        .sidebar-footer {
+            margin-top: auto;
+            font-size: 12px;
+            color: var(--text-secondary);
+            opacity: 0.4;
+            border-top: 3px solid var(--border-color);
+            padding-top: 14px;
+            text-align: center;
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 110;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 3px solid var(--border-color);
+            padding: 4px 14px;
+            font-family: inherit;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a;
+            text-shadow: none;
+        }
+        .menu-toggle:active {
+            transform: translate(2px, 2px);
+            box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a;
+        }
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            top: var(--topnav-height);
+            background: rgba(0,0,0,0.5);
+            z-index: 80;
+        }
 
         .main-content {
             padding: 24px 28px 30px 28px;
@@ -210,29 +373,145 @@
         .footer-links a { color: var(--text-secondary); font-size: 14px; }
         .footer-links a:hover { color: var(--accent-gold); }
 
+        /* ========== 退出管理按钮 ========== */
+        .logout-bar {
+            background: var(--bg-card);
+            border: 4px solid var(--border-color);
+            padding: 12px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            background-image: var(--dot-pattern);
+            background-size: 20px 20px;
+        }
+        .logout-bar .info {
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+        .logout-bar .info strong {
+            color: var(--accent-gold);
+        }
+        .logout-bar .btn-logout {
+            background: var(--accent-red);
+            border: 3px solid var(--border-color);
+            color: #f5e6d3;
+            font-family: inherit;
+            font-size: 14px;
+            padding: 6px 18px;
+            cursor: pointer;
+            box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a;
+            transition: 0.05s linear;
+            text-shadow: none;
+        }
+        .logout-bar .btn-logout:active {
+            transform: translate(2px, 2px);
+            box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a;
+        }
+        .logout-bar .btn-home {
+            background: var(--bg-nav);
+            border: 3px solid var(--border-color);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 14px;
+            padding: 6px 18px;
+            cursor: pointer;
+            box-shadow: inset -3px -3px 0 #0a1a2a, inset 3px 3px 0 #3a4a6a;
+            transition: 0.05s linear;
+            text-shadow: none;
+        }
+        .logout-bar .btn-home:active {
+            transform: translate(2px, 2px);
+            box-shadow: inset 3px 3px 0 #0a1a2a, inset -3px -3px 0 #3a4a6a;
+        }
+        .logout-bar .btn-home:hover {
+            color: var(--accent-gold);
+            border-color: var(--accent-gold);
+        }
+
         @media (max-width: 820px) {
             body { padding-left: 0; padding-top: 70px; }
             .main-content { padding: 16px 14px 20px 14px; }
+            .top-nav { padding: 0 12px; height: auto; min-height: 56px; gap: 6px; }
+            .top-nav .logo { font-size: 16px; }
+            .top-nav-links { gap: 10px; }
+            .top-nav-links a { font-size: var(--nav-font-mobile); }
+            .top-nav .theme-toggle { font-size: 12px; padding: 3px 12px; }
+            .sidebar { transform: translateX(-100%); width: 200px; top: 56px; }
+            .sidebar.open { transform: translateX(0); }
+            .sidebar-overlay.open { display: block; }
+            .menu-toggle { display: block; }
+            .logout-bar { flex-direction: column; align-items: stretch; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            body { font-size: 15px; }
+            .top-nav .logo { font-size: 14px; }
+            .top-nav-links a { font-size: 13px; }
+            .page-title h1 { font-size: 26px; }
+            .admin-section { padding: 14px 12px 16px; }
+            .admin-section h2 { font-size: 18px; }
+            .admin-table { font-size: 11px; }
+            .admin-table th, .admin-table td { padding: 4px 2px; }
+            .admin-table input { font-size: 10px; padding: 2px 4px; }
+            .logout-bar .info { font-size: 13px; }
+            .logout-bar .btn-logout, .logout-bar .btn-home { font-size: 13px; padding: 5px 14px; }
+            .footer-links { flex-direction: column; gap: 6px; }
         }
     </style>
 </head>
 <body>
-    <!-- 导航、侧边栏与全站一致，此处省略，实际包含完整HTML -->
-    <!-- ... 省略顶部导航、侧边栏等 ... -->
+
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <header class="top-nav">
+        <div class="logo">🎮 攻略<span>站</span></div>
+        <div class="top-nav-links">
+            <a href="index.html">首页</a>
+            <a href="guide.html">新手引导</a>
+            <a href="gallery.html">图鉴</a>
+            <a href="tools.html">攻略</a>
+            <a href="activities.html">活动</a>
+            <a href="about.html">权责</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle">🌓 切换</button>
+    </header>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-title">📌 本页目录</div>
+        <nav class="sidebar-nav">
+            <a href="#plantSection">🌱 植物数据</a>
+            <a href="#fishSection">🐟 鱼类数据</a>
+            <a href="#costumeSection">👕 服装数据</a>
+            <a href="#sceneSection">🗺️ 场景数据</a>
+            <a href="#changelogSection">📝 更新日志</a>
+            <a href="#guideSection">📖 攻略内容</a>
+        </nav>
+        <div class="sidebar-footer">v1.0 · 像素攻略站</div>
+    </aside>
 
     <main class="main-content">
+
         <div class="page-title">
             <h1>⚙️ 数据管理后台</h1>
             <p>管理植物、鱼类、服装、场景、更新日志、攻略等所有数据</p>
         </div>
 
-        <!-- 管理员身份提示 -->
-        <div id="authInfo" style="background:var(--bg-card);border:4px solid var(--border-color);padding:16px 20px;margin-bottom:24px;border-left:8px solid var(--accent-gold);">
-            <p>当前身份：<strong id="currentRole">访客</strong></p>
-            <p style="font-size:14px;color:var(--text-secondary);">只有管理员可以编辑数据。最高管理员可管理管理员列表。</p>
+        <!-- ===== 退出管理栏 ===== -->
+        <div class="logout-bar" id="logoutBar">
+            <div class="info">
+                👤 当前管理员：<strong id="currentAdminName">加载中...</strong>
+                <span style="opacity:0.5;margin-left:12px;font-size:13px;">修改后记得点击“保存”</span>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <button class="btn-home" id="goHomeBtn">🏠 返回首页</button>
+                <button class="btn-logout" id="logoutBtn">🚪 退出管理</button>
+            </div>
         </div>
 
-        <!-- 管理员列表管理（仅最高管理员可见） -->
+        <!-- ===== 管理员列表管理（仅最高管理员可见） ===== -->
         <div class="admin-section" id="adminUserSection" style="display:none;">
             <h2>👥 管理员列表</h2>
             <ul class="admin-list" id="adminUserList"></ul>
@@ -242,7 +521,7 @@
             </div>
         </div>
 
-        <!-- 数据编辑区 -->
+        <!-- ===== 植物数据 ===== -->
         <div class="admin-section" id="plantSection">
             <h2>🌱 植物数据</h2>
             <div class="admin-table-wrap">
@@ -262,6 +541,7 @@
             </div>
         </div>
 
+        <!-- ===== 鱼类数据 ===== -->
         <div class="admin-section" id="fishSection">
             <h2>🐟 鱼类数据</h2>
             <div class="admin-table-wrap">
@@ -281,6 +561,7 @@
             </div>
         </div>
 
+        <!-- ===== 服装数据 ===== -->
         <div class="admin-section" id="costumeSection">
             <h2>👕 服装数据</h2>
             <div class="admin-table-wrap">
@@ -300,6 +581,7 @@
             </div>
         </div>
 
+        <!-- ===== 场景数据 ===== -->
         <div class="admin-section" id="sceneSection">
             <h2>🗺️ 场景数据</h2>
             <div class="admin-table-wrap">
@@ -319,6 +601,7 @@
             </div>
         </div>
 
+        <!-- ===== 更新日志 ===== -->
         <div class="admin-section" id="changelogSection">
             <h2>📝 更新日志</h2>
             <div class="admin-table-wrap">
@@ -338,8 +621,9 @@
             </div>
         </div>
 
+        <!-- ===== 攻略内容 ===== -->
         <div class="admin-section" id="guideSection">
-            <h2>📖 攻略内容（工具箱）</h2>
+            <h2>📖 攻略内容</h2>
             <div class="admin-table-wrap">
                 <table class="admin-table" id="guideTable">
                     <thead>
@@ -371,14 +655,40 @@
 
     <script>
         // ============================================================
-        // 1. 管理员认证
+        // 0. 权限验证（未登录则跳转首页）
+        // ============================================================
+        (function() {
+            const admin = localStorage.getItem('current_admin');
+            if (!admin) {
+                alert('⚠️ 请先登录管理员账号！');
+                window.location.href = 'index.html';
+                return;
+            }
+            document.getElementById('currentAdminName').textContent = admin;
+        })();
+
+        // ============================================================
+        // 1. 退出 & 返回首页
+        // ============================================================
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            if (confirm('确定退出管理吗？')) {
+                localStorage.removeItem('current_admin');
+                window.location.href = 'index.html';
+            }
+        });
+        document.getElementById('goHomeBtn').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+
+        // ============================================================
+        // 2. 管理员认证
         // ============================================================
         function getCurrentAdmin() { return localStorage.getItem('current_admin') || null; }
         function isAdmin() { return getCurrentAdmin() !== null; }
         function isSuperAdmin() { return getCurrentAdmin() === 'ya_la'; }
 
         // ============================================================
-        // 2. 数据存取
+        // 3. 数据存取
         // ============================================================
         const STORAGE_KEYS = {
             plants: 'haqiya_plants',
@@ -403,7 +713,7 @@
         }
 
         // ============================================================
-        // 3. 默认数据（同 gallery.html）
+        // 4. 默认数据
         // ============================================================
         const DEFAULT_COSTUMES = [
             { id: 'c1', name: '深渊主宰', badge: '默认' },
@@ -431,7 +741,6 @@
             { id: 's16', name: '卡萨酒庄', desc: '互动场景', date: '' },
             { id: 's17', name: '蜜月沙滩', desc: '🎣 钓鱼小游戏 N109: Fishing', date: '2026.07.31' }
         ];
-        // 植物默认数据（完整列表）
         const DEFAULT_PLANTS = [
             { id: 'qiangwei', name: '蔷薇花', cost: 20, sell: 22, grow: 600000, water: 0.8, yield: 2, unlock: 0 },
             { id: 'shengcai', name: '生菜', cost: 28, sell: 29, grow: 720000, water: 1.5, yield: 2, unlock: 3 },
@@ -483,44 +792,151 @@
             { id: 'tanhua', name: '月下昙花', cost: 1800, sell: 5040, grow: 21600000, water: 0.9, yield: 1,
             unlock: 265 }
         ];
-        // 鱼类默认数据（完整列表，此处只放几条示意，实际代码将包含全部）
         const DEFAULT_FISH = [
             { id: 'lk01', name: '团头鲂·武昌鱼', star: 1, map: '湖', when: '白天', sell: 20 },
             { id: 'lk02', name: '桂鱼', star: 1, map: '湖', when: '白天', sell: 20 },
-            // ... 完整数据会在最终代码中提供
+            { id: 'lk04', name: '罗非鱼', star: 1, map: '湖', when: '白天', sell: 20 },
+            { id: 'lk06', name: '草鱼', star: 1, map: '湖', when: '白天', sell: 20 },
+            { id: 'lk07', name: '鲢鱼', star: 1, map: '湖', when: '白天', sell: 20 },
+            { id: 'lk08', name: '鲤鱼', star: 1, map: '湖', when: '白天', sell: 20 },
+            { id: 'lk09', name: '鲫鱼', star: 1, map: '湖', when: '白天', sell: 20 },
+            { id: 'lk11', name: '鳙鱼', star: 1, map: '湖', when: '白天', sell: 20 },
+            { id: 'lk03', name: '泥鳅', star: 1, map: '湖', when: '夜间', sell: 20 },
+            { id: 'lk05', name: '翘嘴鲌', star: 1, map: '湖', when: '夜间', sell: 20 },
+            { id: 'lk10', name: '鲶鱼', star: 1, map: '湖', when: '夜间', sell: 20 },
+            { id: 'lk14', name: '黄辣丁', star: 1, map: '湖', when: '夜间', sell: 20 },
+            { id: 'lk15', name: '黑鱼', star: 1, map: '湖', when: '夜间', sell: 20 },
+            { id: 'lk13', name: '黄尾密鲴', star: 1, map: '湖', when: '夜间', sell: 20 },
+            { id: 'lk12', name: '鳡鱼', star: 1, map: '湖', when: '夜间', sell: 20 },
+            { id: 'lk16', name: '巨骨舌鱼', star: 2, map: '湖', when: '白天', sell: 90 },
+            { id: 'lk17', name: '柳条鱼', star: 2, map: '湖', when: '白天', sell: 90 },
+            { id: 'lk18', name: '胭脂鱼', star: 2, map: '湖', when: '白天', sell: 90 },
+            { id: 'lk26', name: '拟尖头鲷', star: 2, map: '湖', when: '白天', sell: 90 },
+            { id: 'lk27', name: '巨型唐鱼', star: 2, map: '湖', when: '白天', sell: 90 },
+            { id: 'lk28', name: '水虎鱼', star: 2, map: '湖', when: '白天', sell: 90 },
+            { id: 'lk20', name: '鸭嘴鲟', star: 2, map: '湖', when: '夜间', sell: 90 },
+            { id: 'lk19', name: '雀鳝', star: 2, map: '湖', when: '夜间', sell: 90 },
+            { id: 'lk29', name: '电鳗', star: 2, map: '湖', when: '夜间', sell: 90 },
+            { id: 'lk30', name: '花鳗鲡', star: 2, map: '湖', when: '夜间', sell: 90 },
+            { id: 'lk31', name: '史氏鲟', star: 2, map: '湖', when: '夜间', sell: 90 },
+            { id: 'lk21', name: '巨型高背鲤', star: 3, map: '湖', when: '白天', sell: 400 },
+            { id: 'lk22', name: '巨型黄蜡鲶', star: 3, map: '湖', when: '白天', sell: 400 },
+            { id: 'lk24', name: '达氏鳇', star: 3, map: '湖', when: '白天', sell: 400 },
+            { id: 'lk23', name: '盲眼洞穴鱼', star: 3, map: '湖', when: '夜间', sell: 400 },
+            { id: 'lk25', name: '黄金河虎', star: 3, map: '湖', when: '夜间', sell: 400 },
+            { id: 'lk32', name: '阿根廷红虾', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'lk33', name: '海鳌虾', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'lk34', name: '海白菜', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'lk35', name: '扇贝', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'lk36', name: '水母', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'lk37', name: '甜虾', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'lk38', name: '利铂鲨', star: 3, map: '海', when: '白天', sell: 400 },
+            { id: 'lk39', name: '鬼角大嘴鱼', star: 3, map: '海', when: '白天', sell: 400 },
+            { id: 'se01', name: '三文鱼', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'se02', name: '太平洋蓝鳍金枪鱼', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'se03', name: '小黄鱼', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'se05', name: '梭子鱼', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'se06', name: '比目鱼', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'se08', name: '真鲷', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'se09', name: '翻车鱼', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'se10', name: '蓝黄梅鲷', star: 1, map: '海', when: '白天', sell: 20 },
+            { id: 'se04', name: '带鱼', star: 1, map: '海', when: '夜间', sell: 20 },
+            { id: 'se07', name: '海鳗', star: 1, map: '海', when: '夜间', sell: 20 },
+            { id: 'se15', name: '鲱鱼', star: 1, map: '海', when: '夜间', sell: 20 },
+            { id: 'se14', name: '鲣鱼', star: 1, map: '海', when: '夜间', sell: 20 },
+            { id: 'se13', name: '鯕鲯', star: 1, map: '海', when: '夜间', sell: 20 },
+            { id: 'se12', name: '马面鱼', star: 1, map: '海', when: '夜间', sell: 20 },
+            { id: 'se11', name: '远东拟沙丁鱼', star: 1, map: '海', when: '夜间', sell: 20 },
+            { id: 'se20', name: '鮟鱇鱼', star: 2, map: '海', when: '白天', sell: 90 },
+            { id: 'se19', name: '皇带鱼', star: 2, map: '海', when: '白天', sell: 90 },
+            { id: 'se18', name: '水滴鱼', star: 2, map: '海', when: '白天', sell: 90 },
+            { id: 'se16', name: '吞噬鳗', star: 2, map: '海', when: '夜间', sell: 90 },
+            { id: 'se17', name: '幽灵鲨', star: 2, map: '海', when: '夜间', sell: 90 },
+            { id: 'se25', name: '褶皱鲨', star: 3, map: '海', when: '白天', sell: 400 },
+            { id: 'se24', name: '毒蛇鱼', star: 3, map: '海', when: '白天', sell: 400 },
+            { id: 'se23', name: '桶眼鱼', star: 3, map: '海', when: '白天', sell: 400 },
+            { id: 'se21', name: '哥布林鲨', star: 3, map: '海', when: '夜间', sell: 400 },
+            { id: 'se22', name: '巨口鱼', star: 3, map: '海', when: '夜间', sell: 400 },
+            { id: 'sb01', name: '伞嘴鱼', star: 3, map: '海', when: '白天', sell: 400 },
+            { id: 'sb03', name: '无鳞龙鱼', star: 3, map: '海', when: '白天', sell: 400 },
+            { id: 'sb05', name: '长吻银鲛', star: 3, map: '海', when: '白天', sell: 400 },
+            { id: 'sb02', name: '斑点长手鱼', star: 3, map: '海', when: '夜间', sell: 400 },
+            { id: 'sb04', name: '锯鲨', star: 3, map: '海', when: '夜间', sell: 400 },
+            { id: 'sb06', name: '鬼蝠魟', star: 3, map: '海', when: '夜间', sell: 400 },
+            { id: 'fx01', name: '发条机械鱼', star: 3, map: '通用', when: '白天', sell: 400 },
+            { id: 'fx02', name: '宝石琉璃鱼', star: 3, map: '通用', when: '白天', sell: 400 },
+            { id: 'fx03', name: '星空发光鱼', star: 3, map: '通用', when: '白天', sell: 400 },
+            { id: 'fx04', name: '梦境云朵鱼', star: 3, map: '通用', when: '白天', sell: 400 },
+            { id: 'fx05', name: '飞天彩虹鱼', star: 3, map: '通用', when: '白天', sell: 400 },
+            { id: 'fx06', name: '幽灵骨骼鱼', star: 3, map: '通用', when: '夜间', sell: 400 },
+            { id: 'fx07', name: '时光齿轮鱼', star: 3, map: '通用', when: '夜间', sell: 400 },
+            { id: 'fx08', name: '漂浮气球鱼', star: 3, map: '通用', when: '夜间', sell: 400 },
+            { id: 'fx09', name: '熔岩焰火鱼', star: 3, map: '通用', when: '夜间', sell: 400 },
+            { id: 'fx10', name: '纸艺折纸鱼', star: 3, map: '通用', when: '夜间', sell: 400 },
+            { id: 'fx11', name: '霓虹水母鱼', star: 3, map: '通用', when: '夜间', sell: 400 },
+            { id: 'se34', name: '狼鳗', star: 2, map: '海', when: '夜间', sell: 90 },
+            { id: 'se35', name: '吞噬者黑鮟鱇', star: 3, map: '海', when: '夜间', sell: 400 },
+            { id: 'se36', name: '凶猛帆猎鱼', star: 3, map: '海', when: '白天', sell: 400 },
+            { id: 'se37', name: '长棘巨口鱼', star: 2, map: '海', when: '白天', sell: 90 }
         ];
-
-        // 更新日志默认数据（从 about 接口提取）
         const DEFAULT_CHANGELOG = [
-            { date: '2026.08.02', content: '新增「暗点编制」系统，打卡、成就、称号；修复钓鱼和花园退出bug。' },
-            { date: '2026.07.31', content: '网站正式更改为注册制；蜜月沙滩「彻夜渔语」小游戏上线。' },
+            { date: '2026.08.07', content: '🎉 3.0 版本大更新，至今已迭代整 680 个版本；优化了服务器后端，修复数据同步问题；修复 3D 模型加载异常；注册页面加入「暗点编制审核中心」通道；通过的狸会收到来自暗点的邮件。' },
+            { date: '2026.08.05', content: '💥 「N109：CHAOS BOOM」小炸弹扫雷游戏上线武器库！继续修复数据同步和进入后空白的 bug；新增 5 个扫雷称号；新增 1 首 BGM。' },
+            { date: '2026.08.02', content: '新增「暗点编制」系统，系统内可以打卡；取消留言板匿名；新增成就及成就牌系统；上线 35 个称号，包括成就和隐藏成就；修复钓鱼和花园退出的同步 bug。' },
+            { date: '2026.07.31', content: '网站正式更改为注册制；蜜月沙滩专属小游戏「彻夜渔语 N109: Fishing」上线。' },
             { date: '2026.07.29', content: '厨房专属种菜小游戏 N109: Gardening 上线。' },
-            // ... 完整列表略，最终会包含全部
+            { date: '2026.07.28', content: '「暗点修车坊」场景上线；场景专属小游戏 N109 Boulevard 上线。' },
+            { date: '2026.07.26', content: '「一封神秘的舞会邀请函」出现在塔尔城神秘集市；新增两支舞可选。' },
+            { date: '2026.07.22', content: '「秦彻版答案之书」上线塔尔城神秘集市；用红宝石解锁后放在教堂里。' },
+            { date: '2026.07.21', content: '「数羊小游戏」放在卧室的床头，睡前催眠用。' },
+            { date: '2026.07.20', content: '重制邀请码页面、加载页，更适合瞳点美学。' },
+            { date: '2026.07.19', content: '小组件 UI 更新美化；新增电脑小组件、便利贴和搓骰子。' },
+            { date: '2026.07.18', content: 'CHAI 场景上线，摩托艇可互动；新增邮箱功能；富豪榜排名徽章功能。' },
+            { date: '2026.07.16', content: '「浴室」场景上线；作息系统所有场景已完整。' },
+            { date: '2026.07.15', content: 'CER 庄上线，715 二周年应援礼物上线并常驻；送花为他祝福常驻；双击可以抱猫了。' },
+            { date: '2026.07.13', content: '交易系统玩法上线，放在 Elysium 极乐之境酒吧左上角；修复了一些 bug（也许还会有）。' },
+            { date: '2026.07.10', content: '「Elysium 极乐之境酒吧」场景上线；BGM 可以在情报档案里下载，请勿商用；新增 9 首 BGM；修复电影院无法播放 bug。' },
+            { date: '2026.07.09', content: '小梅已回归瞳点，一家人就是要整整齐齐。' },
+            { date: '2026.07.07', content: '「料理室」上线并加入作息系统；运动陪练模式上线；伴睡模式新增无梦话模式；私人影院限时放映已开放，电影票通过神秘集市获取；金色飞贼加入集市常驻商品。' },
+            { date: '2026.07.06', content: '「塔尔城神秘集市」已开放；「龙谷」已上线；打卡功能已上线，可以记录 30 天的数据趋势。' },
+            { date: '2026.07.05', content: '「秦彻个人作息系统」正式上线；「瞳点私人影院」已上线，多部影片随机播放；优化经期管理和同步机制。' },
+            { date: '2026.07.04', content: '宝库新增「我的记事本」；新增多端同步（云端连接器，手机电脑共用一份）；修复部分 bug；「藏品室」上线，瞳点最宝贵的资料都在这里。' },
+            { date: '2026.07.03', content: '「瞳点歌房」上线，戳话筒让他唱歌，点击屏幕可以观看出场 PV；小狸花已正式入驻瞳点；新增部分家具互动。' },
+            { date: '2026.07.02', content: '新增「卧室」场景；小龙可以飞起来了；还有些零碎的小惊喜藏在各处等你发现。' },
+            { date: '2026.07.01', content: '「地下温泉」场景上线；点水池入汤、中间舞台互动、坐进温泉的专属对话；久坐自动泡汤；音乐库扩充 + 单曲专属台词；进场随机场景与服装；留言板防水模式开启。' },
+            { date: '2026.06.30', content: '两天内入驻小狸花达 3000 人，升级服务器；「秦彻的宝库」上线；番茄钟摸红宝石、经期日历、留言板 & 在线人数；伴睡模式，音乐可选唱片 & 单曲循环。' },
+            { date: '2026.06.28', content: '✨ 初始版本上线；5 套官方服装，2 个场景；随机漫步模式启动。' }
         ];
-
-        // 攻略默认数据（从种地钓鱼8.html 提取）
         const DEFAULT_GUIDE = [
-            { title: '🌱 零基础攻略·开荒阶段', content: '刚进游戏时，先种 <span class="guide-highlight">生菜</span> 和 <span class="guide-highlight">水稻</span>...' },
-            // ... 完整内容
+            { title: '🌱 零基础攻略·开荒阶段', content: '刚进游戏时，先种 <span class="guide-highlight">生菜</span> 和 <span class="guide-highlight">水稻</span>（种后必浇水），攒够 800 金币后第一时间升级 <span class="guide-success">好气鸦 Lv.2</span>（从 30 分钟降到 18 分钟）。前期绝对不要碰黑色曼陀罗、盲盒、升级水壶/铲子。冲到 65 次收获后，立即买晨露铃兰（270 币）种下，图鉴 +1。' },
+            { title: '📈 零基础攻略·铺图鉴阶段', content: '从 65 次到 140 次，按价格从低到高买齐：暖阳雏菊 → 郁金香 → 翠绿大白菜 → 绣球花 → 香甜马铃薯 → 钟楼风铃草。攒够 2400 金币后升好气鸦 Lv.4（5 分钟巡逻），专属种子（骨魂玫瑰/鸦羽天竺葵）开始入库。留 1~2 块空地等好气鸦叼回专属种子。所有异色果实（图鉴已亮）全部卖掉换金币周转。' },
+            { title: '🚀 零基础攻略·冲刺阶段', content: '卖光异色（旧日新娘 9300、熔焰烛影×2、绯红誓言……）一口气买齐高价格品种。购买顺序：脆甜西瓜（528）→ 烛台告解花（520）→ 幽灵草菇（680）→ 骨毒仙人掌（980）→ 缎带挽歌兰（1050）→ 荆棘十字藤（1250）（165 次解锁）。很喜水（西瓜、草菇）必浇；浇水无效（仙人掌）千万别浇。剩余空地种生菜/水稻冲 185 次解锁后续。碎片攒到 20 个，优先兑换好气鸦专属的原色种子。' },
+            { title: '⚔ 终极铁律', content: '• 金币永远优先买新种子，升级是后话。<br>• 黑色曼陀罗留最后——只占图鉴一格，前期种它血亏。<br>• 盲盒=赌博，直接买明码标价的种子永远不亏。' },
+            { title: '💧 浇水技巧', content: '在底部「工具」里选中水壶后，点正在生长的地块即可浇水加速，每株只能浇一次。选中后可以连浇好几块，点金币条右半边收起来。植物吃水程度不同，商店里有标注：「很喜水」的浇过后能快接近一半，「浇水无效」的浇了也没用，适合挂机时种。好气鸦自动浇水也会受益于水壶等级。' },
+            { title: '🐦 好气鸦升级详解', content: '好气鸦干活间隔：1 级 30 分钟 → 2 级 18 分 → 3 级 10 分 → 4 级 5 分 → 5 级 2 分钟。从 2 级起，它巡逻时偶尔叼回专属种子（骨魂玫瑰/鸦羽天竺葵），概率随等级从 5% 涨到 11%。每次升级白送几颗，一共 7 颗。满级后额外有概率叼回：猫爪暗蓝小菇、黑爪武蜡泉花、噬魂紫龙角（概率极低）。' },
+            { title: '🎁 盲盒与碎片', content: '种子盲盒 110 币（出前期品种），稀有盲盒 1040 币（只出后期品种）。两种都能开出尚未解锁的品种，好气鸦专属除外。开到已有品种补偿碎片（普通 +4，稀有 +12），攒够 20 个碎片可在商店兑换指定种子（但需先解锁该品种）。' },
+            { title: '✨ 异色与图鉴', content: '种下时有小概率长成异色株，花苞阶段就能看出颜色，售价三倍，图鉴中单独占一格。慢的品种概率更高，没显色之前浇水还有一次额外机会。' },
+            { title: '🎣 钓鱼入门 · 基础操作', content: '点击 <span class="guide-highlight">抛竿</span> 开始钓鱼，等待 1.5~5.5 秒后会出现「有鱼！」或「收杆！」提醒。此时下方的进度条上会有一个金色收杆区，你需要看准光标扫过金色区域时立即点 <span class="guide-highlight">收杆</span>，点准了才能钓上来。收早了、收偏了或拖太久都会失败（脱钩/断杆）。' },
+            { title: '🎣 鱼饵与稀有鱼', content: '普通鱼饵（10金币）只能钓到 ★1 和 ★2 的鱼以及日常杂物。秘制鱼饵（30金币）可以钓到所有鱼，包括 ★3 稀有鱼和隐藏款。商店里可以切换当前使用的鱼饵，点左上角的鱼饵框即可切换。' },
+            { title: '🗺️ 地图与鱼种分布', content: '湖和海的鱼种不同，解锁海图需要湖图鉴达到 10 种。白天和夜间出现的鱼也不同，想要收集全图鉴需要切换时段。新增的 9 种湖产生物（阿根廷红虾、海鳌虾、海白菜、扇贝、水母、甜虾、河蟹、蛤蜊、海胆）均为 1 星全天可钓，售价 20 金币；鱿鱼为海·夜间，同样 1 星 20 金币。这些是前期快速积累图鉴的好选择。' },
+            { title: '💪 体力管理', content: '每次抛竿消耗 1 点体力（撒网按网的数量扣）。体力上限 109 点，每天 0 点自动回满，平时每 10 分钟恢复 1 点。商店里可以购买体力罐（400 金币 +30 体力）。优先用体力钓鱼，体力用完后转为种地挂机。' },
+            { title: '🎣 鱼竿与鱼网', content: '鱼竿升级后收杆区变宽（Lv1 16% → Lv5 34%），更容易收准，断杆概率也降低。鱼网可以一次捞多个（Lv1 一次 5 个，满级 10 个），但需要消耗对应数量的鱼饵和体力。鱼网省的是操作时间，不是体力。' },
+            { title: '🧑‍🌾 秦彻代钓', content: '点秦彻头顶的感叹号，可以让他帮你钓 4 小时。他回来时会带回若干渔获，有时能带回只有他能钓到的特殊鱼（秦彻专属池每天轮换）。代钓不消耗你的体力和鱼饵，是白嫖图鉴的好方法。' },
+            { title: '📊 图鉴收集优先级', content: '前期优先收集湖中的 1 星鱼（尤其是新增的 9 种湖产生物），快速凑满 10 种解锁海图。海图解锁后，用秘制鱼饵钓 ★2 和 ★3 鱼，收益更高。隐藏款（红三星）需要满级鱼竿才出现。' }
         ];
 
         // ============================================================
-        // 4. 渲染表格
+        // 5. 渲染表格
         // ============================================================
-        function renderTable(tableId, data, fields, idKey, options) {
+        function renderTable(tableId, data, fields, idKey) {
             const tbody = document.getElementById(tableId + 'Body');
             if (!tbody) return;
             let html = '';
             data.forEach((item, index) => {
                 html += '<tr>';
                 fields.forEach(field => {
-                    if (field === '操作') return;
                     let value = item[field] !== undefined ? item[field] : '';
-                    if (field === 'id') {
-                        html += `<td><input type="text" value="${value}" data-field="${field}" data-index="${index}" class="edit-input" /></td>`;
-                    } else {
-                        html += `<td><input type="text" value="${value}" data-field="${field}" data-index="${index}" class="edit-input" /></td>`;
-                    }
+                    html += `<td><input type="text" value="${value}" data-field="${field}" data-index="${index}" class="edit-input" /></td>`;
                 });
                 html += `<td>
                             <button class="btn-sm danger" onclick="deleteRow('${tableId}', ${index})">删除</button>
@@ -530,7 +946,6 @@
             tbody.innerHTML = html;
         }
 
-        // 通用的获取表格数据函数
         function getTableData(tableId, fields) {
             const tbody = document.getElementById(tableId + 'Body');
             const rows = tbody.querySelectorAll('tr');
@@ -548,68 +963,57 @@
         }
 
         // ============================================================
-        // 5. 删除行
+        // 6. 删除行
         // ============================================================
         function deleteRow(tableId, index) {
             if (!confirm('确定删除此行吗？')) return;
-            // 从当前表格数据中移除
             const tbody = document.getElementById(tableId + 'Body');
             const rows = tbody.querySelectorAll('tr');
             if (rows.length > index) {
                 rows[index].remove();
             }
-            // 重新索引
-            // 实际保存时再重新构建
         }
 
         // ============================================================
-        // 6. 保存函数
+        // 7. 保存函数
         // ============================================================
         function saveTableData(tableId, key, fields, idKey) {
             const data = getTableData(tableId, fields);
-            // 确保每个项目有唯一 id（如果没有则生成）
             data.forEach(item => {
                 if (!item[idKey]) {
                     item[idKey] = 'item_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
                 }
             });
             saveData(key, data);
-            alert('已保存 ' + key);
-            // 重新加载并渲染该表
+            alert('✅ 已保存 ' + key);
             renderAllTables();
         }
 
         // ============================================================
-        // 7. 初始化所有表格
+        // 8. 初始化所有表格
         // ============================================================
         function renderAllTables() {
-            // 植物
             const plants = loadData(STORAGE_KEYS.plants, DEFAULT_PLANTS);
             renderTable('plant', plants, ['id', 'name', 'cost', 'sell', 'grow', 'water', 'yield', 'unlock'], 'id');
 
-            // 鱼类
             const fish = loadData(STORAGE_KEYS.fish, DEFAULT_FISH);
             renderTable('fish', fish, ['id', 'name', 'star', 'map', 'when', 'sell'], 'id');
 
-            // 服装
             const costumes = loadData(STORAGE_KEYS.costumes, DEFAULT_COSTUMES);
             renderTable('costume', costumes, ['id', 'name', 'badge'], 'id');
 
-            // 场景
             const scenes = loadData(STORAGE_KEYS.scenes, DEFAULT_SCENES);
             renderTable('scene', scenes, ['id', 'name', 'desc', 'date'], 'id');
 
-            // 更新日志
             const changelog = loadData(STORAGE_KEYS.changelog, DEFAULT_CHANGELOG);
             renderTable('changelog', changelog, ['date', 'content'], 'date');
 
-            // 攻略
             const guide = loadData(STORAGE_KEYS.guide, DEFAULT_GUIDE);
             renderTable('guide', guide, ['title', 'content'], 'title');
         }
 
         // ============================================================
-        // 8. 管理员列表管理
+        // 9. 管理员列表管理
         // ============================================================
         function renderAdminUsers() {
             if (!isSuperAdmin()) return;
@@ -636,49 +1040,33 @@
         }
 
         // ============================================================
-        // 9. 初始化
+        // 10. 初始化
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
-            // 权限检查
             const admin = getCurrentAdmin();
-            const roleEl = document.getElementById('currentRole');
-            if (admin) {
-                roleEl.textContent = isSuperAdmin() ? '最高管理员 (你)' : '普通管理员 (' + admin + ')';
-                // 显示管理员管理区（仅最高管理员）
-                if (isSuperAdmin()) {
-                    document.getElementById('adminUserSection').style.display = 'block';
+
+            // 管理员列表管理（仅最高管理员）
+            if (isSuperAdmin()) {
+                document.getElementById('adminUserSection').style.display = 'block';
+                renderAdminUsers();
+                document.getElementById('addAdminBtn').addEventListener('click', function() {
+                    const name = document.getElementById('newAdminName').value.trim();
+                    if (!name) { alert('请输入用户名'); return; }
+                    let admins = JSON.parse(localStorage.getItem('admin_users') || '["ya_la"]');
+                    if (admins.includes(name)) { alert('该用户已是管理员'); return; }
+                    if (admins.length >= 6) { alert('管理员名额已满'); return; }
+                    admins.push(name);
+                    localStorage.setItem('admin_users', JSON.stringify(admins));
                     renderAdminUsers();
-                    document.getElementById('addAdminBtn').addEventListener('click', function() {
-                        const name = document.getElementById('newAdminName').value.trim();
-                        if (!name) { alert('请输入用户名'); return; }
-                        let admins = JSON.parse(localStorage.getItem('admin_users') || '["ya_la"]');
-                        if (admins.includes(name)) { alert('该用户已是管理员'); return; }
-                        if (admins.length >= 6) { alert('管理员名额已满'); return; }
-                        admins.push(name);
-                        localStorage.setItem('admin_users', JSON.stringify(admins));
-                        renderAdminUsers();
-                        document.getElementById('newAdminName').value = '';
-                        alert('已添加管理员：' + name);
-                    });
-                }
-            } else {
-                roleEl.textContent = '访客（无编辑权限）';
-                // 隐藏所有编辑功能？但为了演示，仍可查看，但操作会提示权限不足。
-                // 我们可以禁用按钮或提示。
-                document.querySelectorAll('.admin-section .btn, .admin-section .btn-sm').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        if (!isAdmin()) {
-                            e.preventDefault();
-                            alert('需要管理员权限，请先在首页登录。');
-                        }
-                    });
+                    document.getElementById('newAdminName').value = '';
+                    alert('已添加管理员：' + name);
                 });
             }
 
             // 渲染所有表格
             renderAllTables();
 
-            // 绑定新增行
+            // 新增行
             document.getElementById('addPlantRow').addEventListener('click', function() {
                 const tbody = document.getElementById('plantTableBody');
                 const row = document.createElement('tr');
@@ -774,23 +1162,43 @@
             document.getElementById('saveGuide').addEventListener('click', function() {
                 saveTableData('guide', STORAGE_KEYS.guide, ['title', 'content'], 'title');
             });
-
-            // 如果非管理员，按钮点击提示
-            if (!isAdmin()) {
-                document.querySelectorAll('.admin-section .btn, .admin-section .btn-sm').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        if (!isAdmin()) {
-                            e.preventDefault();
-                            alert('需要管理员权限，请先在首页登录。');
-                        }
-                    }, true);
-                });
-            }
         });
 
-        // 暴露删除函数
         window.deleteRow = deleteRow;
         window.removeAdmin = removeAdmin;
+        window.renderAllTables = renderAllTables;
+
+        // ============================================================
+        // 11. 主题切换
+        // ============================================================
+        (function() {
+            const themeBtn = document.getElementById('themeToggle');
+            const current = localStorage.getItem('pixel-theme');
+            if (current === 'light') document.documentElement.classList.add('light-mode');
+            themeBtn.addEventListener('click', function() {
+                const html = document.documentElement;
+                html.classList.toggle('light-mode');
+                localStorage.setItem('pixel-theme', html.classList.contains('light-mode') ? 'light' : 'dark');
+            });
+
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            menuToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('open');
+                overlay.classList.toggle('open');
+            });
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('open');
+            });
+            document.querySelectorAll('.sidebar-nav a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 820) { sidebar.classList.remove('open');
+                        overlay.classList.remove('open'); }
+                });
+            });
+        })();
     </script>
 
 </body>

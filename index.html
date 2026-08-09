@@ -141,6 +141,8 @@
             --font-size-base: 18px;
             --gap-section: 32px;
             --main-padding-top: 32px;
+            --nav-font-pc: 17px;
+            --nav-font-mobile: 14px;
         }
         .light-mode {
             --bg-page: #efe8df;
@@ -244,7 +246,7 @@
         }
         .top-nav-links a {
             color: var(--text-secondary);
-            font-size: 18px;
+            font-size: 16px(--nav-font-pc);
             padding: 4px 0;
             border-bottom: 3px solid transparent;
             transition: none;
@@ -397,7 +399,6 @@
             gap: var(--gap-section);
         }
 
-        /* 当屏幕较窄时，右侧栏移至下方 */
         @media (max-width: 1100px) {
             .content-wrap {
                 flex-direction: column;
@@ -529,7 +530,7 @@
             font-style: normal;
         }
 
-        /* 四个入口卡片 ———— 已缩小尺寸并替换为图片图标 */
+        /* 四个入口卡片 */
         .quick-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -781,6 +782,102 @@
             color: var(--accent-gold);
         }
 
+        /* ========== 欢迎弹窗 ========== */
+        .welcome-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            backdrop-filter: blur(6px);
+        }
+        .welcome-modal.open {
+            display: flex;
+        }
+        .welcome-modal .modal-box {
+            background: var(--bg-card);
+            border: 6px solid var(--border-color);
+            box-shadow: 0 0 0 3px var(--bg-page), 8px 8px 0 rgba(0, 0, 0, 0.5);
+            max-width: 580px;
+            width: 100%;
+            padding: 28px 32px 24px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .welcome-modal .modal-box h2 {
+            font-size: 22px;
+            color: var(--accent-gold);
+            text-shadow: var(--text-shadow-enabled);
+            text-align: center;
+            border-bottom: 3px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+        .welcome-modal .modal-box .rules {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 2.2;
+            padding: 4px 0;
+        }
+        .welcome-modal .modal-box .rules li {
+            list-style: none;
+            padding: 2px 0 2px 24px;
+            position: relative;
+        }
+        .welcome-modal .modal-box .rules li::before {
+            content: "◆";
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+            font-size: 14px;
+        }
+        .welcome-modal .modal-box .rules .highlight {
+            color: var(--accent-gold);
+        }
+        .welcome-modal .modal-box .btn-row {
+            display: flex;
+            gap: 16px;
+            margin-top: 18px;
+            justify-content: center;
+        }
+        .welcome-modal .modal-box .btn-row button {
+            flex: 1;
+            max-width: 160px;
+            background: var(--btn-bg);
+            border: 3px solid var(--border-color);
+            color: var(--btn-text);
+            font-family: inherit;
+            font-size: 16px;
+            padding: 10px 0;
+            cursor: pointer;
+            box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a;
+            transition: 0.05s linear;
+            text-shadow: none;
+        }
+        .welcome-modal .modal-box .btn-row button:active {
+            transform: translate(2px, 2px);
+            box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a;
+        }
+        .welcome-modal .modal-box .btn-row .btn-accept {
+            background: #3a7a3a;
+            border-color: #5aaa5a;
+            color: #c0f0c0;
+        }
+        .welcome-modal .modal-box .btn-row .btn-accept:hover {
+            background: #4a8a4a;
+        }
+        .welcome-modal .modal-box .btn-row .btn-reject {
+            background: #7a3a3a;
+            border-color: #aa5a5a;
+            color: #f0c0c0;
+        }
+        .welcome-modal .modal-box .btn-row .btn-reject:hover {
+            background: #8a4a4a;
+        }
+
         /* ========== 响应式 ========== */
         @media (max-width: 1100px) {
             .content-wrap {
@@ -813,10 +910,10 @@
                 font-size: 16px;
             }
             .top-nav-links {
-                gap: 12px;
+                gap: 10px;
             }
             .top-nav-links a {
-                font-size: 15px;
+                font-size: 13px(--nav-font-mobile);
             }
             .top-nav .theme-toggle {
                 font-size: 13px;
@@ -856,6 +953,21 @@
             .dual-item {
                 aspect-ratio: 3/4;
             }
+            .welcome-modal .modal-box {
+                padding: 20px 16px 18px;
+                margin: 12px;
+            }
+            .welcome-modal .modal-box h2 {
+                font-size: 19px;
+            }
+            .welcome-modal .modal-box .rules {
+                font-size: 14px;
+                line-height: 2;
+            }
+            .welcome-modal .modal-box .btn-row button {
+                font-size: 14px;
+                padding: 8px 0;
+            }
         }
         @media (max-width: 480px) {
             body {
@@ -890,10 +1002,48 @@
             .main-content {
                 padding: 20px 10px 16px 10px;
             }
+            .welcome-modal .modal-box {
+                padding: 16px 12px 14px;
+            }
+            .welcome-modal .modal-box h2 {
+                font-size: 17px;
+            }
+            .welcome-modal .modal-box .rules {
+                font-size: 13px;
+                line-height: 1.9;
+            }
+            .welcome-modal .modal-box .btn-row {
+                flex-direction: row;
+                gap: 10px;
+            }
+            .welcome-modal .modal-box .btn-row button {
+                font-size: 13px;
+                padding: 6px 0;
+            }
         }
     </style>
 </head>
 <body>
+
+    <!-- ============================================================ -->
+    <!-- 欢迎弹窗（首次进入弹出） -->
+    <!-- ============================================================ -->
+    <div class="welcome-modal" id="welcomeModal">
+        <div class="modal-box">
+            <h2>📢 欢迎来到 N109 攻略站</h2>
+            <ul class="rules">
+                <li><span class="highlight">为爱发电</span>，现生很忙，不要催我，欢迎加入 🐾</li>
+                <li>网页比较粗糙，所以 <span class="highlight">有没有大佬救救！</span> 🥺</li>
+                <li>欢迎友好交流呀 (*^_^*) ，毕竟我也不是什么魔鬼。<br>挑刺的你别看，<span class="highlight">反弹一切阴阳怪气</span> 🔥</li>
+                <li>深空只喜欢 <span class="highlight">秦彻</span>，只承认 <span class="highlight">6.22 前的 5 个男主</span></li>
+                <li>因为是个人搓的网页，所以会有一些个性发言，<span class="highlight">劝大家不要出于好奇去看</span> 🤫</li>
+            </ul>
+            <div class="btn-row">
+                <button class="btn-accept" id="welcomeAccept">✅ 接受</button>
+                <button class="btn-reject" id="welcomeReject">❌ 不接受</button>
+            </div>
+        </div>
+    </div>
 
     <!-- ===== 移动端汉堡 ===== -->
     <button class="menu-toggle" id="menuToggle" aria-label="切换侧边栏">☰</button>
@@ -922,8 +1072,9 @@
             <a href="#quick">🚀 入口</a>
             <a href="#dual">🎨 展览</a>
         </nav>
-        <button class="sidebar-login-btn" id="loginToggle">🔐 登录管理</button>
-        <div class="sidebar-footer">v1.0 · 像素攻略站</div>
+      <button class="sidebar-login-btn" id="loginToggle">🔐 登录管理</button>
+<a href="manage.html" id="adminDataLink" style="display:none; color:var(--accent-gold); font-size:15px; padding:6px 12px; border:3px solid transparent; display:none; margin-top:4px; text-align:center; background:var(--bg-card); border:3px solid var(--border-color); box-shadow:inset -2px -2px 0 #0a1a2a,inset 2px 2px 0 #3a4a6a;">⚙️ 修改数据</a>
+<div class="sidebar-footer">v1.0 · 像素攻略站</div>
     </aside>
 
     <!-- ===== 主内容 ===== -->
@@ -954,7 +1105,7 @@
                     </blockquote>
                 </section>
 
-                <!-- 四个入口卡片（已替换为图片图标） -->
+                <!-- 四个入口卡片 -->
                 <section class="quick-grid" id="quick">
                     <div class="quick-card" onclick="location.href='guide.html'">
                         <img src="./image/icon-guide.png" alt="新手引导" class="card-icon" />
@@ -989,7 +1140,7 @@
                         </div>
                     </div>
                     <div class="dual-item">
-                        <div class="title">🎨 艺术展</div>
+                        <div class="title">🎨 画廊</div>
                         <div class="inner-carousel" id="artCarousel">
                             <div class="slides" id="artSlides"></div>
                             <div class="inner-dots" id="artDots"></div>
@@ -1006,9 +1157,9 @@
                     <h3>📜 关于本站</h3>
                     <div class="about-text">
                         <p>本攻略站由玩家 <strong>「呀嘞呀嘞」</strong> 于2026年8月创建，是一个非官方的民间爱好者攻略站。</p>
-                        <p>所有数据均由玩家在游戏中实测整理，旨在帮助更多喜欢秦彻的玩家快速上手 N109 的世界。</p>
+                        <p>所有数据均由玩家在游戏中实测整理，旨在帮助更多喜欢秦彻的玩家快速上手这个小世界。但是精力有限，有些数据可能和游戏里对不上。当我做完这个网页的时候，Lili又更新了（wwwwwwww）</p>
                         <p><span class="highlight">❤️ 为爱发电</span>，欢迎小狸花加入恋与丘丘彻！</p>
-                        <p class="contact">交流群：<strong>1093937278</strong></p>
+                        <p class="contact">数据反馈群：<strong>qq:314964366</strong></p>
                     </div>
                 </div>
 
@@ -1068,6 +1219,56 @@
     <!-- ============================================================ -->
     <script>
         // ============================================================
+        // 0. 欢迎弹窗控制
+        // ============================================================
+        (function() {
+            const modal = document.getElementById('welcomeModal');
+            const acceptBtn = document.getElementById('welcomeAccept');
+            const rejectBtn = document.getElementById('welcomeReject');
+
+            // 检查是否已经接受过（localStorage 记录）
+            const hasAccepted = localStorage.getItem('n109_welcome_accepted');
+
+            if (!hasAccepted) {
+                // 未接受过 → 显示弹窗
+                modal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            // 接受按钮
+            acceptBtn.addEventListener('click', function() {
+                localStorage.setItem('n109_welcome_accepted', 'true');
+                modal.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+
+            // 不接受按钮 → 关闭页面
+            rejectBtn.addEventListener('click', function() {
+                window.close();
+                // 如果 window.close() 被浏览器阻止，跳转到空白页
+                if (!window.closed) {
+                    document.body.innerHTML = '';
+                    document.body.style.background = '#1a2633';
+                    document.body.style.color = '#f5e6d3';
+                    document.body.style.display = 'flex';
+                    document.body.style.alignItems = 'center';
+                    document.body.style.justifyContent = 'center';
+                    document.body.style.height = '100vh';
+                    document.body.style.fontFamily = "'Press Start 2P', monospace";
+                    document.body.style.fontSize = '20px';
+                    document.body.innerHTML = '<div style="text-align:center;padding:20px;">👋 已退出<br><span style="font-size:14px;color:#c9b8a8;margin-top:16px;display:block;">你可以关闭此标签页</span></div>';
+                }
+            });
+
+            // 点击遮罩层不关闭（必须点击按钮）
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    // 不做任何事，防止误触关闭
+                }
+            });
+        })();
+
+        // ============================================================
         // 管理员系统
         // ============================================================
         const ADMIN_STORAGE_KEY = 'admin_users_with_password';
@@ -1119,25 +1320,30 @@
             return localStorage.getItem('current_admin') || null;
         }
 
-        function updateLoginUI() {
-            const btn = document.getElementById('loginToggle');
-            const admin = getCurrentAdmin();
-            if (admin) {
-                btn.textContent = '👤 ' + admin + ' (退出)';
-                btn.classList.add('logged');
-                btn.onclick = function() {
-                    if (confirm('确定退出管理吗？')) logoutAdmin();
-                };
-                document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
-            } else {
-                btn.textContent = '🔐 登录管理';
-                btn.classList.remove('logged');
-                btn.onclick = function() {
-                    document.getElementById('loginModal').classList.add('open');
-                };
-                document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'none');
-            }
-        }
+       function updateLoginUI() {
+    const btn = document.getElementById('loginToggle');
+    const admin = getCurrentAdmin();
+    const adminLink = document.getElementById('adminDataLink');
+    if (admin) {
+        btn.textContent = '👤 ' + admin + ' (退出)';
+        btn.classList.add('logged');
+        btn.onclick = function() {
+            if (confirm('确定退出管理吗？')) logoutAdmin();
+        };
+        document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
+        //
+        if (adminLink) adminLink.style.display = 'block';
+    } else {
+        btn.textContent = '🔐 登录管理';
+        btn.classList.remove('logged');
+        btn.onclick = function() {
+            document.getElementById('loginModal').classList.add('open');
+        };
+        document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'none');
+        //
+        if (adminLink) adminLink.style.display = 'none';
+    }
+}
 
         document.addEventListener('DOMContentLoaded', function() {
             const modal = document.getElementById('loginModal');
@@ -1308,7 +1514,7 @@
         updateDailyQuote();
 
         // ============================================================
-        // 4. 主轮播（点击跳转 activities.html）
+        // 4. 主轮播
         // ============================================================
         const MAIN_CAROUSEL = [
             { src: './image/banner-activity1.jpg', alt: '活动1', link: 'activities.html' },
@@ -1387,7 +1593,7 @@
         });
 
         // ============================================================
-        // 5. 双栏轮播 — 各3张，点击跳转活动页
+        // 5. 双栏轮播
         // ============================================================
         const CONTEST_IMAGES = [
             './image/contest-1.jpg',
@@ -1486,7 +1692,7 @@
         window.goMainSlide = goMainSlide;
 
         // ============================================================
-        // 7. Toast 提示（登录用）
+        // 7. Toast 提示
         // ============================================================
         function showToast(msg) {
             const el = document.createElement('div');

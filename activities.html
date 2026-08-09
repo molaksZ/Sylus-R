@@ -25,6 +25,8 @@
             --topnav-height: 60px;
             --dot-pattern: radial-gradient(circle, rgba(200,180,160,0.05) 1px, transparent 1px);
             --card-shadow: 0 4px 0 0 var(--border-color);
+            --nav-font-pc: 16px;
+            --nav-font-mobile: 13px;
         }
         .light-mode {
             --bg-page: #f2ebe0;
@@ -76,7 +78,7 @@
         .top-nav .logo { font-size: 20px; font-weight: bold; color: var(--accent-gold); text-shadow: var(--text-shadow-enabled); letter-spacing: 1px; white-space: nowrap; }
         .top-nav .logo span { background: var(--accent-red); color: #f5e6d3; padding: 2px 10px; font-size: 11px; border: 2px solid var(--border-color); margin-left: 8px; text-shadow: none; }
         .top-nav-links { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
-        .top-nav-links a { color: var(--text-secondary); font-size: 17px; padding: 4px 0; border-bottom: 3px solid transparent; transition: none; white-space: nowrap; }
+        .top-nav-links a { color: var(--text-secondary); font-size: var(--nav-font-pc); padding: 4px 0; border-bottom: 3px solid transparent; transition: none; white-space: nowrap; }
         .top-nav-links a:hover { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
         .top-nav-links a.active { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
         .top-nav .theme-toggle { background: var(--btn-bg); color: var(--btn-text); border: 3px solid var(--border-color); padding: 4px 16px; font-family: inherit; font-size: 14px; cursor: pointer; box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a; transition: 0.05s linear; text-shadow: none; white-space: nowrap; }
@@ -125,11 +127,148 @@
         .footer-links a { color: var(--text-secondary); font-size: 14px; }
         .footer-links a:hover { color: var(--accent-gold); }
 
-        @media (max-width: 820px) { body { padding-left: 0; padding-top: 70px; } .top-nav { padding: 0 12px; height: auto; min-height: 56px; gap: 6px; } .top-nav .logo { font-size: 16px; } .top-nav-links { gap: 12px; } .top-nav-links a { font-size: 14px; } .top-nav .theme-toggle { font-size: 12px; padding: 3px 12px; } .sidebar { transform: translateX(-100%); width: 200px; top: 56px; } .sidebar.open { transform: translateX(0); } .sidebar-overlay.open { display: block; } .menu-toggle { display: block; } .main-content { padding: 16px 14px 20px 14px; } .activity-grid { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 480px) { body { font-size: 15px; } .top-nav .logo { font-size: 14px; } .top-nav-links a { font-size: 12px; } .page-title h1 { font-size: 24px; } .activity-grid { grid-template-columns: 1fr; } .footer-links { flex-direction: column; gap: 6px; } }
+        /* ========== 欢迎弹窗 ========== */
+        .welcome-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            backdrop-filter: blur(6px);
+        }
+        .welcome-modal.open { display: flex; }
+        .welcome-modal .modal-box {
+            background: var(--bg-card);
+            border: 6px solid var(--border-color);
+            box-shadow: 0 0 0 3px var(--bg-page), 8px 8px 0 rgba(0,0,0,0.5);
+            max-width: 580px;
+            width: 100%;
+            padding: 28px 32px 24px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .welcome-modal .modal-box h2 {
+            font-size: 22px;
+            color: var(--accent-gold);
+            text-shadow: var(--text-shadow-enabled);
+            text-align: center;
+            border-bottom: 3px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+        .welcome-modal .modal-box .rules {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 2.2;
+            padding: 4px 0;
+        }
+        .welcome-modal .modal-box .rules li {
+            list-style: none;
+            padding: 2px 0 2px 24px;
+            position: relative;
+        }
+        .welcome-modal .modal-box .rules li::before {
+            content: "◆";
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+            font-size: 14px;
+        }
+        .welcome-modal .modal-box .rules .highlight { color: var(--accent-gold); }
+        .welcome-modal .modal-box .btn-row {
+            display: flex;
+            gap: 16px;
+            margin-top: 18px;
+            justify-content: center;
+        }
+        .welcome-modal .modal-box .btn-row button {
+            flex: 1;
+            max-width: 160px;
+            background: var(--btn-bg);
+            border: 3px solid var(--border-color);
+            color: var(--btn-text);
+            font-family: inherit;
+            font-size: 16px;
+            padding: 10px 0;
+            cursor: pointer;
+            box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a;
+            transition: 0.05s linear;
+            text-shadow: none;
+        }
+        .welcome-modal .modal-box .btn-row button:active {
+            transform: translate(2px,2px);
+            box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a;
+        }
+        .welcome-modal .modal-box .btn-row .btn-accept {
+            background: #3a7a3a;
+            border-color: #5aaa5a;
+            color: #c0f0c0;
+        }
+        .welcome-modal .modal-box .btn-row .btn-accept:hover { background: #4a8a4a; }
+        .welcome-modal .modal-box .btn-row .btn-reject {
+            background: #7a3a3a;
+            border-color: #aa5a5a;
+            color: #f0c0c0;
+        }
+        .welcome-modal .modal-box .btn-row .btn-reject:hover { background: #8a4a4a; }
+
+        @media (max-width: 820px) {
+            body { padding-left: 0; padding-top: 70px; }
+            .top-nav { padding: 0 12px; height: auto; min-height: 56px; gap: 6px; }
+            .top-nav .logo { font-size: 16px; }
+            .top-nav-links { gap: 10px; }
+            .top-nav-links a { font-size: var(--nav-font-mobile); }
+            .top-nav .theme-toggle { font-size: 12px; padding: 3px 12px; }
+            .sidebar { transform: translateX(-100%); width: 200px; top: 56px; }
+            .sidebar.open { transform: translateX(0); }
+            .sidebar-overlay.open { display: block; }
+            .menu-toggle { display: block; }
+            .main-content { padding: 16px 14px 20px 14px; }
+            .activity-grid { grid-template-columns: 1fr 1fr; }
+            .welcome-modal .modal-box { padding: 20px 16px 18px; margin: 12px; }
+            .welcome-modal .modal-box h2 { font-size: 19px; }
+            .welcome-modal .modal-box .rules { font-size: 14px; line-height: 2; }
+            .welcome-modal .modal-box .btn-row button { font-size: 14px; padding: 8px 0; }
+        }
+        @media (max-width: 480px) {
+            body { font-size: 15px; }
+            .top-nav .logo { font-size: 14px; }
+            .top-nav-links a { font-size: 13px; }
+            .page-title h1 { font-size: 24px; }
+            .activity-grid { grid-template-columns: 1fr; }
+            .footer-links { flex-direction: column; gap: 6px; }
+            .welcome-modal .modal-box { padding: 16px 12px 14px; }
+            .welcome-modal .modal-box h2 { font-size: 17px; }
+            .welcome-modal .modal-box .rules { font-size: 13px; line-height: 1.9; }
+            .welcome-modal .modal-box .btn-row { flex-direction: row; gap: 10px; }
+            .welcome-modal .modal-box .btn-row button { font-size: 13px; padding: 6px 0; }
+        }
     </style>
 </head>
 <body>
+
+    <!-- ============================================================ -->
+    <!-- 欢迎弹窗 -->
+    <!-- ============================================================ -->
+    <div class="welcome-modal" id="welcomeModal">
+        <div class="modal-box">
+            <h2>📢 欢迎来到 N109 攻略站</h2>
+            <ul class="rules">
+                <li><span class="highlight">为爱发电</span>，现生很忙，不要催我，欢迎加入 🐾</li>
+                <li>网页比较粗糙，所以 <span class="highlight">有没有大佬救救！</span> 🥺</li>
+                <li>欢迎友好交流呀 (*^_^*) ，毕竟我也不是什么魔鬼。<br>挑刺的你别看，<span class="highlight">反弹一切阴阳怪气</span> 🔥</li>
+                <li>深空只喜欢 <span class="highlight">秦彻</span>，只承认 <span class="highlight">6.22 前的 5 个男主</span></li>
+                <li>因为是个人搓的网页，所以会有一些个性发言，<span class="highlight">劝大家不要出于好奇去看</span> 🤫</li>
+            </ul>
+            <div class="btn-row">
+                <button class="btn-accept" id="welcomeAccept">✅ 接受</button>
+                <button class="btn-reject" id="welcomeReject">❌ 不接受</button>
+            </div>
+        </div>
+    </div>
 
     <button class="menu-toggle" id="menuToggle" aria-label="切换侧边栏">☰</button>
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -150,9 +289,7 @@
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-title">📌 本页目录</div>
         <nav class="sidebar-nav">
-            <a href="#ongoing" class="active">🔥 进行中</a>
-            <a href="#upcoming">📅 即将开始</a>
-            <a href="#past">📜 已结束</a>
+            <a href="#upcoming" class="active">📅 即将开始</a>
         </nav>
         <div class="sidebar-footer">v1.0 · 像素攻略站</div>
     </aside>
@@ -161,39 +298,16 @@
 
         <div class="page-title">
             <h1>🎯 活动</h1>
-            <p>当前活动 · 即将开始 · 往期回顾</p>
+            <p>即将开始 · 敬请期待</p>
         </div>
 
-        <!-- 进行中 -->
-        <h2 style="font-size:20px; color:var(--accent-gold); text-shadow:var(--text-shadow-enabled); border-bottom:3px solid var(--border-color); padding-bottom:8px; margin-bottom:16px;" id="ongoing">🔥 进行中</h2>
+        <!-- 即将开始 -->
+        <h2 style="font-size:20px; color:var(--accent-gold); text-shadow:var(--text-shadow-enabled); border-bottom:3px solid var(--border-color); padding-bottom:8px; margin-bottom:16px;" id="upcoming">📅 即将开始</h2>
         <div class="activity-grid">
             <div class="activity-card">
                 <span class="icon">🏆</span>
                 <h3>选梅大赛</h3>
                 <p>上传你的作品，让大家投票！每人可投5票，图片格式 JPG/PNG/WebP，最大 2MB。</p>
-                <span class="status">进行中</span>
-            </div>
-            <div class="activity-card">
-                <span class="icon">🎣</span>
-                <h3>彻夜渔语 · 钓鱼大赛</h3>
-                <p>蜜月沙滩钓鱼小游戏，钓到稀有鱼种获得额外奖励！</p>
-                <span class="status">进行中</span>
-            </div>
-        </div>
-
-        <!-- 即将开始 -->
-        <h2 style="font-size:20px; color:var(--accent-gold); text-shadow:var(--text-shadow-enabled); border-bottom:3px solid var(--border-color); padding-bottom:8px; margin-bottom:16px; margin-top:32px;" id="upcoming">📅 即将开始</h2>
-        <div class="activity-grid">
-            <div class="activity-card">
-                <span class="icon">🎨</span>
-                <h3>艺术展 · 限时联动</h3>
-                <p>与知名画师的联动活动，15张精选作品展出，敬请期待。</p>
-                <span class="status soon">即将开启</span>
-            </div>
-            <div class="activity-card">
-                <span class="icon">🏎️</span>
-                <h3>N109 Boulevard 锦标赛</h3>
-                <p>赛车小游戏限时竞速赛，挑战最快圈速，赢取限定奖励。</p>
                 <span class="status soon">即将开启</span>
             </div>
         </div>
@@ -213,6 +327,45 @@
 
     <script>
         (function() {
+            // 欢迎弹窗
+            const modal = document.getElementById('welcomeModal');
+            const acceptBtn = document.getElementById('welcomeAccept');
+            const rejectBtn = document.getElementById('welcomeReject');
+
+            const hasAccepted = localStorage.getItem('n109_welcome_accepted');
+
+            if (!hasAccepted) {
+                modal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            acceptBtn.addEventListener('click', function() {
+                localStorage.setItem('n109_welcome_accepted', 'true');
+                modal.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+
+            rejectBtn.addEventListener('click', function() {
+                window.close();
+                if (!window.closed) {
+                    document.body.innerHTML = '';
+                    document.body.style.background = '#1a2633';
+                    document.body.style.color = '#f5e6d3';
+                    document.body.style.display = 'flex';
+                    document.body.style.alignItems = 'center';
+                    document.body.style.justifyContent = 'center';
+                    document.body.style.height = '100vh';
+                    document.body.style.fontFamily = "'Press Start 2P', monospace";
+                    document.body.style.fontSize = '20px';
+                    document.body.innerHTML = '<div style="text-align:center;padding:20px;">👋 已退出<br><span style="font-size:14px;color:#c9b8a8;margin-top:16px;display:block;">你可以关闭此标签页</span></div>';
+                }
+            });
+
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) { /* 不做任何事 */ }
+            });
+
+            // 主题切换
             const themeBtn = document.getElementById('themeToggle');
             const current = localStorage.getItem('pixel-theme');
             if (current === 'light') document.documentElement.classList.add('light-mode');
@@ -222,6 +375,7 @@
                 localStorage.setItem('pixel-theme', html.classList.contains('light-mode') ? 'light' : 'dark');
             });
 
+            // 侧边栏
             const menuToggle = document.getElementById('menuToggle');
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
@@ -240,16 +394,15 @@
                 });
             });
 
+            // 侧边栏高亮
             const sections = [
-                { id: 'ongoing', link: document.querySelector('.sidebar-nav a[href="#ongoing"]') },
-                { id: 'upcoming', link: document.querySelector('.sidebar-nav a[href="#upcoming"]') },
-                { id: 'past', link: document.querySelector('.sidebar-nav a[href="#past"]') }
+                { id: 'upcoming', link: document.querySelector('.sidebar-nav a[href="#upcoming"]') }
             ];
             let timer = null;
             window.addEventListener('scroll', function() {
                 if (timer) return;
                 timer = setTimeout(function() {
-                    let activeId = 'ongoing';
+                    let activeId = 'upcoming';
                     let minDist = Infinity;
                     sections.forEach(function(item) {
                         const el = document.getElementById(item.id);
@@ -271,7 +424,7 @@
                 }, 100);
             });
             setTimeout(function() {
-                document.querySelector('.sidebar-nav a[href="#ongoing"]')?.classList.add('active');
+                document.querySelector('.sidebar-nav a[href="#upcoming"]')?.classList.add('active');
             }, 300);
         })();
     </script>

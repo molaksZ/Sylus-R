@@ -30,6 +30,8 @@
             --font-base: 18px;
             --font-small: 15px;
             --font-title: 30px;
+            --nav-font-pc: 17px;
+            --nav-font-mobile: 14px;
         }
         .light-mode {
             --bg-page: #f2ebe0;
@@ -78,7 +80,7 @@
         .top-nav .logo { font-size: 22px; font-weight: bold; color: var(--accent-gold); text-shadow: var(--text-shadow-enabled); letter-spacing: 1px; white-space: nowrap; }
         .top-nav .logo span { background: var(--accent-red); color: #f5e6d3; padding: 2px 10px; font-size: 12px; border: 2px solid var(--border-color); margin-left: 8px; text-shadow: none; }
         .top-nav-links { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
-        .top-nav-links a { color: var(--text-secondary); font-size: 17px; padding: 4px 0; border-bottom: 3px solid transparent; transition: none; white-space: nowrap; }
+        .top-nav-links a { color: var(--text-secondary); font-size: var(--nav-font-pc); padding: 4px 0; border-bottom: 3px solid transparent; transition: none; white-space: nowrap; }
         .top-nav-links a:hover { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
         .top-nav-links a.active { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
         .top-nav .theme-toggle { background: var(--btn-bg); color: var(--btn-text); border: 3px solid var(--border-color); padding: 4px 16px; font-family: inherit; font-size: 15px; cursor: pointer; box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a; transition: 0.05s linear; text-shadow: none; white-space: nowrap; }
@@ -153,7 +155,7 @@
         }
         .intro-card .click-hint { text-align: center; padding: 4px 0 6px 0; font-size: 11px; color: var(--text-secondary); opacity: 0.6; border-top: 1.5px solid var(--border-color); letter-spacing: 0.5px; background: var(--bg-card); }
 
-        /* ========== 引导模态框（左图右文，竖版图片） ========== */
+        /* ========== 引导模态框 ========== */
         .guide-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(6px); z-index: 3000; align-items: center; justify-content: center; padding: 30px; }
         .guide-modal.open { display: flex; }
         .guide-modal .modal-content { position: relative; max-width: 750px; width: 100%; max-height: 90vh; background: var(--bg-card); border: 4px solid var(--border-color); border-radius: 12px; overflow: hidden; box-shadow: 0 0 60px rgba(0,0,0,0.8); display: grid; grid-template-columns: 2fr 3fr; }
@@ -195,13 +197,109 @@
         .footer-links a { color: var(--text-secondary); font-size: 15px; }
         .footer-links a:hover { color: var(--accent-gold); }
 
+        /* ========== 欢迎弹窗 ========== */
+        .welcome-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            backdrop-filter: blur(6px);
+        }
+        .welcome-modal.open {
+            display: flex;
+        }
+        .welcome-modal .modal-box {
+            background: var(--bg-card);
+            border: 6px solid var(--border-color);
+            box-shadow: 0 0 0 3px var(--bg-page), 8px 8px 0 rgba(0, 0, 0, 0.5);
+            max-width: 580px;
+            width: 100%;
+            padding: 28px 32px 24px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .welcome-modal .modal-box h2 {
+            font-size: 22px;
+            color: var(--accent-gold);
+            text-shadow: var(--text-shadow-enabled);
+            text-align: center;
+            border-bottom: 3px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+        .welcome-modal .modal-box .rules {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 2.2;
+            padding: 4px 0;
+        }
+        .welcome-modal .modal-box .rules li {
+            list-style: none;
+            padding: 2px 0 2px 24px;
+            position: relative;
+        }
+        .welcome-modal .modal-box .rules li::before {
+            content: "◆";
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+            font-size: 14px;
+        }
+        .welcome-modal .modal-box .rules .highlight {
+            color: var(--accent-gold);
+        }
+        .welcome-modal .modal-box .btn-row {
+            display: flex;
+            gap: 16px;
+            margin-top: 18px;
+            justify-content: center;
+        }
+        .welcome-modal .modal-box .btn-row button {
+            flex: 1;
+            max-width: 160px;
+            background: var(--btn-bg);
+            border: 3px solid var(--border-color);
+            color: var(--btn-text);
+            font-family: inherit;
+            font-size: 16px;
+            padding: 10px 0;
+            cursor: pointer;
+            box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a;
+            transition: 0.05s linear;
+            text-shadow: none;
+        }
+        .welcome-modal .modal-box .btn-row button:active {
+            transform: translate(2px, 2px);
+            box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a;
+        }
+        .welcome-modal .modal-box .btn-row .btn-accept {
+            background: #3a7a3a;
+            border-color: #5aaa5a;
+            color: #c0f0c0;
+        }
+        .welcome-modal .modal-box .btn-row .btn-accept:hover {
+            background: #4a8a4a;
+        }
+        .welcome-modal .modal-box .btn-row .btn-reject {
+            background: #7a3a3a;
+            border-color: #aa5a5a;
+            color: #f0c0c0;
+        }
+        .welcome-modal .modal-box .btn-row .btn-reject:hover {
+            background: #8a4a4a;
+        }
+
         /* ========== 响应式 ========== */
         @media (max-width: 820px) {
             body { padding-left: 0; padding-top: 70px; }
             .top-nav { padding: 0 12px; height: auto; min-height: 56px; gap: 6px; }
             .top-nav .logo { font-size: 18px; }
-            .top-nav-links { gap: 12px; }
-            .top-nav-links a { font-size: 16px; }
+            .top-nav-links { gap: 10px; }
+            .top-nav-links a { font-size: var(--nav-font-mobile); }
             .top-nav .theme-toggle { font-size: 13px; padding: 3px 12px; }
             .sidebar { transform: translateX(-100%); width: 200px; top: 56px; }
             .sidebar.open { transform: translateX(0); }
@@ -214,11 +312,26 @@
             .scene-modal .modal-box { grid-template-columns: 1fr; max-width: 600px; }
             .scene-modal .modal-image { aspect-ratio: 4/3; min-height: 220px; }
             .scene-modal .modal-info { padding: 18px 20px; }
+            .welcome-modal .modal-box {
+                padding: 20px 16px 18px;
+                margin: 12px;
+            }
+            .welcome-modal .modal-box h2 {
+                font-size: 19px;
+            }
+            .welcome-modal .modal-box .rules {
+                font-size: 14px;
+                line-height: 2;
+            }
+            .welcome-modal .modal-box .btn-row button {
+                font-size: 14px;
+                padding: 8px 0;
+            }
         }
         @media (max-width: 480px) {
             body { font-size: 17px; }
             .top-nav .logo { font-size: 16px; }
-            .top-nav-links a { font-size: 14px; }
+            .top-nav-links a { font-size: 13px; }
             .page-title h1 { font-size: 26px; }
             .intro-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
             .guide-modal { padding: 16px; }
@@ -233,10 +346,48 @@
             .scene-modal .modal-info h2 { font-size: 20px; }
             .scene-modal .modal-info .desc { font-size: 16px; }
             .footer-links { flex-direction: column; gap: 6px; }
+            .welcome-modal .modal-box {
+                padding: 16px 12px 14px;
+            }
+            .welcome-modal .modal-box h2 {
+                font-size: 17px;
+            }
+            .welcome-modal .modal-box .rules {
+                font-size: 13px;
+                line-height: 1.9;
+            }
+            .welcome-modal .modal-box .btn-row {
+                flex-direction: row;
+                gap: 10px;
+            }
+            .welcome-modal .modal-box .btn-row button {
+                font-size: 13px;
+                padding: 6px 0;
+            }
         }
     </style>
 </head>
 <body>
+
+    <!-- ============================================================ -->
+    <!-- 欢迎弹窗 -->
+    <!-- ============================================================ -->
+    <div class="welcome-modal" id="welcomeModal">
+        <div class="modal-box">
+            <h2>📢 欢迎来到 N109 攻略站</h2>
+            <ul class="rules">
+                <li><span class="highlight">为爱发电</span>，现生很忙，不要催我，欢迎加入 🐾</li>
+                <li>网页比较粗糙，所以 <span class="highlight">有没有大佬救救！</span> 🥺</li>
+                <li>欢迎友好交流呀 (*^_^*) ，毕竟我也不是什么魔鬼。<br>挑刺的你别看，<span class="highlight">反弹一切阴阳怪气</span> 🔥</li>
+                <li>深空只喜欢 <span class="highlight">秦彻</span>，只承认 <span class="highlight">6.22 前的 5 个男主</span></li>
+                <li>因为是个人搓的网页，所以会有一些个性发言，<span class="highlight">劝大家不要出于好奇去看</span> 🤫</li>
+            </ul>
+            <div class="btn-row">
+                <button class="btn-accept" id="welcomeAccept">✅ 接受</button>
+                <button class="btn-reject" id="welcomeReject">❌ 不接受</button>
+            </div>
+        </div>
+    </div>
 
     <!-- ===== 移动端汉堡 ===== -->
     <button class="menu-toggle" id="menuToggle" aria-label="切换侧边栏">☰</button>
@@ -274,11 +425,10 @@
             <p>点击下方界面图片，放大查看功能引导</p>
         </div>
 
-        <!-- ===== 四张界面图片（直接显示真实图片） ===== -->
+        <!-- ===== 四张界面图片 ===== -->
         <section id="intro">
             <div class="intro-grid">
 
-                <!-- 卡片1：操作与右上角 -->
                 <div class="intro-card" data-target="modal1">
                     <span class="card-label">🎮 操作 · 右上角 <span class="badge">2项</span></span>
                     <div class="screenshot">
@@ -287,7 +437,6 @@
                     <div class="click-hint">🖱️ 点击放大 · 查看引导</div>
                 </div>
 
-                <!-- 卡片2：左下角核心键 -->
                 <div class="intro-card" data-target="modal2">
                     <span class="card-label">❤️ 左下角核心 <span class="badge">4项</span></span>
                     <div class="screenshot">
@@ -296,7 +445,6 @@
                     <div class="click-hint">🖱️ 点击放大 · 查看引导</div>
                 </div>
 
-                <!-- 卡片3：秦彻宝库 I -->
                 <div class="intro-card" data-target="modal3">
                     <span class="card-label">💎 宝库 I <span class="badge">4项</span></span>
                     <div class="screenshot">
@@ -305,7 +453,6 @@
                     <div class="click-hint">🖱️ 点击放大 · 查看引导</div>
                 </div>
 
-                <!-- 卡片4：秦彻宝库 II + 切换设置 -->
                 <div class="intro-card" data-target="modal4">
                     <span class="card-label">💎 宝库 II · ⚙️ 切换 <span class="badge">8项</span></span>
                     <div class="screenshot">
@@ -369,6 +516,50 @@
     <!-- JavaScript -->
     <!-- ============================================================ -->
     <script>
+        // ============================================================
+        // 0. 欢迎弹窗控制
+        // ============================================================
+        (function() {
+            const modal = document.getElementById('welcomeModal');
+            const acceptBtn = document.getElementById('welcomeAccept');
+            const rejectBtn = document.getElementById('welcomeReject');
+
+            const hasAccepted = localStorage.getItem('n109_welcome_accepted');
+
+            if (!hasAccepted) {
+                modal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            acceptBtn.addEventListener('click', function() {
+                localStorage.setItem('n109_welcome_accepted', 'true');
+                modal.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+
+            rejectBtn.addEventListener('click', function() {
+                window.close();
+                if (!window.closed) {
+                    document.body.innerHTML = '';
+                    document.body.style.background = '#1a2633';
+                    document.body.style.color = '#f5e6d3';
+                    document.body.style.display = 'flex';
+                    document.body.style.alignItems = 'center';
+                    document.body.style.justifyContent = 'center';
+                    document.body.style.height = '100vh';
+                    document.body.style.fontFamily = "'Press Start 2P', monospace";
+                    document.body.style.fontSize = '20px';
+                    document.body.innerHTML = '<div style="text-align:center;padding:20px;">👋 已退出<br><span style="font-size:14px;color:#c9b8a8;margin-top:16px;display:block;">你可以关闭此标签页</span></div>';
+                }
+            });
+
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    // 不做任何事
+                }
+            });
+        })();
+
         // ============================================================
         // 1. 主题切换 & 侧边栏
         // ============================================================
@@ -435,7 +626,7 @@
         })();
 
         // ============================================================
-        // 2. 引导内容（四张卡片）
+        // 2. 引导内容
         // ============================================================
         const guideImages = {
             modal1: './images/guide-op-right.png',
@@ -499,7 +690,6 @@
             }
         };
 
-        // 卡片点击 → 打开模态框
         document.querySelectorAll('.intro-card').forEach(card => {
             card.addEventListener('click', function() {
                 const target = this.dataset.target;
@@ -513,7 +703,6 @@
             });
         });
 
-        // 关闭模态框
         document.getElementById('modalClose').addEventListener('click', function() {
             document.getElementById('guideModal').classList.remove('open');
             document.body.style.overflow = '';
@@ -532,7 +721,7 @@
         });
 
         // ============================================================
-        // 3. 场景数据（17个）
+        // 3. 场景数据
         // ============================================================
         const SCENES = [
             { id: 's1', name: '客厅', icon: '🛋️', desc: '基础互动场景', detail: '客厅是主界面的核心场景，秦彻会在这里随机出现。你可以在这里与他对话、互动，偶尔触发特殊事件。是日常陪伴的主要场景之一。', tags: ['日常', '互动'] },
@@ -588,7 +777,6 @@
 
         function openSceneModal(index) {
             const scene = SCENES[index];
-            // 构建图片路径，处理特殊字符
             const imgPath = `./images/scene_${scene.name}.png`;
             modalImg.src = imgPath;
             modalImg.onerror = function() {
@@ -621,9 +809,6 @@
         // ============================================================
         renderScenes();
 
-        // ============================================================
-        // 7. 全局暴露
-        // ============================================================
         window.openSceneModal = openSceneModal;
         window.closeSceneModal = closeSceneModal;
     </script>
