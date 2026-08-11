@@ -5,50 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>权责说明 · N109 攻略站</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <!-- Default Statcounter code for My wiki https://wiki.n109.vip -->
+    <script type="text/javascript">
+    var sc_project=13342215; 
+    var sc_invisible=1; 
+    var sc_security="1113367e"; 
+    </script>
+    <script type="text/javascript"
+    src="https://www.statcounter.com/counter/counter.js" async></script>
+    <noscript><div class="statcounter"><a title="Web Analytics Made Easy -
+    Statcounter" href="https://statcounter.com/" target="_blank"><img
+    class="statcounter" src="https://c.statcounter.com/13342215/0/1113367e/1/"
+    alt="Web Analytics Made Easy - Statcounter"
+    referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+    <!-- End of Statcounter Code -->
     <style>
         :root {
+            /* 层次感优化 - 深色模式 */
             --bg-page: #1a2633;
-            --bg-card: #263340;
+            --bg-card: #2a3a4a;
             --bg-nav: #0f1a24;
             --bg-sidebar: #0f1a24;
-            --bg-right: #1e2c3a;
+            --bg-right: #223240;
+            --border-color: #4a6a8a;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 0 0 var(--border-color);
+            --gap-section: 36px;
+
             --text-primary: #f5e6d3;
             --text-secondary: #c9b8a8;
+            --text-heading: #f7e8d0;
             --accent-gold: #e8b84c;
             --accent-orange: #d98c3a;
             --accent-red: #b84a3a;
-            --accent-dark: #8b5a2b;
-            --border-color: #5c3a21;
             --shadow-color: #1a0e08;
             --btn-bg: #b84a3a;
             --btn-text: #f5e6d3;
             --text-shadow-enabled: 2px 2px 0 var(--shadow-color);
             --sidebar-width: 180px;
             --topnav-height: 60px;
-            --dot-pattern: radial-gradient(circle, rgba(200,180,160,0.05) 1px, transparent 1px);
-            --card-shadow: 0 4px 0 0 var(--border-color);
-            --nav-font-pc: 16px;
-            --nav-font-mobile: 13px;
+            --dot-pattern: radial-gradient(circle, rgba(200, 180, 160, 0.05) 1px, transparent 1px);
+            --right-title-bg: rgba(0, 0, 0, 0.45);
+            --font-size-base: 18px;
+            --main-padding-top: 32px;
+            --nav-font-pc: 17px;
+            --nav-font-mobile: 14px;
         }
         .light-mode {
-            --bg-page: #f2ebe0;
-            --bg-card: #ffffff;
-            --bg-nav: #e6dccc;
-            --bg-sidebar: #e6dccc;
-            --bg-right: #f5efe8;
+            /* 主色 (60%) - 淡紫灰 + 米白 */
+            --bg-page: #f0eef5;
+            --bg-card: #fcfaf8;
+            --bg-nav: #fcfaf8;
+            --bg-sidebar: #fcfaf8;
+            --bg-right: #f5f2f0;
+            --border-color: #c4d0c8;
+            --card-shadow: 0 4px 16px rgba(180, 190, 180, 0.12), 0 2px 0 0 var(--border-color);
+            --right-title-bg: rgba(196, 208, 200, 0.30);
+
             --text-primary: #2c241c;
-            --text-secondary: #5a4e42;
-            --accent-gold: #b88a3a;
-            --accent-orange: #c47a2a;
-            --accent-red: #a03a2a;
-            --accent-dark: #8b5a2b;
-            --border-color: #b8a898;
-            --shadow-color: transparent;
-            --btn-bg: #a03a2a;
-            --btn-text: #f5e6d3;
+            --text-secondary: #6a5e52;
+            --text-heading: #1a1a1a;
+            --accent-gold: #c4a86a;
+            --accent-orange: #b8985a;
+            --accent-red: #c4d0c8;
+            --shadow-color: rgba(180, 190, 180, 0.15);
+            --btn-bg: #c4a86a;
+            --btn-text: #fcfaf8;
             --text-shadow-enabled: none;
-            --card-shadow: 0 4px 0 0 var(--border-color);
-            --dot-pattern: radial-gradient(circle, rgba(120,100,80,0.08) 1px, transparent 1px);
         }
         * {
             margin: 0;
@@ -61,13 +83,21 @@
             font-family: 'Press Start 2P', 'Courier New', monospace;
             background: var(--bg-page);
             color: var(--text-primary);
-            font-size: 16px;
-            line-height: 1.8;
+            font-size: var(--font-size-base);
+            line-height: 1.9;
             min-height: 100vh;
             padding-top: var(--topnav-height);
             padding-left: var(--sidebar-width);
             background-image: var(--dot-pattern);
             background-size: 20px 20px;
+            background-image: var(--dot-pattern), url('images/bg-body.jpg');
+            background-size: 20px 20px, cover;
+            background-attachment: fixed, fixed;
+            background-position: 0 0, center center;
+            background-blend-mode: normal, overlay;
+        }
+        .light-mode body {
+            background-image: var(--dot-pattern), url('images/bg-body-light.jpg');
         }
         a { color: var(--accent-gold); text-decoration: none; }
         a:hover { color: var(--accent-orange); }
@@ -366,6 +396,7 @@
             cursor: pointer;
             transition: transform 0.15s, box-shadow 0.15s;
             border-radius: 4px;
+            position: relative;
         }
         .thought-card:hover {
             transform: translateY(-4px);
@@ -400,6 +431,7 @@
             font-size: 14px;
             color: var(--text-secondary);
             line-height: 1.8;
+            white-space: pre-wrap;
         }
         .thought-card .click-hint {
             font-size: 11px;
@@ -409,8 +441,30 @@
             padding: 2px 0 6px;
             border-top: 1.5px solid var(--border-color);
         }
+        .thought-card .thought-admin-btns {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            display: flex;
+            gap: 4px;
+            z-index: 5;
+        }
+        .thought-card .thought-admin-btns button {
+            background: var(--accent-gold);
+            border: 2px solid var(--border-color);
+            color: #1a1a1a;
+            font-family: inherit;
+            font-size: 10px;
+            padding: 2px 8px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+        .thought-card .thought-admin-btns .del {
+            background: var(--accent-red);
+            color: #f5e6d3;
+        }
 
-        /* 确认弹窗（点击“一些想法”时弹出） */
+        /* 确认弹窗（点击"一些想法"时弹出） */
         .confirm-modal {
             display: none;
             position: fixed;
@@ -774,7 +828,7 @@
         </div>
     </div>
 
-    <!-- ===== 确认弹窗（点击“一些想法”时弹出） ===== -->
+    <!-- ===== 确认弹窗（点击"一些想法"时弹出） ===== -->
     <div class="confirm-modal" id="confirmModal">
         <div class="modal-box">
             <h2>💭 温馨提示</h2>
@@ -894,6 +948,9 @@
             </button>
             <div class="thought-body" id="thoughtBody">
                 <div class="thought-grid" id="thoughtGrid"></div>
+                <div id="thoughtAdminArea" style="margin-top:16px;text-align:center;display:none;">
+                    <button id="thoughtAddBtn" style="background:var(--btn-bg);border:3px solid var(--border-color);color:var(--btn-text);font-family:inherit;font-size:14px;padding:6px 20px;cursor:pointer;box-shadow:inset -2px -2px 0 var(--shadow-color),inset 2px 2px 0 var(--shadow-light);">➕ 新增记录</button>
+                </div>
             </div>
         </div>
 
@@ -1036,45 +1093,39 @@
 
             let isOpen = false;
 
-            // 点击“一些想法”标题 → 弹出确认弹窗
             thoughtToggle.addEventListener('click', function(e) {
                 e.stopPropagation();
-                // 如果已经展开，直接收起（不弹窗）
                 if (thoughtBody.classList.contains('open')) {
                     thoughtBody.classList.remove('open');
                     thoughtArrow.classList.remove('open');
                     isOpen = false;
                     return;
                 }
-                // 未展开 → 弹出确认弹窗
                 confirmModal.classList.add('open');
                 document.body.style.overflow = 'hidden';
             });
 
-            // 点击“是” → 关闭确认弹窗，展开折叠
             confirmYes.addEventListener('click', function() {
                 confirmModal.classList.remove('open');
                 document.body.style.overflow = '';
                 thoughtBody.classList.add('open');
                 thoughtArrow.classList.add('open');
                 isOpen = true;
+                renderThoughts();
             });
 
-            // 点击“否” → 关闭确认弹窗，跳转首页
             confirmNo.addEventListener('click', function() {
                 confirmModal.classList.remove('open');
                 document.body.style.overflow = '';
                 window.location.href = 'index.html';
             });
 
-            // 点击确认弹窗遮罩层 → 不做任何事（必须点按钮）
             confirmModal.addEventListener('click', function(e) {
                 if (e.target === this) {
                     // 不做任何事
                 }
             });
 
-            // 键盘 ESC 关闭确认弹窗（相当于点“否”）
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && confirmModal.classList.contains('open')) {
                     confirmModal.classList.remove('open');
@@ -1085,87 +1136,195 @@
         })();
 
         // ============================================================
-        // 3. 一些想法 - 卡片数据 & 渲染
+        // 3. 一些想法 - 数据管理
         // ============================================================
-        (function() {
-            // ===== 卡片数据（在这里添加/修改卡片内容） =====
-            const thoughtData = [
-                {
-                    title: '关于这个网站',
-                    text: '这是一个为爱发电的个人项目，所有内容都是我一个人在业余时间慢慢搓出来的。如果你觉得有用，那就是我最大的动力。',
-                    img: './images/thought-placeholder.png'
-                },
-                {
-                    title: '为什么做这个站',
-                    text: '因为喜欢秦彻，也喜欢N109这个世界。想把游戏里的数据、图鉴、攻略整理出来，方便自己查，也方便其他玩家。',
-                    img: './images/thought-placeholder.png'
-                },
-                {
-                    title: '未来计划',
-                    text: '打算慢慢完善所有数据，包括更多植物、鱼类的详细信息，以及场景互动攻略。但现生很忙，更新会比较慢。',
-                    img: './images/thought-placeholder.png'
-                },
-                {
-                    title: '一些碎碎念',
-                    text: '网页设计粗糙，代码也不够优雅，但已经尽力了。如果有什么建议，欢迎友好交流，但请别太苛责。',
-                    img: './images/thought-placeholder.png'
-                }
-            ];
+        const THOUGHT_STORAGE_KEY = 'n109_thoughts_data';
 
-            // 渲染卡片
+        const DEFAULT_THOUGHTS = [
+            {
+                id: 't1',
+                title: '关于这个网站',
+                text: '这是一个为爱发电的个人项目，所有内容都是我一个人在业余时间慢慢搓出来的。如果你觉得有用，那就是我最大的动力。',
+                img: './images/thought-placeholder.png',
+                date: '2026.08.01'
+            },
+            {
+                id: 't2',
+                title: '为什么做这个站',
+                text: '因为喜欢秦彻，也喜欢N109这个世界。想把游戏里的数据、图鉴、攻略整理出来，方便自己查，也方便其他玩家。',
+                img: './images/thought-placeholder.png',
+                date: '2026.08.05'
+            },
+            {
+                id: 't3',
+                title: '未来计划',
+                text: '打算慢慢完善所有数据，包括更多植物、鱼类的详细信息，以及场景互动攻略。但现生很忙，更新会比较慢。',
+                img: './images/thought-placeholder.png',
+                date: '2026.08.08'
+            },
+            {
+                id: 't4',
+                title: '一些碎碎念',
+                text: '网页设计粗糙，代码也不够优雅，但已经尽力了。如果有什么建议，欢迎友好交流，但请别太苛责。',
+                img: './images/thought-placeholder.png',
+                date: '2026.08.10'
+            },
+            {
+                id: 't5',
+                title: '📝 2026.08.11-12 更新记录',
+                text: '🎨 尝试多组配色方案（星蓝/帝释青/霜地、复古红棕/檀木/奶雾等），最终保留现有设计\n🏆 确认「选梅大赛」活动方案及页面需求（瀑布流布局 + 投票系统）\n🔧 修复管理后台"只能增加不能修改"的问题\n🎮 新增「技能五子棋」玩法及5个成就（又唱又跳、力拔山兮、你们不要再打了啦、在下技能五、小臭棋篓）\n📊 首页右侧栏「排行榜」替换为「更新日志」模块\n✏️ 「一些想法」增加管理员增删改功能（登录后可直接编辑）',
+                img: './images/thought-placeholder.png',
+                date: '2026.08.12'
+            }
+        ];
+
+        function loadThoughts() {
+            let data = localStorage.getItem(THOUGHT_STORAGE_KEY);
+            if (data) {
+                try {
+                    let parsed = JSON.parse(data);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        return parsed;
+                    }
+                } catch (e) {}
+            }
+            localStorage.setItem(THOUGHT_STORAGE_KEY, JSON.stringify(DEFAULT_THOUGHTS));
+            return DEFAULT_THOUGHTS;
+        }
+
+        function saveThoughts(thoughts) {
+            localStorage.setItem(THOUGHT_STORAGE_KEY, JSON.stringify(thoughts));
+        }
+
+        function renderThoughts() {
             const grid = document.getElementById('thoughtGrid');
             if (!grid) return;
-
+            
+            const thoughts = loadThoughts();
+            const isAdmin = localStorage.getItem('current_admin') !== null;
+            
+            // 显示/隐藏管理员新增按钮
+            const adminArea = document.getElementById('thoughtAdminArea');
+            if (adminArea) {
+                adminArea.style.display = isAdmin ? 'block' : 'none';
+            }
+            
             grid.innerHTML = '';
-            thoughtData.forEach((item, index) => {
+            thoughts.forEach((item, index) => {
                 const card = document.createElement('div');
                 card.className = 'thought-card';
                 card.innerHTML = `
                     <div class="card-img" data-index="${index}">
-                        <img src="${item.img}" alt="${item.title}" loading="lazy"
+                        <img src="${item.img || './images/thought-placeholder.png'}" alt="${item.title}" loading="lazy"
                              onerror="this.parentElement.innerHTML='<span style=\\'font-size:14px;color:var(--text-secondary);padding:20px;display:block;\\'>📷 ${item.title}</span>'">
                     </div>
                     <div class="card-body">
                         <h4>${item.title}</h4>
                         <p>${item.text}</p>
+                        <div style="font-size:11px;color:var(--text-secondary);opacity:0.6;margin-top:6px;">${item.date || ''}</div>
                     </div>
                     <div class="click-hint">🖱️ 点击图片查看大图</div>
+                    ${isAdmin ? `
+                    <div class="thought-admin-btns">
+                        <button class="thought-edit-btn" data-index="${index}">✏️</button>
+                        <button class="thought-del-btn del" data-index="${index}">✕</button>
+                    </div>
+                    ` : ''}
                 `;
                 grid.appendChild(card);
             });
-
-            // ===== 大图查看功能 =====
-            const viewer = document.getElementById('imageViewer');
-            const viewerImg = document.getElementById('viewerImg');
-            const viewerCaption = document.getElementById('viewerCaption');
-            const viewerClose = document.getElementById('viewerClose');
-
-            // 点击卡片图片 → 打开大图
+            
+            // 图片点击查看大图
             grid.querySelectorAll('.card-img').forEach((imgWrap, index) => {
                 imgWrap.style.cursor = 'pointer';
                 imgWrap.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    const data = thoughtData[index];
-                    viewerImg.src = data.img;
+                    const thoughts = loadThoughts();
+                    const data = thoughts[index];
+                    const viewer = document.getElementById('imageViewer');
+                    const viewerImg = document.getElementById('viewerImg');
+                    const viewerCaption = document.getElementById('viewerCaption');
+                    viewerImg.src = data.img || './images/thought-placeholder.png';
                     viewerCaption.textContent = data.title;
                     viewer.classList.add('open');
                     document.body.style.overflow = 'hidden';
                 });
             });
+            
+            // 管理员编辑功能
+            if (isAdmin) {
+                document.querySelectorAll('.thought-edit-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const index = parseInt(this.dataset.index);
+                        editThought(index);
+                    });
+                });
+                document.querySelectorAll('.thought-del-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const index = parseInt(this.dataset.index);
+                        if (confirm('确定要删除这条记录吗？')) {
+                            deleteThought(index);
+                        }
+                    });
+                });
+            }
+        }
 
-            // 关闭大图
+        function editThought(index) {
+            const thoughts = loadThoughts();
+            const item = thoughts[index];
+            const newTitle = prompt('修改标题：', item.title);
+            if (newTitle === null) return;
+            const newText = prompt('修改内容（多行用 \\n 分隔）：', item.text);
+            if (newText === null) return;
+            const newDate = prompt('修改日期：', item.date || new Date().toISOString().slice(0,10));
+            if (newDate === null) return;
+            
+            thoughts[index] = { ...item, title: newTitle, text: newText, date: newDate };
+            saveThoughts(thoughts);
+            renderThoughts();
+        }
+
+        function deleteThought(index) {
+            const thoughts = loadThoughts();
+            thoughts.splice(index, 1);
+            saveThoughts(thoughts);
+            renderThoughts();
+        }
+
+        function addThought() {
+            const thoughts = loadThoughts();
+            const newId = 't' + Date.now();
+            const title = prompt('输入标题：') || '新记录';
+            const text = prompt('输入内容（多行用 \\n 分隔）：') || '内容待补充';
+            const date = new Date().toISOString().slice(0,10);
+            thoughts.push({
+                id: newId,
+                title: title,
+                text: text,
+                img: './images/thought-placeholder.png',
+                date: date
+            });
+            saveThoughts(thoughts);
+            renderThoughts();
+        }
+
+        // 大图查看关闭
+        (function() {
+            const viewer = document.getElementById('imageViewer');
+            const viewerClose = document.getElementById('viewerClose');
             viewerClose.addEventListener('click', function() {
                 viewer.classList.remove('open');
                 document.body.style.overflow = '';
             });
-
             viewer.addEventListener('click', function(e) {
                 if (e.target === this) {
                     viewer.classList.remove('open');
                     document.body.style.overflow = '';
                 }
             });
-
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && viewer.classList.contains('open')) {
                     viewer.classList.remove('open');
@@ -1173,8 +1332,36 @@
                 }
             });
         })();
+
+        // 新增按钮
+        document.addEventListener('DOMContentLoaded', function() {
+            const addBtn = document.getElementById('thoughtAddBtn');
+            if (addBtn) {
+                addBtn.addEventListener('click', addThought);
+            }
+            // 如果 "一些想法" 默认展开，渲染数据
+            if (document.getElementById('thoughtBody').classList.contains('open')) {
+                renderThoughts();
+            }
+            // 监听展开事件
+            const observer = new MutationObserver(function() {
+                if (document.getElementById('thoughtBody').classList.contains('open')) {
+                    renderThoughts();
+                }
+            });
+            const target = document.getElementById('thoughtBody');
+            if (target) {
+                observer.observe(target, { attributes: true, attributeFilter: ['class'] });
+            }
+        });
+
+        window.renderThoughts = renderThoughts;
+        window.addThought = addThought;
+        window.editThought = editThought;
+        window.deleteThought = deleteThought;
+        window.loadThoughts = loadThoughts;
+        window.saveThoughts = saveThoughts;
     </script>
 
 </body>
 </html>
-<!-- 浮动管理员按钮已移除 -->

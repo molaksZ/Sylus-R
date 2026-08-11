@@ -5,54 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>活动 · N109 攻略站</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <!-- Default Statcounter code for My wiki https://wiki.n109.vip -->
+    <script type="text/javascript">
+    var sc_project=13342215; 
+    var sc_invisible=1; 
+    var sc_security="1113367e"; 
+    </script>
+    <script type="text/javascript"
+    src="https://www.statcounter.com/counter/counter.js" async></script>
+    <noscript><div class="statcounter"><a title="Web Analytics Made Easy -
+    Statcounter" href="https://statcounter.com/" target="_blank"><img
+    class="statcounter" src="https://c.statcounter.com/13342215/0/1113367e/1/"
+    alt="Web Analytics Made Easy - Statcounter"
+    referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+    <!-- End of Statcounter Code -->
     <style>
         :root {
             --bg-page: #1a2633;
-            --bg-card: rgba(38, 51, 64, 0.92);
-            --bg-nav: rgba(15, 26, 36, 0.95);
-            --bg-sidebar: rgba(15, 26, 36, 0.92);
+            --bg-card: #2a3a4a;
+            --bg-nav: #0f1a24;
+            --bg-sidebar: #0f1a24;
+            --bg-right: #223240;
+            --border-color: #4a6a8a;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 0 0 var(--border-color);
+            --gap-section: 36px;
             --text-primary: #f5e6d3;
             --text-secondary: #c9b8a8;
+            --text-heading: #f7e8d0;
             --accent-gold: #e8b84c;
             --accent-orange: #d98c3a;
             --accent-red: #b84a3a;
-            --border-color: #5c3a21;
             --shadow-color: #1a0e08;
             --btn-bg: #b84a3a;
             --btn-text: #f5e6d3;
             --text-shadow-enabled: 2px 2px 0 var(--shadow-color);
             --sidebar-width: 180px;
             --topnav-height: 60px;
-            --dot-pattern: radial-gradient(circle, rgba(200,180,160,0.05) 1px, transparent 1px);
-            --card-shadow: 0 4px 0 0 var(--border-color);
-            --nav-font-pc: 16px;
-            --nav-font-mobile: 13px;
+            --dot-pattern: radial-gradient(circle, rgba(200, 180, 160, 0.05) 1px, transparent 1px);
+            --right-title-bg: rgba(0, 0, 0, 0.45);
+            --font-size-base: 18px;
+            --main-padding-top: 32px;
+            --nav-font-pc: 17px;
+            --nav-font-mobile: 14px;
         }
         .light-mode {
-            --bg-page: #f2ebe0;
-            --bg-card: rgba(255, 255, 255, 0.92);
-            --bg-nav: rgba(230, 220, 204, 0.95);
-            --bg-sidebar: rgba(230, 220, 204, 0.92);
+            --bg-page: #f0eef5;
+            --bg-card: #fcfaf8;
+            --bg-nav: #fcfaf8;
+            --bg-sidebar: #fcfaf8;
+            --bg-right: #f5f2f0;
+            --border-color: #c4d0c8;
+            --card-shadow: 0 4px 16px rgba(180, 190, 180, 0.12), 0 2px 0 0 var(--border-color);
+            --right-title-bg: rgba(196, 208, 200, 0.30);
             --text-primary: #2c241c;
-            --text-secondary: #5a4e42;
-            --accent-gold: #b88a3a;
-            --accent-orange: #c47a2a;
-            --accent-red: #a03a2a;
-            --border-color: #b8a898;
-            --shadow-color: transparent;
-            --btn-bg: #a03a2a;
-            --btn-text: #f5e6d3;
+            --text-secondary: #6a5e52;
+            --text-heading: #1a1a1a;
+            --accent-gold: #c4a86a;
+            --accent-orange: #b8985a;
+            --accent-red: #c4d0c8;
+            --shadow-color: rgba(180, 190, 180, 0.15);
+            --btn-bg: #c4a86a;
+            --btn-text: #fcfaf8;
             --text-shadow-enabled: none;
-            --card-shadow: 0 4px 0 0 var(--border-color);
-            --dot-pattern: radial-gradient(circle, rgba(120,100,80,0.08) 1px, transparent 1px);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.25s, color 0.25s, border 0.25s, box-shadow 0.25s; image-rendering: pixelated; }
         body {
             font-family: 'Press Start 2P', 'Courier New', monospace;
             background: var(--bg-page);
             color: var(--text-primary);
-            font-size: 16px;
-            line-height: 1.8;
+            font-size: var(--font-size-base);
+            line-height: 1.9;
             min-height: 100vh;
             padding-top: var(--topnav-height);
             padding-left: var(--sidebar-width);
@@ -61,6 +83,8 @@
             background-image: var(--dot-pattern), url('images/bg-body.jpg');
             background-size: 20px 20px, cover;
             background-attachment: fixed, fixed;
+            background-position: 0 0, center center;
+            background-blend-mode: normal, overlay;
         }
         .light-mode body {
             background-image: var(--dot-pattern), url('images/bg-body-light.jpg');
@@ -82,7 +106,7 @@
         .top-nav-links a:hover { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
         .top-nav-links a.active { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
         .top-nav .theme-toggle { background: var(--btn-bg); color: var(--btn-text); border: 3px solid var(--border-color); padding: 4px 16px; font-family: inherit; font-size: 14px; cursor: pointer; box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a; transition: 0.05s linear; text-shadow: none; white-space: nowrap; }
-        .top-nav .theme-toggle:active { transform: translate(2px, 2px); box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a; }
+        .top-nav .theme-toggle:active { transform: translate(2px,2px); box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a; }
 
         .sidebar {
             position: fixed; top: var(--topnav-height); left: 0; bottom: 0; width: var(--sidebar-width);
@@ -99,7 +123,7 @@
         .sidebar-footer { margin-top: auto; font-size: 12px; color: var(--text-secondary); opacity: 0.4; border-top: 3px solid var(--border-color); padding-top: 14px; text-align: center; }
 
         .menu-toggle { display: none; position: fixed; top: 10px; left: 10px; z-index: 110; background: var(--btn-bg); color: var(--btn-text); border: 3px solid var(--border-color); padding: 4px 14px; font-family: inherit; font-size: 16px; cursor: pointer; box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a; text-shadow: none; }
-        .menu-toggle:active { transform: translate(2px, 2px); box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a; }
+        .menu-toggle:active { transform: translate(2px,2px); box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a; }
         .sidebar-overlay { display: none; position: fixed; inset: 0; top: var(--topnav-height); background: rgba(0,0,0,0.5); z-index: 80; }
 
         .main-content { padding: 20px 28px 30px 28px; max-width: 1200px; margin: 0 auto; min-height: calc(100vh - var(--topnav-height) - 60px); }
@@ -126,6 +150,9 @@
         .footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 6px; }
         .footer-links a { color: var(--text-secondary); font-size: 14px; }
         .footer-links a:hover { color: var(--accent-gold); }
+
+        .card-expand { margin-top:12px; padding-top:12px; border-top:2px solid var(--border-color); font-size:13px; color:var(--text-secondary); line-height:2; text-align:left; }
+        .card-expand .highlight { color: var(--accent-gold); }
 
         /* ========== 欢迎弹窗 ========== */
         .welcome-modal {
@@ -250,9 +277,7 @@
 </head>
 <body>
 
-    <!-- ============================================================ -->
-    <!-- 欢迎弹窗 -->
-    <!-- ============================================================ -->
+    <!-- ===== 欢迎弹窗 ===== -->
     <div class="welcome-modal" id="welcomeModal">
         <div class="modal-box">
             <h2>📢 欢迎来到 N109 攻略站</h2>
@@ -270,7 +295,7 @@
         </div>
     </div>
 
-    <button class="menu-toggle" id="menuToggle" aria-label="切换侧边栏">☰</button>
+    <button class="menu-toggle" id="menuToggle">☰</button>
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <header class="top-nav">
@@ -289,7 +314,7 @@
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-title">📌 本页目录</div>
         <nav class="sidebar-nav">
-            <a href="#upcoming" class="active">📅 即将开始</a>
+            <a href="#activities" class="active">📅 活动</a>
         </nav>
         <div class="sidebar-footer">v1.0 · 像素攻略站</div>
     </aside>
@@ -298,18 +323,49 @@
 
         <div class="page-title">
             <h1>🎯 活动</h1>
-            <p>即将开始 · 敬请期待</p>
+            <p>进行中 · 即将开始</p>
         </div>
 
-        <!-- 即将开始 -->
-        <h2 style="font-size:20px; color:var(--accent-gold); text-shadow:var(--text-shadow-enabled); border-bottom:3px solid var(--border-color); padding-bottom:8px; margin-bottom:16px;" id="upcoming">📅 即将开始</h2>
+        <h2 style="font-size:20px; color:var(--accent-gold); text-shadow:var(--text-shadow-enabled); border-bottom:3px solid var(--border-color); padding-bottom:8px; margin-bottom:16px;" id="activities">📅 活动</h2>
+
         <div class="activity-grid">
-            <div class="activity-card">
+
+            <!-- ===== 选梅大赛卡片 ===== -->
+            <div class="activity-card" style="cursor:default;">
                 <span class="icon">🏆</span>
                 <h3>选梅大赛</h3>
-                <p>上传你的作品，让大家投票！每人可投5票，图片格式 JPG/PNG/WebP，最大 2MB。</p>
-                <span class="status soon">即将开启</span>
+                <p>投稿期：2026.08.15 — 08.18<br>投票期：2026.08.20 — 08.22</p>
+                <span class="status soon" id="cardStatus">即将开启</span>
+
+                <!-- 三个按键 -->
+                <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+                    <button class="card-tab-btn active" data-target="schedule" style="flex:1;min-width:70px;background:var(--btn-bg);border:3px solid var(--border-color);color:var(--btn-text);font-family:inherit;font-size:12px;padding:6px 10px;cursor:pointer;box-shadow:inset -2px -2px 0 #3a1a12,inset 2px 2px 0 #c06a5a;text-shadow:none;border-radius:4px;transition:0.05s linear;">📅 赛程</button>
+                    <button class="card-tab-btn" data-target="rules" style="flex:1;min-width:70px;background:var(--bg-card);border:3px solid var(--border-color);color:var(--text-secondary);font-family:inherit;font-size:12px;padding:6px 10px;cursor:pointer;box-shadow:inset -2px -2px 0 #0a1a2a,inset 2px 2px 0 #3a4a6a;text-shadow:none;border-radius:4px;transition:0.05s linear;">📋 规则</button>
+                    <button class="card-tab-btn" data-target="vote" style="flex:1;min-width:70px;background:var(--bg-card);border:3px solid var(--border-color);color:var(--text-secondary);font-family:inherit;font-size:12px;padding:6px 10px;cursor:pointer;box-shadow:inset -2px -2px 0 #0a1a2a,inset 2px 2px 0 #3a4a6a;text-shadow:none;border-radius:4px;transition:0.05s linear;">🗳️ 投票</button>
+                </div>
+
+                <!-- 展开内容 - 赛程 -->
+                <div class="card-expand" id="cardSchedule">
+                    <span class="highlight">📥 投稿期：</span>2026.08.15 — 2026.08.18 17:00<br>
+                    <span class="highlight">🗳️ 投票期：</span>2026.08.20 — 2026.08.22 17:00<br>
+                    <span class="highlight">🏆 结果公示：</span>2026.08.24 起公示3个工作日
+                </div>
+
+                <!-- 展开内容 - 规则（默认隐藏） -->
+                <div class="card-expand" id="cardRules" style="display:none;">
+                    <span class="highlight">📋 投稿规则</span><br>
+                    • 小红书发帖带tag <span class="highlight">#恋与丘丘彻 #选梅大赛</span><br>
+                    • 提交1张游戏内「参赛梅」截图，评论中备注游戏UID<br>
+                    • 每位玩家仅限1个有效作品<br><br>
+                    <span class="highlight">🗳️ 评选规则</span><br>
+                    • 每位用户拥有 <span class="highlight">1票</span>，不可撤回<br>
+                    • 得票数前5名获得特殊奖励<br><br>
+                    <span class="highlight">⚠️ 注意事项</span><br>
+                    • 严禁盗用、抄袭他人作品<br>
+                    • 严禁恶意刷票，违者取消资格
+                </div>
             </div>
+
         </div>
 
         <footer class="footer">
@@ -326,25 +382,21 @@
     </main>
 
     <script>
+        // ===== 欢迎弹窗 =====
         (function() {
-            // 欢迎弹窗
             const modal = document.getElementById('welcomeModal');
             const acceptBtn = document.getElementById('welcomeAccept');
             const rejectBtn = document.getElementById('welcomeReject');
-
             const hasAccepted = localStorage.getItem('n109_welcome_accepted');
-
             if (!hasAccepted) {
                 modal.classList.add('open');
                 document.body.style.overflow = 'hidden';
             }
-
             acceptBtn.addEventListener('click', function() {
                 localStorage.setItem('n109_welcome_accepted', 'true');
                 modal.classList.remove('open');
                 document.body.style.overflow = '';
             });
-
             rejectBtn.addEventListener('click', function() {
                 window.close();
                 if (!window.closed) {
@@ -360,12 +412,13 @@
                     document.body.innerHTML = '<div style="text-align:center;padding:20px;">👋 已退出<br><span style="font-size:14px;color:#c9b8a8;margin-top:16px;display:block;">你可以关闭此标签页</span></div>';
                 }
             });
-
             modal.addEventListener('click', function(e) {
                 if (e.target === this) { /* 不做任何事 */ }
             });
+        })();
 
-            // 主题切换
+        // ===== 主题 & 侧边栏 =====
+        (function() {
             const themeBtn = document.getElementById('themeToggle');
             const current = localStorage.getItem('pixel-theme');
             if (current === 'light') document.documentElement.classList.add('light-mode');
@@ -374,8 +427,6 @@
                 html.classList.toggle('light-mode');
                 localStorage.setItem('pixel-theme', html.classList.contains('light-mode') ? 'light' : 'dark');
             });
-
-            // 侧边栏
             const menuToggle = document.getElementById('menuToggle');
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
@@ -393,40 +444,37 @@
                         overlay.classList.remove('open'); }
                 });
             });
-
-            // 侧边栏高亮
-            const sections = [
-                { id: 'upcoming', link: document.querySelector('.sidebar-nav a[href="#upcoming"]') }
-            ];
-            let timer = null;
-            window.addEventListener('scroll', function() {
-                if (timer) return;
-                timer = setTimeout(function() {
-                    let activeId = 'upcoming';
-                    let minDist = Infinity;
-                    sections.forEach(function(item) {
-                        const el = document.getElementById(item.id);
-                        if (el) {
-                            const rect = el.getBoundingClientRect();
-                            if (rect.top < 300 && rect.top > -300) {
-                                const dist = Math.abs(rect.top);
-                                if (dist < minDist) { minDist = dist;
-                                    activeId = item.id; }
-                            }
-                        }
-                    });
-                    sections.forEach(function(item) {
-                        if (item.link) {
-                            item.link.classList.toggle('active', item.id === activeId);
-                        }
-                    });
-                    timer = null;
-                }, 100);
-            });
-            setTimeout(function() {
-                document.querySelector('.sidebar-nav a[href="#upcoming"]')?.classList.add('active');
-            }, 300);
         })();
+
+        // ===== 三个按键切换 =====
+        document.querySelectorAll('.card-tab-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const target = this.dataset.target;
+
+                // 切换按钮样式
+                document.querySelectorAll('.card-tab-btn').forEach(function(b) {
+                    b.style.background = 'var(--bg-card)';
+                    b.style.color = 'var(--text-secondary)';
+                    b.style.boxShadow = 'inset -2px -2px 0 #0a1a2a, inset 2px 2px 0 #3a4a6a';
+                });
+                this.style.background = 'var(--btn-bg)';
+                this.style.color = 'var(--btn-text)';
+                this.style.boxShadow = 'inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a';
+
+                // 点击「投票」→ 跳转到 contest.html
+                if (target === 'vote') {
+                    window.location.href = 'contest.html';
+                    return;
+                }
+
+                // 切换展开内容（赛程 / 规则）
+                document.querySelectorAll('.card-expand').forEach(function(el) {
+                    el.style.display = 'none';
+                });
+                var targetEl = document.getElementById('card' + target.charAt(0).toUpperCase() + target.slice(1));
+                if (targetEl) targetEl.style.display = 'block';
+            });
+        });
     </script>
 
 </body>

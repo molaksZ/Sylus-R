@@ -5,53 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>攻略 · N109 攻略站</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <!-- Default Statcounter code for My wiki https://wiki.n109.vip -->
+    <script type="text/javascript">
+    var sc_project=13342215; 
+    var sc_invisible=1; 
+    var sc_security="1113367e"; 
+    </script>
+    <script type="text/javascript"
+    src="https://www.statcounter.com/counter/counter.js" async></script>
+    <noscript><div class="statcounter"><a title="Web Analytics Made Easy -
+    Statcounter" href="https://statcounter.com/" target="_blank"><img
+    class="statcounter" src="https://c.statcounter.com/13342215/0/1113367e/1/"
+    alt="Web Analytics Made Easy - Statcounter"
+    referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+    <!-- End of Statcounter Code -->
     <style>
         /* ========== 主题变量 ========== */
         :root {
+            /* 层次感优化 - 深色模式 */
             --bg-page: #1a2633;
-            --bg-card: #263340;
+            --bg-card: #2a3a4a;
             --bg-nav: #0f1a24;
             --bg-sidebar: #0f1a24;
-            --bg-right: #1e2c3a;
+            --bg-right: #223240;
+            --border-color: #4a6a8a;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 0 0 var(--border-color);
+            --gap-section: 36px;
+
             --text-primary: #f5e6d3;
             --text-secondary: #c9b8a8;
             --text-heading: #f7e8d0;
             --accent-gold: #e8b84c;
             --accent-orange: #d98c3a;
             --accent-red: #b84a3a;
-            --border-color: #5c3a21;
             --shadow-color: #1a0e08;
             --btn-bg: #b84a3a;
             --btn-text: #f5e6d3;
             --text-shadow-enabled: 2px 2px 0 var(--shadow-color);
             --sidebar-width: 180px;
             --topnav-height: 60px;
-            --dot-pattern: radial-gradient(circle, rgba(200,180,160,0.05) 1px, transparent 1px);
-            --card-shadow: 0 4px 0 0 var(--border-color);
-            --font-base: 17px;
-            --font-small: 14px;
-            --nav-font-pc: 16px;
-            --nav-font-mobile: 13px;
+            --dot-pattern: radial-gradient(circle, rgba(200, 180, 160, 0.05) 1px, transparent 1px);
+            --right-title-bg: rgba(0, 0, 0, 0.45);
+            --font-size-base: 18px;
+            --main-padding-top: 32px;
+            --nav-font-pc: 17px;
+            --nav-font-mobile: 14px;
         }
         .light-mode {
-            --bg-page: #f2ebe0;
-            --bg-card: #ffffff;
-            --bg-nav: #e6dccc;
-            --bg-sidebar: #e6dccc;
-            --bg-right: #f5efe8;
+            /* 主色 (60%) - 淡紫灰 + 米白 */
+            --bg-page: #f0eef5;
+            --bg-card: #fcfaf8;
+            --bg-nav: #fcfaf8;
+            --bg-sidebar: #fcfaf8;
+            --bg-right: #f5f2f0;
+            --border-color: #c4d0c8;
+            --card-shadow: 0 4px 16px rgba(180, 190, 180, 0.12), 0 2px 0 0 var(--border-color);
+            --right-title-bg: rgba(196, 208, 200, 0.30);
+
             --text-primary: #2c241c;
-            --text-secondary: #5a4e42;
+            --text-secondary: #6a5e52;
             --text-heading: #1a1a1a;
-            --accent-gold: #b88a3a;
-            --accent-orange: #c47a2a;
-            --accent-red: #a03a2a;
-            --border-color: #b8a898;
-            --shadow-color: transparent;
-            --btn-bg: #a03a2a;
-            --btn-text: #f5e6d3;
+            --accent-gold: #c4a86a;
+            --accent-orange: #b8985a;
+            --accent-red: #c4d0c8;
+            --shadow-color: rgba(180, 190, 180, 0.15);
+            --btn-bg: #c4a86a;
+            --btn-text: #fcfaf8;
             --text-shadow-enabled: none;
-            --card-shadow: 0 4px 0 0 var(--border-color);
-            --dot-pattern: radial-gradient(circle, rgba(120,100,80,0.08) 1px, transparent 1px);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.25s, color 0.25s, border 0.25s, box-shadow 0.25s; image-rendering: pixelated; }
@@ -59,13 +79,21 @@
             font-family: 'Press Start 2P', 'Courier New', monospace;
             background: var(--bg-page);
             color: var(--text-primary);
-            font-size: var(--font-base);
+            font-size: var(--font-size-base);
             line-height: 1.9;
             min-height: 100vh;
             padding-top: var(--topnav-height);
             padding-left: var(--sidebar-width);
             background-image: var(--dot-pattern);
             background-size: 20px 20px;
+            background-image: var(--dot-pattern), url('images/bg-body.jpg');
+            background-size: 20px 20px, cover;
+            background-attachment: fixed, fixed;
+            background-position: 0 0, center center;
+            background-blend-mode: normal, overlay;
+        }
+        .light-mode body {
+            background-image: var(--dot-pattern), url('images/bg-body-light.jpg');
         }
         a { color: var(--accent-gold); text-decoration: none; }
         a:hover { color: var(--accent-orange); }
@@ -130,7 +158,7 @@
         .main-content { padding: 20px 28px 30px 28px; max-width: 1200px; margin: 0 auto; }
         .page-title { margin-bottom: 28px; border-bottom: 4px solid var(--border-color); padding-bottom: 14px; }
         .page-title h1 { font-size: 28px; text-shadow: var(--text-shadow-enabled); color: var(--accent-gold); }
-        .page-title p { font-size: var(--font-small); color: var(--text-secondary); margin-top: 6px; }
+        .page-title p { font-size: 14px; color: var(--text-secondary); margin-top: 6px; }
 
         .guide-module {
             margin-bottom: 8px;
@@ -470,6 +498,7 @@
             <a href="#farm">🌱 农场</a>
             <a href="#fishing">🎣 钓鱼</a>
             <a href="#mine">💥 扫雷</a>
+            <a href="#gomoku">♟️ 技能五子棋</a>
             <a href="#sheep">🐑 数羊</a>
             <a href="#race">🏎️ 赛车</a>
             <a href="#book">📖 答案之书</a>
@@ -483,7 +512,7 @@
 
         <div class="page-title">
             <h1>📝 攻略</h1>
-            <p>农场 · 钓鱼 · 扫雷 · 数羊 · 赛车 · 答案之书 · 黑市 · 经济</p>
+            <p>农场 · 钓鱼 · 扫雷 · 技能五子棋 · 数羊 · 赛车 · 答案之书 · 黑市 · 经济</p>
         </div>
 
         <!-- ===== 农场 ===== -->
@@ -634,9 +663,20 @@
                     <button class="sub-header" data-sub="mineGuideBody"><span>🚀 小技巧</span><span class="arrow">▶</span></button>
                     <div class="sub-body" id="mineGuideBody">
                         <div class="guide-content">
+                            <p><span class="highlight">如何判断周围8格是否有雷：</span></p>
+                            <p>当你翻开一个格子后，上面显示的数字 <span class="highlight">(1-8)</span> 表示它周围 <span class="highlight">相邻的8个格子</span> 中隐藏的地雷数量。</p>
+                            <ul>
+                                <li>数字 <span class="highlight">1</span> 表示周围8格中有 <span class="highlight">1颗雷</span></li>
+                                <li>数字 <span class="highlight">2</span> 表示周围8格中有 <span class="highlight">2颗雷</span></li>
+                                <li>数字 <span class="highlight">3</span> 表示周围8格中有 <span class="highlight">3颗雷</span></li>
+                                <li>以此类推，数字 <span class="highlight">8</span> 表示周围8格全是雷</li>
+                            </ul>
+                            <div style="margin:12px 0;padding:12px;background:var(--bg-card);border:2px solid var(--border-color);text-align:center;border-radius:4px;">
+                                <p style="font-size:14px;color:var(--text-secondary);">📷 <span class="highlight">图片待补充</span></p>
+                                <p style="font-size:12px;color:var(--text-secondary);opacity:0.6;">示意图：数字与周围8格的关系</p>
+                            </div>
+                            <p><span class="highlight">推理技巧：</span>结合多个数字的交集，可以精确推断出哪些格子是雷，哪些是安全的。先标记确认的雷（右键/长按），再翻开确定安全的格子。</p>
                             <p><span class="highlight">开局策略：</span>优先点击角落和边缘，降低踩雷概率。</p>
-                            <p><span class="highlight">进阶技巧：</span>利用数字 1-8 推理未翻开格子的地雷分布。</p>
-                            <p><span class="highlight">标记法：</span>确定是雷的格子先标记，避免后续误触。</p>
                         </div>
                     </div>
                 </div>
@@ -656,6 +696,111 @@
                 </div>
             </div>
         </div>
+
+       <!-- ===== 技能五子棋（新增） ===== -->
+<div class="guide-module" id="gomoku">
+    <button class="module-header" data-module="gomokuBody">
+        <span>♟️ 技能五子棋</span>
+        <span class="arrow" id="gomokuArrow">▶</span>
+    </button>
+    <div class="module-body" id="gomokuBody">
+        <!-- 规则 -->
+        <div class="sub-section">
+            <button class="sub-header" data-sub="gomokuRuleBody"><span>📋 规则</span><span class="arrow">▶</span></button>
+            <div class="sub-body" id="gomokuRuleBody">
+                <div class="guide-content">
+                    <p>「技能五子棋」于 <span class="highlight">2026.08.11</span> 上线【客厅】场景。</p>
+                    <ul>
+                        <li><span class="highlight">联机对战</span> — 与在线玩家实时对弈</li>
+                        <li><span class="highlight">房间观战</span> — 进入他人房间观看对局</li>
+                        <li><span class="highlight">房间弹幕</span> — 观战时发送弹幕互动</li>
+                        <li><span class="highlight">催促语音</span> — 对局中催促对方落子（趣味语音）</li>
+                        <li><span class="highlight">秦彻单机模式</span> — 与秦彻AI对战</li>
+                        <li><span class="highlight">排位赛玩法</span> — 段位系统，匹配实力相当的对手</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 技能系统 -->
+        <div class="sub-section">
+            <button class="sub-header" data-sub="gomokuSkillBody"><span>⚡ 技能系统</span><span class="arrow">▶</span></button>
+            <div class="sub-body" id="gomokuSkillBody">
+                <div class="guide-content">
+                    <p>对局中可消耗技能点打出特殊牌，改变棋局局势。技能点消耗分为 <span class="highlight">1/2/3</span> 三档，手牌上限 <span class="highlight">3 张</span>。</p>
+                    <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px;">
+                        <div style="background:var(--bg-page);border:2px solid var(--border-color);padding:10px 12px;border-radius:4px;">
+                            <span class="highlight">🌪️ 飞沙走石</span><br>
+                            <span style="color:var(--text-secondary);font-size:12px;">消耗 1 点 · 移除对手一颗棋子</span>
+                        </div>
+                        <div style="background:var(--bg-page);border:2px solid var(--border-color);padding:10px 12px;border-radius:4px;">
+                            <span class="highlight">🧊 静如止水</span><br>
+                            <span style="color:var(--text-secondary);font-size:12px;">消耗 2 点 · 冻结对手一回合（对方照常攒点，下回合免疫冻结）</span>
+                        </div>
+                        <div style="background:var(--bg-page);border:2px solid var(--border-color);padding:10px 12px;border-radius:4px;">
+                            <span class="highlight">⏳ 时光倒流</span><br>
+                            <span style="color:var(--text-secondary);font-size:12px;">消耗 2 点 · 双方各退一步</span>
+                        </div>
+                        <div style="background:var(--bg-page);border:2px solid var(--border-color);padding:10px 12px;border-radius:4px;">
+                            <span class="highlight">🧹 保洁上门</span><br>
+                            <span style="color:var(--text-secondary);font-size:12px;">消耗 3 点 · 清掉一整行或一整列（双方子都清，金钟罩除外）</span>
+                        </div>
+                        <div style="background:var(--bg-page);border:2px solid var(--border-color);padding:10px 12px;border-radius:4px;">
+                            <span class="highlight">💪 力拔山兮</span><br>
+                            <span style="color:var(--text-secondary);font-size:12px;">消耗 3 点 · 清空全场（自己的也没了），对手补偿 3 点</span>
+                        </div>
+                        <div style="background:var(--bg-page);border:2px solid var(--border-color);padding:10px 12px;border-radius:4px;">
+                            <span class="highlight">🐦‍⬛ 乌鸦叼走</span><br>
+                            <span style="color:var(--text-secondary);font-size:12px;">消耗 1 点 · 小梅叼走对手一颗子，丢到随机空格</span>
+                        </div>
+                        <div style="background:var(--bg-page);border:2px solid var(--border-color);padding:10px 12px;border-radius:4px;">
+                            <span class="highlight">🛡️ 金钟罩</span><br>
+                            <span style="color:var(--text-secondary);font-size:12px;">消耗 1 点 · 给自己一颗子镀红宝石，免疫一切移除/挪动</span>
+                        </div>
+                        <div style="background:var(--bg-page);border:2px solid var(--border-color);padding:10px 12px;border-radius:4px;">
+                            <span class="highlight">🔄 风水轮流转</span><br>
+                            <span style="color:var(--text-secondary);font-size:12px;">消耗 3 点 · 棋盘顺时针转 90°，双方棋子全部易主</span>
+                        </div>
+                        <div style="background:var(--bg-page);border:2px solid var(--border-color);padding:10px 12px;border-radius:4px;">
+                            <span class="highlight">🔄 黑市调包</span><br>
+                            <span style="color:var(--text-secondary);font-size:12px;">消耗 2 点 · 对手一颗子和自己一颗子互换位置</span>
+                        </div>
+                        <div style="background:var(--bg-page);border:2px solid var(--border-color);padding:10px 12px;border-radius:4px;">
+                            <span class="highlight">🚫 宵禁</span><br>
+                            <span style="color:var(--text-secondary);font-size:12px;">消耗 1 点 · 在空格立碑，三回合内双方都不能落这格</span>
+                        </div>
+                        <div style="background:var(--bg-page);border:2px solid var(--border-color);padding:10px 12px;border-radius:4px;">
+                            <span class="highlight">🕵️ 卧底</span><br>
+                            <span style="color:var(--text-secondary);font-size:12px;">消耗 3 点 · 下一颗子伪装成对方颜色，两回合后显形</span>
+                        </div>
+                        <div style="background:var(--bg-page);border:2px solid var(--border-color);padding:10px 12px;border-radius:4px;border-color:var(--accent-gold);">
+                            <span class="highlight">🔨 镶在桌面</span><br>
+                            <span style="color:var(--text-secondary);font-size:12px;">消耗 2 点 · <span class="highlight">反制牌</span> 攥在手里，对手掀桌/转盘时弹出按住，牌和点数作废</span>
+                        </div>
+                    </div>
+                    <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);opacity:0.7;">💡 技能点消耗分 1/2/3 三档，每档 4 张牌。手牌上限 3 张，满了不能再抽。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 成就 -->
+        <div class="sub-section">
+            <button class="sub-header" data-sub="gomokuAchvBody"><span>🏅 成就</span><span class="arrow">▶</span></button>
+            <div class="sub-body" id="gomokuAchvBody">
+                <div class="guide-content">
+                    <ul>
+                        <li><span class="highlight">又唱又跳</span> — 技能五子棋赢20局</li>
+                        <li><span class="highlight">力拔山兮</span> — 技能五子棋赢50局</li>
+                        <li><span class="highlight">你们不要再打了啦</span> — 技能五子棋平局20次</li>
+                        <li><span class="highlight">在下技能五</span> — 技能五子棋累计打出100张牌</li>
+                        <li><span class="highlight">小臭棋篓</span> — 技能五子棋输给秦彻50局</li>
+                    </ul>
+                    <p style="margin-top:8px;font-size:13px;color:var(--text-secondary);opacity:0.7;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
         <!-- ===== 数羊 ===== -->
         <div class="guide-module" id="sheep">
@@ -714,18 +859,10 @@
                             <p>赛车小游戏 N109 Boulevard 在暗点修车坊进行。</p>
                             <ul>
                                 <li>方向键 / WASD 控制赛车移动。</li>
-                                <li>避开障碍物，收集赛道上的加速道具。</li>
+                                <li>避开障碍物。</li>
                                 <li>完成一圈即为胜利，记录最佳圈速。</li>
                             </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="sub-section">
-                    <button class="sub-header" data-sub="raceGuideBody"><span>🚀 小技巧</span><span class="arrow">▶</span></button>
-                    <div class="sub-body" id="raceGuideBody">
-                        <div class="guide-content">
-                            <p><span class="highlight">提前预判：</span>障碍物出现前会有提示，提前变道躲避。</p>
-                            <p><span class="highlight">道具利用：</span>加速道具尽量在直道上使用，弯道提前减速。</p>
+                            <p style="margin-top:8px;font-size:13px;color:var(--text-secondary);opacity:0.7;">⚠️ 游戏内具体机制以实际版本为准。</p>
                         </div>
                     </div>
                 </div>
@@ -978,6 +1115,7 @@
                 { id: 'farm', link: document.querySelector('.sidebar-nav a[href="#farm"]') },
                 { id: 'fishing', link: document.querySelector('.sidebar-nav a[href="#fishing"]') },
                 { id: 'mine', link: document.querySelector('.sidebar-nav a[href="#mine"]') },
+                { id: 'gomoku', link: document.querySelector('.sidebar-nav a[href="#gomoku"]') },
                 { id: 'sheep', link: document.querySelector('.sidebar-nav a[href="#sheep"]') },
                 { id: 'race', link: document.querySelector('.sidebar-nav a[href="#race"]') },
                 { id: 'book', link: document.querySelector('.sidebar-nav a[href="#book"]') },
@@ -1113,7 +1251,6 @@
             { id: 'lk24', name: '达氏鳇', star: 3, map: '湖', when: '白天', sell: 400, spec: '秦彻专属' },
             { id: 'lk23', name: '盲眼洞穴鱼', star: 3, map: '湖', when: '夜间', sell: 400 },
             { id: 'lk25', name: '黄金河虎', star: 3, map: '湖', when: '夜间', sell: 400 },
-            // 以下已修正为海
             { id: 'lk32', name: '阿根廷红虾', star: 1, map: '海', when: '白天', sell: 20 },
             { id: 'lk33', name: '海鳌虾', star: 1, map: '海', when: '白天', sell: 20 },
             { id: 'lk34', name: '海白菜', star: 1, map: '海', when: '白天', sell: 20 },

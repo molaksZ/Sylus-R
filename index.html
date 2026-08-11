@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>N109 攻略站 · 首页</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <!-- Default Statcounter code for My wiki https://wiki.n109.vip -->
+    <script type="text/javascript">
+    var sc_project=13342215; 
+    var sc_invisible=1; 
+    var sc_security="1113367e"; 
+    </script>
+    <script type="text/javascript"
+    src="https://www.statcounter.com/counter/counter.js" async></script>
+    <noscript><div class="statcounter"><a title="Web Analytics Made Easy -
+    Statcounter" href="https://statcounter.com/" target="_blank"><img
+    class="statcounter" src="https://c.statcounter.com/13342215/0/1113367e/1/"
+    alt="Web Analytics Made Easy - Statcounter"
+    referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+    <!-- End of Statcounter Code -->
     <style>
         /* ===== 侧边栏登录按钮 ===== */
         .sidebar-login-btn {
@@ -117,18 +131,22 @@
 
         /* ========== 主题变量 ========== */
         :root {
+            /* 层次感优化 - 深色模式 */
             --bg-page: #1a2633;
-            --bg-card: rgba(38, 51, 64, 0.92);
-            --bg-nav: rgba(15, 26, 36, 0.95);
-            --bg-sidebar: rgba(15, 26, 36, 0.92);
-            --bg-right: rgba(30, 44, 58, 0.90);
+            --bg-card: #2a3a4a;
+            --bg-nav: #0f1a24;
+            --bg-sidebar: #0f1a24;
+            --bg-right: #223240;
+            --border-color: #4a6a8a;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 0 0 var(--border-color);
+            --gap-section: 36px;
+
             --text-primary: #f5e6d3;
             --text-secondary: #c9b8a8;
             --text-heading: #f7e8d0;
             --accent-gold: #e8b84c;
             --accent-orange: #d98c3a;
             --accent-red: #b84a3a;
-            --border-color: #5c3a21;
             --shadow-color: #1a0e08;
             --btn-bg: #b84a3a;
             --btn-text: #f5e6d3;
@@ -136,34 +154,39 @@
             --sidebar-width: 180px;
             --topnav-height: 60px;
             --dot-pattern: radial-gradient(circle, rgba(200, 180, 160, 0.05) 1px, transparent 1px);
-            --card-shadow: 0 4px 0 0 var(--border-color);
             --right-title-bg: rgba(0, 0, 0, 0.45);
             --font-size-base: 18px;
-            --gap-section: 32px;
             --main-padding-top: 32px;
             --nav-font-pc: 17px;
             --nav-font-mobile: 14px;
         }
-        .light-mode {
-            --bg-page: #efe8df;
-            --bg-card: rgba(255, 252, 248, 0.94);
-            --bg-nav: rgba(235, 225, 212, 0.96);
-            --bg-sidebar: rgba(235, 225, 212, 0.94);
-            --bg-right: rgba(248, 242, 234, 0.92);
+                .light-mode {
+            /* 主色 (60%) - 淡紫灰 + 米白 */
+            --bg-page: #f0eef5;
+            --bg-card: #fcfaf8;
+            --bg-nav: #fcfaf8;
+            --bg-sidebar: #fcfaf8;
+            --bg-right: #f5f2f0;
+
+            /* 辅助色 (30%) - 鼠尾草绿 */
+            --border-color: #c4d0c8;
+            --right-title-bg: rgba(196, 208, 200, 0.30);
+            --accent-red: #c4d0c8;
+            --shadow-dark: rgba(180, 190, 180, 0.15);
+            --shadow-light: rgba(240, 240, 235, 0.40);
+
+            /* 点缀色 (10%) - 香槟金 */
+            --accent-gold: #c4a86a;
+            --accent-orange: #b8985a;
+            --btn-bg: #c4a86a;
+            --btn-text: #fcfaf8;
+
+            /* 文字颜色 */
             --text-primary: #2c241c;
             --text-secondary: #6a5e52;
             --text-heading: #1a1a1a;
-            --accent-gold: #c4903a;
-            --accent-orange: #b87a2a;
-            --accent-red: #9a3a2a;
-            --border-color: #c8b8a8;
-            --shadow-color: rgba(80, 60, 40, 0.12);
-            --btn-bg: #9a3a2a;
-            --btn-text: #f5e6d3;
             --text-shadow-enabled: none;
-            --card-shadow: 0 6px 12px rgba(80, 60, 40, 0.10), 0 2px 0 0 var(--border-color);
-            --dot-pattern: radial-gradient(circle, rgba(120, 100, 80, 0.08) 1px, transparent 1px);
-            --right-title-bg: rgba(255, 248, 240, 0.75);
+            --card-shadow: 0 4px 16px rgba(180, 190, 180, 0.12), 0 2px 0 0 var(--border-color);
         }
 
         * {
@@ -739,25 +762,6 @@
             color: var(--accent-gold);
         }
 
-        /* 排行榜 */
-        #rubyRank,
-        #coinRank,
-        #sheepRank {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        #rubyRank li,
-        #coinRank li,
-        #sheepRank li {
-            font-size: 16px;
-            color: var(--text-secondary);
-            padding: 2px 0;
-            border-bottom: none;
-            display: flex;
-            align-items: center;
-        }
-
         /* ========== 底部 ========== */
         .footer {
             margin-top: 44px;
@@ -1108,22 +1112,22 @@
                 <!-- 四个入口卡片 -->
                 <section class="quick-grid" id="quick">
                     <div class="quick-card" onclick="location.href='guide.html'">
-                        <img src="https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/icon-guide.png" alt="新手引导" class="card-icon" />
+                        <img src="./image/guide.png" alt="新手引导" class="card-icon" />
                         <div class="label">新手引导</div>
                         <div class="desc">从零开始</div>
                     </div>
                     <div class="quick-card" onclick="location.href='gallery.html'">
-                        <img src="https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/icon-gallery.png" alt="图鉴" class="card-icon" />
+                        <img src="./image/gallery.png" alt="图鉴" class="card-icon" />
                         <div class="label">图鉴</div>
                         <div class="desc">服装·农场·渔场</div>
                     </div>
                     <div class="quick-card" onclick="location.href='tools.html'">
-                        <img src="https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/icon-tools.png" alt="攻略" class="card-icon" />
+                        <img src="./image/tools.png" alt="攻略" class="card-icon" />
                         <div class="label">攻略</div>
                         <div class="desc">农场·钓鱼·更多</div>
                     </div>
                     <div class="quick-card" id="countdownCard">
-                        <img src="https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/icon-birthday.png" alt="秦彻生日" class="card-icon" />
+                        <img src="./image/birthday.png" alt="秦彻生日" class="card-icon" />
                         <div class="label">秦彻生日</div>
                         <div class="countdown" id="birthdayCountdown">--</div>
                         <div class="desc">4月18日</div>
@@ -1182,19 +1186,22 @@
                     </ul>
                 </div>
 
+                <!-- ===== 更新日志（替换原排行榜） ===== -->
                 <div class="right-card">
-                    <h3>🏆 排行榜</h3>
-                    <ul id="rubyRank">
-                        <li>💎 玩家A：100</li>
-                        <li>💎 玩家B：80</li>
-                        <li>💎 玩家C：60</li>
+                 <h3>📝 更新日志</h3>
+                <ul>
+                <li>
+                     <span class="badge">🎮 游戏</span>
+                     <span style="font-size:14px; color:var(--text-secondary);">2026.08.11 「技能五子棋」上线【客厅】场景，联机对战、房间观战、房间弹幕、催促语音、和秦彻单机模式、排位赛玩法均已上线。</span>
+                        </li>
+                        <li>
+                            <span class="badge">📖 攻略</span>
+                            <span style="font-size:14px; color:var(--text-secondary);">2026.08.11 新增「技能五子棋」玩法攻略及5个相关成就；修正赛车小游戏描述；扫雷小游戏增加图文说明（图片待补充）。</span>
+                        </li>
                     </ul>
-                    <ul id="coinRank" style="margin-top:6px;">
-                        <li>🪙 玩家D：9999</li>
-                    </ul>
-                    <ul id="sheepRank" style="margin-top:6px;">
-                        <li>🐑 玩家E：50</li>
-                    </ul>
+                    <div style="margin-top:10px; text-align:right; font-size:13px;">
+                        <a href="changelog.html" style="color:var(--accent-gold);">查看全部更新 →</a>
+                    </div>
                 </div>
 
             </div>
@@ -1517,9 +1524,9 @@
         // 4. 主轮播
         // ============================================================
         const MAIN_CAROUSEL = [
-            { src: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/banner-activity1.jpg', alt: '活动1', link: 'activities.html' },
-            { src: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/banner-activity2.jpg', alt: '活动2', link: 'activities.html' },
-            { src: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/banner-activity3.jpg', alt: '活动3', link: 'activities.html' }
+            { src: './image/activity1.jpg', alt: '活动1', link: 'activities.html' },
+            { src: './image/activity2.jpg', alt: '活动2', link: 'activities.html' },
+            { src: './image/activity3.jpg', alt: '活动3', link: 'activities.html' }
         ];
         let mainIndex = 0,
             mainInterval = null;
@@ -1596,15 +1603,15 @@
         // 5. 双栏轮播
         // ============================================================
         const CONTEST_IMAGES = [
-            'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/contest-1.jpg',
-            'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/contest-2.jpg',
-            'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/contest-3.jpg'
+            './image/contest-1.jpg',
+            './image/contest-2.jpg',
+            './image/contest-3.jpg'
         ];
 
         const ART_IMAGES = [
-            'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/art-1.jpg',
-            'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/art-2.jpg',
-            'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/art-3.jpg'
+            './art/1.jpg',
+            './art/2.jpg',
+            './art/3.jpg'
         ];
 
         // ============================================================

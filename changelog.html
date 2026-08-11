@@ -5,21 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>更新日志 · N109 攻略站</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <!-- Default Statcounter code for My wiki https://wiki.n109.vip -->
+    <script type="text/javascript">
+    var sc_project=13342215; 
+    var sc_invisible=1; 
+    var sc_security="1113367e"; 
+    </script>
+    <script type="text/javascript"
+    src="https://www.statcounter.com/counter/counter.js" async></script>
+    <noscript><div class="statcounter"><a title="Web Analytics Made Easy -
+    Statcounter" href="https://statcounter.com/" target="_blank"><img
+    class="statcounter" src="https://c.statcounter.com/13342215/0/1113367e/1/"
+    alt="Web Analytics Made Easy - Statcounter"
+    referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+    <!-- End of Statcounter Code -->
     <style>
         /* ========== 主题变量 ========== */
         :root {
+            /* 层次感优化 - 深色模式 */
             --bg-page: #1a2633;
-            --bg-card: #263340;
+            --bg-card: #2a3a4a;
             --bg-nav: #0f1a24;
             --bg-sidebar: #0f1a24;
-            --bg-right: #1e2c3a;
+            --bg-right: #223240;
+            --border-color: #4a6a8a;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 0 0 var(--border-color);
+            --gap-section: 36px;
+
             --text-primary: #f5e6d3;
             --text-secondary: #c9b8a8;
+            --text-heading: #f7e8d0;
             --accent-gold: #e8b84c;
             --accent-orange: #d98c3a;
             --accent-red: #b84a3a;
-            --accent-dark: #8b5a2b;
-            --border-color: #5c3a21;
             --shadow-color: #1a0e08;
             --btn-bg: #b84a3a;
             --btn-text: #f5e6d3;
@@ -27,30 +45,35 @@
             --sidebar-width: 180px;
             --topnav-height: 60px;
             --dot-pattern: radial-gradient(circle, rgba(200,180,160,0.05) 1px, transparent 1px);
-            --card-shadow: 0 4px 0 0 var(--border-color);
-            --nav-font-pc: 16px;
-            --nav-font-mobile: 13px;
+            --right-title-bg: rgba(0, 0, 0, 0.45);
+            --font-size-base: 18px;
+            --main-padding-top: 32px;
+            --nav-font-pc: 17px;
+            --nav-font-mobile: 14px;
         }
         .light-mode {
-            --bg-page: #f2ebe0;
-            --bg-card: #ffffff;
-            --bg-nav: #e6dccc;
-            --bg-sidebar: #e6dccc;
-            --bg-right: #f5efe8;
+            /* 主色 (60%) - 淡紫灰 + 米白 */
+            --bg-page: #f0eef5;
+            --bg-card: #fcfaf8;
+            --bg-nav: #fcfaf8;
+            --bg-sidebar: #fcfaf8;
+            --bg-right: #f5f2f0;
+            --border-color: #c4d0c8;
+            --card-shadow: 0 4px 16px rgba(180, 190, 180, 0.12), 0 2px 0 0 var(--border-color);
+            --right-title-bg: rgba(196, 208, 200, 0.30);
+
             --text-primary: #2c241c;
-            --text-secondary: #5a4e42;
-            --accent-gold: #b88a3a;
-            --accent-orange: #c47a2a;
-            --accent-red: #a03a2a;
-            --accent-dark: #8b5a2b;
-            --border-color: #b8a898;
-            --shadow-color: transparent;
-            --btn-bg: #a03a2a;
-            --btn-text: #f5e6d3;
+            --text-secondary: #6a5e52;
+            --text-heading: #1a1a1a;
+            --accent-gold: #c4a86a;
+            --accent-orange: #b8985a;
+            --accent-red: #c4d0c8;
+            --shadow-color: rgba(180, 190, 180, 0.15);
+            --btn-bg: #c4a86a;
+            --btn-text: #fcfaf8;
             --text-shadow-enabled: none;
-            --card-shadow: 0 4px 0 0 var(--border-color);
-            --dot-pattern: radial-gradient(circle, rgba(120,100,80,0.08) 1px, transparent 1px);
         }
+
         * {
             margin: 0;
             padding: 0;
@@ -69,6 +92,14 @@
             padding-left: var(--sidebar-width);
             background-image: var(--dot-pattern);
             background-size: 20px 20px;
+            background-image: var(--dot-pattern), url('images/bg-body.jpg');
+            background-size: 20px 20px, cover;
+            background-attachment: fixed, fixed;
+            background-position: 0 0, center center;
+            background-blend-mode: normal, overlay;
+        }
+        .light-mode body {
+            background-image: var(--dot-pattern), url('images/bg-body-light.jpg');
         }
         a { color: var(--accent-gold); text-decoration: none; }
         a:hover { color: var(--accent-orange); }
@@ -482,6 +513,7 @@
             background: #8a4a4a;
         }
 
+        /* ========== 响应式 ========== */
         @media (max-width: 820px) {
             body { padding-left: 0; padding-top: 70px; }
             .top-nav { padding: 0 12px; height: auto; min-height: 56px; gap: 6px; }
@@ -576,10 +608,10 @@
         <div class="top-nav-links">
             <a href="index.html">首页</a>
             <a href="guide.html">新手引导</a>
-            <a href="gallery.html">游戏图鉴</a>
+            <a href="gallery.html">图鉴</a>
             <a href="changelog.html" class="active">更新日志</a>
             <a href="tools.html">攻略</a>
-            <a href="about.html">权责说明</a>
+            <a href="about.html">权责</a>
         </div>
         <button class="theme-toggle" id="themeToggle">🌓 切换</button>
     </header>
@@ -609,6 +641,34 @@
                 <span class="arrow open" id="siteArrow">▶</span>
             </button>
             <div class="section-body open" id="siteBody">
+
+                <!-- 2026.08.11 -->
+                <div class="log-entry">
+                    <div class="date">📅 2026.08.11 <span class="badge-version">🎮 新游戏</span></div>
+                    <ul>
+                        <li>「技能五子棋」上线【客厅】场景</li>
+                        <li>联机对战、房间观战、房间弹幕、催促语音、和秦彻单机模式、排位赛玩法均已上线</li>
+                    </ul>
+                </div>
+
+                <!-- 2026.08.10 -->
+                <div class="log-entry">
+                    <div class="date">📅 2026.08.10 <span class="badge-version">🌐 公共区</span></div>
+                    <ul>
+                        <li>「拼豆本」开放给公共区，在登录区新增公共区，目前链接了「拼豆本」和「恋与丘丘彻攻略站」</li>
+                        <li>优化了注册工作流</li>
+                    </ul>
+                </div>
+
+                <!-- 2026.08.09 -->
+                <div class="log-entry">
+                    <div class="date">📅 2026.08.09 <span class="badge-version">🧩 小工具</span></div>
+                    <ul>
+                        <li>小梅严肃拥有声音</li>
+                        <li>「拼豆本」小工具上线小梅手账本，可以把自己喜欢的图变成拼豆图纸了！</li>
+                        <li>支持拼豆色板切换、单色显示及导出、颜色删除和替换，导出为超高清图纸</li>
+                    </ul>
+                </div>
 
                 <!-- 2026.08.07 -->
                 <div class="log-entry">
@@ -871,20 +931,58 @@
             </div>
         </div>
 
-        <!-- ========================================================== -->
-        <!-- 板块二：攻略更新（预留） -->
-        <!-- ========================================================== -->
-        <div class="section-block" id="guide-updates">
-            <button class="section-header" data-toggle="guideBody">
-                <span>📖 攻略更新</span>
-                <span class="arrow" id="guideArrow">▶</span>
-            </button>
-            <div class="section-body" id="guideBody">
-                <div style="padding: 20px 0; text-align: center; color: var(--text-secondary); font-size: 16px;">
-                    📭 暂无攻略更新，敬请期待
-                </div>
-            </div>
+      <!-- ========================================================== -->
+<!-- 板块二：攻略更新 -->
+<!-- ========================================================== -->
+<div class="section-block" id="guide-updates">
+    <button class="section-header" data-toggle="guideBody">
+        <span>📖 攻略更新</span>
+        <span class="arrow" id="guideArrow">▶</span>
+    </button>
+    <div class="section-body" id="guideBody">
+
+        <!-- 2026.08.12 攻略站大更新 -->
+        <div class="log-entry">
+            <div class="date">📅 2026.08.12 <span class="badge-version">📝 攻略站大更新</span></div>
+            <ul>
+                <li><span class="highlight">配色方案调整</span> — 全站浅色模式更换为新配色体系，深色模式下背景与卡片色差拉大，层次感增强</li>
+                <li><span class="highlight">首页功能调整</span> — 右侧栏「排行榜」替换为「更新日志」模块，展示最近两条更新</li>
+                <li><span class="highlight">权责说明页更新</span> — 「一些想法」板块新增今日（8.11-8.12）更新记录</li>
+                <li><span class="highlight">图鉴页新增成就</span> — 新增「技能五子棋」5个相关成就</li>
+                <li><span class="highlight">攻略页内容扩充</span> — 新增「技能五子棋」攻略模块；扫雷增加「如何判断周围8格」图文说明（图片待补）；修正赛车描述</li>
+                <li><span class="highlight">新手引导页更新</span> — 客厅场景增加「技能五子棋」说明；所有场景描述分行显示</li>
+                <li><span class="highlight">活动页与投票通道</span> — 选梅大赛卡片内设三个按键（赛程/规则/投票），点击投票跳转独立页面</li>
+                <li><span class="highlight">新增投票通道页面</span> — 独立投票入口，包含奖项展示、9:16瀑布流作品展示、每人1票制投票、点击图片查看大图、管理员后台等功能</li>
+                <li><span class="highlight">更新日志页新增条目</span> — 新增3条游戏更新（8.9/8.10/8.11）及2条攻略更新</li>
+                <li><span class="highlight">统计代码部署</span> — 全站所有页面嵌入 StatCounter 统计代码</li>
+                <li><span class="highlight">涉及文件</span> — 共9个HTML文件，其中 <code>contest.html</code> 为新建</li>
+            </ul>
         </div>
+
+        <!-- 2026.08.11 -->
+        <div class="log-entry">
+            <div class="date">📅 2026.08.11 <span class="badge-version">📝 新增</span></div>
+            <ul>
+                <li>新增「技能五子棋」玩法攻略及5个相关成就</li>
+                <li>修正赛车小游戏描述（删除不实内容）</li>
+                <li>扫雷小游戏增加图文说明（图片待补充）</li>
+            </ul>
+        </div>
+
+        <!-- 2026.08.07 -->
+        <div class="log-entry">
+            <div class="date">📅 2026.08.07 <span class="badge-version">📝 更新</span></div>
+            <ul>
+                <li>更新钓鱼图鉴数据（112种）</li>
+                <li>修正多处鱼类名称错误</li>
+            </ul>
+        </div>
+
+        <div style="padding: 10px 0 4px; text-align: center; color: var(--text-secondary); font-size: 14px; opacity:0.6;">
+            📭 更多攻略更新等待补充
+        </div>
+    </div>
+</div>
 
         <!-- ===== 底部 ===== -->
         <footer class="footer">

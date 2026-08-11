@@ -5,53 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>图鉴 · N109 攻略站</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <!-- Default Statcounter code for My wiki https://wiki.n109.vip -->
+    <script type="text/javascript">
+    var sc_project=13342215; 
+    var sc_invisible=1; 
+    var sc_security="1113367e"; 
+    </script>
+    <script type="text/javascript"
+    src="https://www.statcounter.com/counter/counter.js" async></script>
+    <noscript><div class="statcounter"><a title="Web Analytics Made Easy -
+    Statcounter" href="https://statcounter.com/" target="_blank"><img
+    class="statcounter" src="https://c.statcounter.com/13342215/0/1113367e/1/"
+    alt="Web Analytics Made Easy - Statcounter"
+    referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+    <!-- End of Statcounter Code -->
     <style>
         /* ========== 主题变量 ========== */
         :root {
+            /* 层次感优化 - 深色模式 */
             --bg-page: #1a2633;
-            --bg-card: #263340;
+            --bg-card: #2a3a4a;
             --bg-nav: #0f1a24;
             --bg-sidebar: #0f1a24;
-            --bg-right: #1e2c3a;
+            --bg-right: #223240;
+            --border-color: #4a6a8a;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 0 0 var(--border-color);
+            --gap-section: 36px;
+
             --text-primary: #f5e6d3;
             --text-secondary: #c9b8a8;
             --text-heading: #f7e8d0;
             --accent-gold: #e8b84c;
             --accent-orange: #d98c3a;
             --accent-red: #b84a3a;
-            --border-color: #5c3a21;
             --shadow-color: #1a0e08;
             --btn-bg: #b84a3a;
             --btn-text: #f5e6d3;
             --text-shadow-enabled: 2px 2px 0 var(--shadow-color);
             --sidebar-width: 180px;
             --topnav-height: 60px;
-            --dot-pattern: radial-gradient(circle, rgba(200,180,160,0.05) 1px, transparent 1px);
-            --card-shadow: 0 4px 0 0 var(--border-color);
-            --font-base: 17px;
-            --font-small: 14px;
-            --nav-font-pc: 16px;
-            --nav-font-mobile: 13px;
+            --dot-pattern: radial-gradient(circle, rgba(200, 180, 160, 0.05) 1px, transparent 1px);
+            --right-title-bg: rgba(0, 0, 0, 0.45);
+            --font-size-base: 18px;
+            --main-padding-top: 32px;
+            --nav-font-pc: 17px;
+            --nav-font-mobile: 14px;
         }
         .light-mode {
-            --bg-page: #f2ebe0;
-            --bg-card: #ffffff;
-            --bg-nav: #e6dccc;
-            --bg-sidebar: #e6dccc;
-            --bg-right: #f5efe8;
+            /* 主色 (60%) - 淡紫灰 + 米白 */
+            --bg-page: #f0eef5;
+            --bg-card: #fcfaf8;
+            --bg-nav: #fcfaf8;
+            --bg-sidebar: #fcfaf8;
+            --bg-right: #f5f2f0;
+            --border-color: #c4d0c8;
+            --card-shadow: 0 4px 16px rgba(180, 190, 180, 0.12), 0 2px 0 0 var(--border-color);
+            --right-title-bg: rgba(196, 208, 200, 0.30);
+
             --text-primary: #2c241c;
-            --text-secondary: #5a4e42;
+            --text-secondary: #6a5e52;
             --text-heading: #1a1a1a;
-            --accent-gold: #b88a3a;
-            --accent-orange: #c47a2a;
-            --accent-red: #a03a2a;
-            --border-color: #b8a898;
-            --shadow-color: transparent;
-            --btn-bg: #a03a2a;
-            --btn-text: #f5e6d3;
+            --accent-gold: #c4a86a;
+            --accent-orange: #b8985a;
+            --accent-red: #c4d0c8;
+            --shadow-color: rgba(180, 190, 180, 0.15);
+            --btn-bg: #c4a86a;
+            --btn-text: #fcfaf8;
             --text-shadow-enabled: none;
-            --card-shadow: 0 4px 0 0 var(--border-color);
-            --dot-pattern: radial-gradient(circle, rgba(120,100,80,0.08) 1px, transparent 1px);
         }
 
         * {
@@ -65,13 +85,21 @@
             font-family: 'Press Start 2P', 'Courier New', monospace;
             background: var(--bg-page);
             color: var(--text-primary);
-            font-size: var(--font-base);
+            font-size: var(--font-size-base);
             line-height: 1.9;
             min-height: 100vh;
             padding-top: var(--topnav-height);
             padding-left: var(--sidebar-width);
             background-image: var(--dot-pattern);
             background-size: 20px 20px;
+            background-image: var(--dot-pattern), url('images/bg-body.jpg');
+            background-size: 20px 20px, cover;
+            background-attachment: fixed, fixed;
+            background-position: 0 0, center center;
+            background-blend-mode: normal, overlay;
+        }
+        .light-mode body {
+            background-image: var(--dot-pattern), url('images/bg-body-light.jpg');
         }
         a { color: var(--accent-gold); text-decoration: none; }
         a:hover { color: var(--accent-orange); }
@@ -139,7 +167,7 @@
         .main-content { padding: 20px 28px 30px 28px; max-width: 1200px; margin: 0 auto; }
         .page-title { margin-bottom: 28px; border-bottom: 4px solid var(--border-color); padding-bottom: 14px; }
         .page-title h1 { font-size: 28px; text-shadow: var(--text-shadow-enabled); color: var(--accent-gold); }
-        .page-title p { font-size: var(--font-small); color: var(--text-secondary); margin-top: 6px; }
+        .page-title p { font-size: 14px; color: var(--text-secondary); margin-top: 6px; }
 
         /* ========== 手风琴折叠 ========== */
         .accordion {
@@ -809,46 +837,52 @@
 
         // ---- 成就数据 ----
         const ACHV_DEFS = {
-            sign50: { name: '打卡机转世', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/sign50.png', desc: '连续签到 50 天' },
-            monthfull: { name: '月度全勤打工人', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/monthfull.png', desc: '一个自然月全勤签到' },
-            mktking: { name: '黑市大佬', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/mktking.png', desc: '连续三周黑市股市榜单第一' },
-            farmdex: { name: '暗点农场主', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/farmdex.png', desc: '种花游戏满图鉴' },
-            sheep300: { name: '根本睡不着', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/sheep300.png', desc: '数羊超过 300 个' },
-            race4min: { name: '开到地老天荒', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/race4min.png', desc: '飙车单局时长超过 4 分钟' },
-            airforce10: { name: '空军大师', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/airforce10.png', desc: '连续 10 次钓鱼空军' },
-            eco10: { name: '环保大使', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/eco10.png', desc: '连续 10 次钓上来垃圾' },
-            unlucky: { name: '倒霉鬼', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/unlucky.png', desc: '连续 5 次钓鱼断杆' },
-            goldaxe: { name: '这是你的金斧头吗', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/goldaxe.png', desc: '第一次钓上来河神落下的金斧头' },
-            sign7: { name: '暗点新编', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/sign7.png', desc: '连续签到 7 天' },
-            rubies5k: { name: '龙窟守财神', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/rubies5k.png', desc: '红宝石当前大于 5000 个' },
-            pomoking: { name: '番茄大王', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/pomoking.png', desc: '连续三天挂番茄钟 4 小时' },
-            race10s: { name: '反向赛车手', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/race10s.png', desc: '飙车 10 秒钟内结束游戏' },
-            mktdown3: { name: '天台风很大', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/mktdown3.png', desc: '连续三天亏损' },
-            cast1k: { name: '捕鱼达狸', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/cast1k.png', desc: '累计钓鱼 1000 次' },
-            cast5k: { name: '今晚吃鱼', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/cast5k.png', desc: '累计钓鱼 5000 次' },
-            cast10k: { name: '小猫钓鱼', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/cast10k.png', desc: '累计钓鱼 10000 次' },
-            cast100k: { name: '这河狸吗？', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/cast100k.png', desc: '累计钓鱼 100000 次' },
-            idle50: { name: '守彻待鱼', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/idle50.png', desc: '累计让秦彻钓鱼 50 次' },
-            net1k: { name: '一网打尽', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/net1k.png', desc: '累计用鱼网捞 1000 次' },
-            net3k: { name: '水里还有鱼吗？', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/net3k.png', desc: '累计用鱼网捞 3000 次' },
-            escape100: { name: '哎呀手滑了', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/escape100.png', desc: '钓鱼累计 100 次脱钩' },
-            fishspend200k: { name: '钱都喂了鱼', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/fishspend200k.png', desc: '钓鱼游戏里累计花费 200000' },
-            fishspend500k: { name: '钓鱼是生活', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/fishspend500k.png', desc: '钓鱼游戏里累计花费 500000' },
-            sign365: { name: '和暗点老大的365天', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/sign365.png', desc: '累计打卡签到 365 天' },
-            poke50: { name: '出去不要打扰我睡觉', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/poke50.png', desc: '秦彻睡觉时累计戳醒他 50 次' },
-            box100: { name: '我要验牌', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/box100.png', desc: '农场游戏开盲盒 100 次' },
-            datura100: { name: '塔尔城园丁', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/datura100.png', desc: '农场游戏里种满 100 朵黑色曼陀罗' },
-            wallst5w: { name: '华尔街之狸', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/wallst5w.png', desc: '连续五周黑市最终结算时盈利达 100 钻' },
-            fishdex: { name: '水产户籍管理员', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/fishdex.png', desc: '钓鱼游戏满图鉴' },
-            junkdex: { name: '废品回收大亨', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/junkdex.png', desc: '钓鱼游戏里特殊物品满图鉴' },
-            msg50: { name: '唠嗑永动机', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/msg50.png', desc: '累计在留言板发言 50 次' },
-            sheep1st: { name: '羊圈领袖', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/sheep1st.png', desc: '数羊游戏排行榜前 10 名' },
-            cinema100: { name: '影院座椅已包浆', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/cinema100.png', desc: '电影院场景特殊排片观看 100 次' },
-            boomcore10k: { name: '临空芯核批发商', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/boomcore10k.png', desc: '扫雷累计获得 10000 个芯核' },
-            boompuz1: { name: '像素级微雕大师', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/boompuz1.png', desc: '扫雷游戏里完成第一组拼图' },
-            boomplay100: { name: '卡奥斯炸炸炸', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/boomplay100.png', desc: '扫雷玩了 100 局' },
-            boom10s: { name: '扫雷界扫地僧', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/boom10s.png', desc: '扫雷游戏 10 秒内通关' },
-            boomfirst: { name: '战术性自爆', img: 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/boomfirst.png', desc: '开局 3 下之内踩中炸弹结束游戏' }
+            sign50: { name: '打卡机转世', img: './achv/sign50.png', desc: '连续签到 50 天' },
+            monthfull: { name: '月度全勤打工人', img: './achv/monthfull.png', desc: '一个自然月全勤签到' },
+            mktking: { name: '黑市大佬', img: './achv/mktking.png', desc: '连续三周黑市股市榜单第一' },
+            farmdex: { name: '暗点农场主', img: './achv/farmdex.png', desc: '种花游戏满图鉴' },
+            sheep300: { name: '根本睡不着', img: './achv/sheep300.png', desc: '数羊超过 300 个' },
+            race4min: { name: '开到地老天荒', img: './achv/race4min.png', desc: '飙车单局时长超过 4 分钟' },
+            airforce10: { name: '空军大师', img: './achv/airforce10.png', desc: '连续 10 次钓鱼空军' },
+            eco10: { name: '环保大使', img: './achv/eco10.png', desc: '连续 10 次钓上来垃圾' },
+            unlucky: { name: '倒霉鬼', img: './achv/unlucky.png', desc: '连续 5 次钓鱼断杆' },
+            goldaxe: { name: '这是你的金斧头吗', img: './achv/goldaxe.png', desc: '第一次钓上来河神落下的金斧头' },
+            sign7: { name: '暗点新编', img: './achv/sign7.png', desc: '连续签到 7 天' },
+            rubies5k: { name: '龙窟守财神', img: './achv/rubies5k.png', desc: '红宝石当前大于 5000 个' },
+            pomoking: { name: '番茄大王', img: './achv/pomoking.png', desc: '连续三天挂番茄钟 4 小时' },
+            race10s: { name: '反向赛车手', img: './achv/race10s.png', desc: '飙车 10 秒钟内结束游戏' },
+            mktdown3: { name: '天台风很大', img: './achv/mktdown3.png', desc: '连续三天亏损' },
+            cast1k: { name: '捕鱼达狸', img: './achv/cast1k.png', desc: '累计钓鱼 1000 次' },
+            cast5k: { name: '今晚吃鱼', img: './achv/cast5k.png', desc: '累计钓鱼 5000 次' },
+            cast10k: { name: '小猫钓鱼', img: './achv/cast10k.png', desc: '累计钓鱼 10000 次' },
+            cast100k: { name: '这河狸吗？', img: './achv/cast100k.png', desc: '累计钓鱼 100000 次' },
+            idle50: { name: '守彻待鱼', img: './achv/idle50.png', desc: '累计让秦彻钓鱼 50 次' },
+            net1k: { name: '一网打尽', img: './achv/net1k.png', desc: '累计用鱼网捞 1000 次' },
+            net3k: { name: '水里还有鱼吗？', img: './achv/net3k.png', desc: '累计用鱼网捞 3000 次' },
+            escape100: { name: '哎呀手滑了', img: './achv/escape100.png', desc: '钓鱼累计 100 次脱钩' },
+            fishspend200k: { name: '钱都喂了鱼', img: './achv/fishspend200k.png', desc: '钓鱼游戏里累计花费 200000' },
+            fishspend500k: { name: '钓鱼是生活', img: './achv/fishspend500k.png', desc: '钓鱼游戏里累计花费 500000' },
+            sign365: { name: '和暗点老大的365天', img: './achv/sign365.png', desc: '累计打卡签到 365 天' },
+            poke50: { name: '出去不要打扰我睡觉', img: './achv/poke50.png', desc: '秦彻睡觉时累计戳醒他 50 次' },
+            box100: { name: '我要验牌', img: './achv/box100.png', desc: '农场游戏开盲盒 100 次' },
+            datura100: { name: '塔尔城园丁', img: './achv/datura100.png', desc: '农场游戏里种满 100 朵黑色曼陀罗' },
+            wallst5w: { name: '华尔街之狸', img: './achv/wallst5w.png', desc: '连续五周黑市最终结算时盈利达 100 钻' },
+            fishdex: { name: '水产户籍管理员', img: './achv/fishdex.png', desc: '钓鱼游戏满图鉴' },
+            junkdex: { name: '废品回收大亨', img: './achv/junkdex.png', desc: '钓鱼游戏里特殊物品满图鉴' },
+            msg50: { name: '唠嗑永动机', img: './achv/msg50.png', desc: '累计在留言板发言 50 次' },
+            sheep1st: { name: '羊圈领袖', img: './achv/sheep1st.png', desc: '数羊游戏排行榜前 10 名' },
+            cinema100: { name: '影院座椅已包浆', img: './achv/cinema100.png', desc: '电影院场景特殊排片观看 100 次' },
+            boomcore10k: { name: '临空芯核批发商', img: './achv/boomcore10k.png', desc: '扫雷累计获得 10000 个芯核' },
+            boompuz1: { name: '像素级微雕大师', img: './achv/boompuz1.png', desc: '扫雷游戏里完成第一组拼图' },
+            boomplay100: { name: '卡奥斯炸炸炸', img: './achv/boomplay100.png', desc: '扫雷玩了 100 局' },
+            boom10s: { name: '扫雷界扫地僧', img: './achv/boom10s.png', desc: '扫雷游戏 10 秒内通关' },
+            boomfirst: { name: '战术性自爆', img: './achv/boomfirst.png', desc: '开局 3 下之内踩中炸弹结束游戏' },
+            // ===== 五子棋成就（新增）=====
+            wuziqi_20: { name: '又唱又跳', img: './achv/又唱又跳.png', desc: '技能五子棋赢20局' },
+            wuziqi_50: { name: '力拔山兮', img: './achv/力拔山兮.png', desc: '技能五子棋赢50局' },
+            wuziqi_draw: { name: '你们不要再打了啦', img: './achv/你们不要再打了啦.png', desc: '技能五子棋平局20次' },
+            wuziqi_cards: { name: '在下技能五', img: './achv/在下技能五.png', desc: '技能五子棋累计打出100张牌' },
+            wuziqi_lose: { name: '小臭棋篓', img: './achv/小臭棋篓.png', desc: '技能五子棋输给秦彻50局' }
         };
 
         // ============================================================
@@ -889,12 +923,12 @@
         function plantImgPath(id, stage, variant) {
             let key = 'p-' + id + '-' + stage;
             if (variant && stage >= 3) key += 'v' + variant;
-            return 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/' + key + '.png';
+            return './art/' + key + '.png';
         }
 
-        function fishImgPath(id) { return 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/f-' + id + '.png'; }
+        function fishImgPath(id) { return './fishing_art/f-' + id + '.png'; }
 
-        function junkImgPath(id) { return 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/j-' + id + '.png'; }
+        function junkImgPath(id) { return './fishing_art/j-' + id + '.png'; }
 
         // ---- 植物 ----
         function renderPlants() {
@@ -994,7 +1028,7 @@
                 html += `
                     <div class="card achv-card">
                         <div class="img-wrap">
-                            <img src="${a.img || 'https://cdn.jsdelivr.net/gh/molaksZ/game-images@main/placeholder.png'}" alt="${a.name}" loading="lazy"
+                            <img src="${a.img || './achv/placeholder.png'}" alt="${a.name}" loading="lazy"
                                  onerror="this.parentElement.innerHTML='<span style=\\'font-size:12px;color:var(--text-secondary);\\'>${a.name}</span>'">
                         </div>
                         <div class="name">${a.name}</div>
