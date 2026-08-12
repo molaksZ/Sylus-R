@@ -132,27 +132,150 @@
         .page-title h1 { font-size: 28px; text-shadow: var(--text-shadow-enabled); color: var(--accent-gold); }
         .page-title p { font-size: 16px; color: var(--text-secondary); margin-top: 6px; }
 
-        .activity-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
-        .activity-card {
-            background: var(--bg-card); border: 4px solid var(--border-color);
+        /* ===== 活动列表 ===== */
+        .tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 24px;
+            border: 4px solid var(--border-color);
+            background: var(--bg-card);
             box-shadow: inset 0 0 0 2px var(--bg-card), var(--card-shadow);
-            padding: 20px; backdrop-filter: blur(4px);
-            transition: none;
+            border-radius: 4px;
+            overflow: hidden;
         }
-        .activity-card:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 2px var(--bg-card), 0 6px 0 0 var(--border-color); border-color: var(--accent-gold); }
-        .activity-card .icon { font-size: 40px; display: block; margin-bottom: 10px; }
-        .activity-card h3 { font-size: 18px; color: var(--accent-gold); text-shadow: var(--text-shadow-enabled); }
-        .activity-card p { font-size: 15px; color: var(--text-secondary); margin-top: 6px; line-height: 1.8; }
-        .activity-card .status { display: inline-block; background: var(--accent-red); color: #f5e6d3; font-size: 11px; padding: 2px 12px; border: 2px solid var(--border-color); margin-top: 10px; }
-        .activity-card .status.soon { background: var(--bg-nav); color: var(--text-secondary); }
+        .tab-btn {
+            flex: 1;
+            background: var(--bg-card);
+            border: none;
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 14px;
+            padding: 12px 8px;
+            cursor: pointer;
+            transition: 0.1s;
+            text-shadow: none;
+            border-right: 2px solid var(--border-color);
+        }
+        .tab-btn:last-child {
+            border-right: none;
+        }
+        .tab-btn:hover {
+            color: var(--accent-gold);
+            background: var(--bg-nav);
+        }
+        .tab-btn.active {
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a;
+            border-color: var(--border-color);
+        }
+        .tab-btn .count {
+            font-size: 10px;
+            opacity: 0.6;
+            margin-left: 4px;
+        }
+        .tab-btn.active .count {
+            opacity: 1;
+        }
+
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .activity-item {
+            background: var(--bg-card);
+            border: 4px solid var(--border-color);
+            box-shadow: inset 0 0 0 2px var(--bg-card), var(--card-shadow);
+            padding: 20px 24px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .activity-item .info {
+            flex: 1;
+            min-width: 180px;
+        }
+        .activity-item .info .title {
+            font-size: 18px;
+            color: var(--accent-gold);
+            text-shadow: var(--text-shadow-enabled);
+        }
+        .activity-item .info .time {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        .activity-item .info .desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            opacity: 0.8;
+        }
+        .activity-item .status-tag {
+            display: inline-block;
+            font-size: 11px;
+            padding: 4px 14px;
+            border: 2px solid var(--border-color);
+            border-radius: 3px;
+            background: var(--bg-nav);
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+        .status-tag.upcoming {
+            border-color: var(--accent-orange);
+            color: var(--accent-orange);
+        }
+        .status-tag.ongoing {
+            border-color: #4a8a4a;
+            color: #8fdb8f;
+        }
+        .status-tag.ended {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+        }
+
+        .activity-item .link-btn {
+            background: var(--btn-bg);
+            border: 3px solid var(--border-color);
+            color: var(--btn-text);
+            font-family: inherit;
+            font-size: 13px;
+            padding: 8px 20px;
+            cursor: pointer;
+            box-shadow: inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a;
+            transition: 0.05s linear;
+            text-shadow: none;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .activity-item .link-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a;
+        }
+        .activity-item .link-btn:hover {
+            background: #c05a4a;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+            font-size: 16px;
+            opacity: 0.6;
+            border: 4px dashed var(--border-color);
+            border-radius: 4px;
+        }
 
         .footer { margin-top: 40px; border-top: 4px solid var(--border-color); padding: 20px 0 14px; text-align: center; font-size: 14px; color: var(--text-secondary); }
         .footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 6px; }
         .footer-links a { color: var(--text-secondary); font-size: 14px; }
         .footer-links a:hover { color: var(--accent-gold); }
-
-        .card-expand { margin-top:12px; padding-top:12px; border-top:2px solid var(--border-color); font-size:13px; color:var(--text-secondary); line-height:2; text-align:left; }
-        .card-expand .highlight { color: var(--accent-gold); }
 
         /* ========== 欢迎弹窗 ========== */
         .welcome-modal {
@@ -229,17 +352,9 @@
             transform: translate(2px,2px);
             box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a;
         }
-        .welcome-modal .modal-box .btn-row .btn-accept {
-            background: #3a7a3a;
-            border-color: #5aaa5a;
-            color: #c0f0c0;
-        }
+        .welcome-modal .modal-box .btn-row .btn-accept { background: #3a7a3a; border-color: #5aaa5a; color: #c0f0c0; }
         .welcome-modal .modal-box .btn-row .btn-accept:hover { background: #4a8a4a; }
-        .welcome-modal .modal-box .btn-row .btn-reject {
-            background: #7a3a3a;
-            border-color: #aa5a5a;
-            color: #f0c0c0;
-        }
+        .welcome-modal .modal-box .btn-row .btn-reject { background: #7a3a3a; border-color: #aa5a5a; color: #f0c0c0; }
         .welcome-modal .modal-box .btn-row .btn-reject:hover { background: #8a4a4a; }
 
         @media (max-width: 820px) {
@@ -254,7 +369,10 @@
             .sidebar-overlay.open { display: block; }
             .menu-toggle { display: block; }
             .main-content { padding: 16px 14px 20px 14px; }
-            .activity-grid { grid-template-columns: 1fr 1fr; }
+            .tabs { flex-wrap: wrap; }
+            .tab-btn { flex: 1 1 33%; font-size: 12px; padding: 10px 4px; }
+            .activity-item { flex-direction: column; align-items: stretch; }
+            .activity-item .link-btn { text-align: center; }
             .welcome-modal .modal-box { padding: 20px 16px 18px; margin: 12px; }
             .welcome-modal .modal-box h2 { font-size: 19px; }
             .welcome-modal .modal-box .rules { font-size: 14px; line-height: 2; }
@@ -265,7 +383,10 @@
             .top-nav .logo { font-size: 14px; }
             .top-nav-links a { font-size: 13px; }
             .page-title h1 { font-size: 24px; }
-            .activity-grid { grid-template-columns: 1fr; }
+            .tab-btn { font-size: 11px; padding: 8px 2px; }
+            .activity-item .info .title { font-size: 16px; }
+            .activity-item .info .time { font-size: 12px; }
+            .activity-item .info .desc { font-size: 13px; }
             .footer-links { flex-direction: column; gap: 6px; }
             .welcome-modal .modal-box { padding: 16px 12px 14px; }
             .welcome-modal .modal-box h2 { font-size: 17px; }
@@ -323,50 +444,19 @@
 
         <div class="page-title">
             <h1>🎯 活动</h1>
-            <p>进行中 · 即将开始</p>
+            <p>进行中 · 即将开始 · 已结束</p>
         </div>
 
-        <h2 style="font-size:20px; color:var(--accent-gold); text-shadow:var(--text-shadow-enabled); border-bottom:3px solid var(--border-color); padding-bottom:8px; margin-bottom:16px;" id="activities">📅 活动</h2>
-
-        <div class="activity-grid">
-
-            <!-- ===== 选梅大赛卡片 ===== -->
-            <div class="activity-card" style="cursor:default;">
-                <span class="icon">🏆</span>
-                <h3>选梅大赛</h3>
-                <p>投稿期：2026.08.15 — 08.18<br>投票期：2026.08.20 — 08.22</p>
-                <span class="status soon" id="cardStatus">即将开启</span>
-
-                <!-- 三个按键 -->
-                <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
-                    <button class="card-tab-btn active" data-target="schedule" style="flex:1;min-width:70px;background:var(--btn-bg);border:3px solid var(--border-color);color:var(--btn-text);font-family:inherit;font-size:12px;padding:6px 10px;cursor:pointer;box-shadow:inset -2px -2px 0 #3a1a12,inset 2px 2px 0 #c06a5a;text-shadow:none;border-radius:4px;transition:0.05s linear;">📅 赛程</button>
-                    <button class="card-tab-btn" data-target="rules" style="flex:1;min-width:70px;background:var(--bg-card);border:3px solid var(--border-color);color:var(--text-secondary);font-family:inherit;font-size:12px;padding:6px 10px;cursor:pointer;box-shadow:inset -2px -2px 0 #0a1a2a,inset 2px 2px 0 #3a4a6a;text-shadow:none;border-radius:4px;transition:0.05s linear;">📋 规则</button>
-                    <button class="card-tab-btn" data-target="vote" style="flex:1;min-width:70px;background:var(--bg-card);border:3px solid var(--border-color);color:var(--text-secondary);font-family:inherit;font-size:12px;padding:6px 10px;cursor:pointer;box-shadow:inset -2px -2px 0 #0a1a2a,inset 2px 2px 0 #3a4a6a;text-shadow:none;border-radius:4px;transition:0.05s linear;">🗳️ 投票</button>
-                </div>
-
-                <!-- 展开内容 - 赛程 -->
-                <div class="card-expand" id="cardSchedule">
-                    <span class="highlight">📥 投稿期：</span>2026.08.15 — 2026.08.18 17:00<br>
-                    <span class="highlight">🗳️ 投票期：</span>2026.08.20 — 2026.08.22 17:00<br>
-                    <span class="highlight">🏆 结果公示：</span>2026.08.24 起公示3个工作日
-                </div>
-
-                <!-- 展开内容 - 规则（默认隐藏） -->
-                <div class="card-expand" id="cardRules" style="display:none;">
-                    <span class="highlight">📋 投稿规则</span><br>
-                    • 小红书发帖带tag <span class="highlight">#恋与丘丘彻 #选梅大赛</span><br>
-                    • 提交1张游戏内「参赛梅」截图，评论中备注游戏UID<br>
-                    • 每位玩家仅限1个有效作品<br><br>
-                    <span class="highlight">🗳️ 评选规则</span><br>
-                    • 每位用户拥有 <span class="highlight">1票</span>，不可撤回<br>
-                    • 得票数前5名获得特殊奖励<br><br>
-                    <span class="highlight">⚠️ 注意事项</span><br>
-                    • 严禁盗用、抄袭他人作品<br>
-                    • 严禁恶意刷票，违者取消资格
-                </div>
-            </div>
-
+        <!-- ===== Tab 切换 ===== -->
+        <div class="tabs" id="tabContainer">
+            <button class="tab-btn active" data-status="all">📋 全部 <span class="count" id="countAll">0</span></button>
+            <button class="tab-btn" data-status="ongoing">🟢 进行中 <span class="count" id="countOngoing">0</span></button>
+            <button class="tab-btn" data-status="upcoming">🟠 即将开始 <span class="count" id="countUpcoming">0</span></button>
+            <button class="tab-btn" data-status="ended">🔴 已结束 <span class="count" id="countEnded">0</span></button>
         </div>
+
+        <!-- ===== 活动列表 ===== -->
+        <div class="activity-list" id="activityList"></div>
 
         <footer class="footer">
             <div style="margin-bottom:8px;">📜 本攻略站由玩家自发维护 · 内容按 <strong>CC BY-NC-SA 4.0</strong> 协议提供</div>
@@ -446,35 +536,87 @@
             });
         })();
 
-        // ===== 三个按键切换 =====
-        document.querySelectorAll('.card-tab-btn').forEach(function(btn) {
+        // ===== 活动数据 =====
+        const activities = [
+            {
+                id: 'contest',
+                title: '🏆 选梅大赛',
+                status: 'upcoming', // upcoming | ongoing | ended
+                startDate: '2026.08.15',
+                endDate: '2026.08.22',
+                desc: '以游戏内装饰小梅为主题的创意截图大赛，丰厚奖励等你来拿！',
+                link: '#' // 替换为朋友的活动页面链接
+            }
+        ];
+
+        // ===== 根据当前时间自动更新状态（可选） =====
+        function updateStatusByDate(activity) {
+            const now = new Date();
+            // 为了演示，保持手动设置，但可以自动判断
+            // 这里保留手动设置，因为活动尚未开始
+            return activity.status;
+        }
+
+        // ===== 渲染活动列表 =====
+        function renderActivities(filterStatus) {
+            const list = document.getElementById('activityList');
+            const filtered = filterStatus === 'all' 
+                ? activities 
+                : activities.filter(a => a.status === filterStatus);
+
+            // 更新计数
+            const counts = {
+                all: activities.length,
+                ongoing: activities.filter(a => a.status === 'ongoing').length,
+                upcoming: activities.filter(a => a.status === 'upcoming').length,
+                ended: activities.filter(a => a.status === 'ended').length
+            };
+            document.getElementById('countAll').textContent = counts.all;
+            document.getElementById('countOngoing').textContent = counts.ongoing;
+            document.getElementById('countUpcoming').textContent = counts.upcoming;
+            document.getElementById('countEnded').textContent = counts.ended;
+
+            if (filtered.length === 0) {
+                list.innerHTML = `<div class="empty-state">📭 暂无活动</div>`;
+                return;
+            }
+
+            const statusMap = {
+                'upcoming': { label: '即将开始', cls: 'upcoming' },
+                'ongoing': { label: '进行中', cls: 'ongoing' },
+                'ended': { label: '已结束', cls: 'ended' }
+            };
+
+            list.innerHTML = filtered.map(a => {
+                const st = statusMap[a.status] || statusMap.upcoming;
+                return `
+                    <div class="activity-item">
+                        <div class="info">
+                            <div class="title">${a.title}</div>
+                            <div class="time">📅 ${a.startDate} — ${a.endDate}</div>
+                            <div class="desc">${a.desc}</div>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                            <span class="status-tag ${st.cls}">${st.label}</span>
+                            <a href="${a.link}" target="_blank" class="link-btn">📢 官方公告</a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ===== Tab 切换 =====
+        document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                const target = this.dataset.target;
-
-                // 切换按钮样式
-                document.querySelectorAll('.card-tab-btn').forEach(function(b) {
-                    b.style.background = 'var(--bg-card)';
-                    b.style.color = 'var(--text-secondary)';
-                    b.style.boxShadow = 'inset -2px -2px 0 #0a1a2a, inset 2px 2px 0 #3a4a6a';
-                });
-                this.style.background = 'var(--btn-bg)';
-                this.style.color = 'var(--btn-text)';
-                this.style.boxShadow = 'inset -3px -3px 0 #3a1a12, inset 3px 3px 0 #c06a5a';
-
-                // 点击「投票」→ 跳转到 contest.html
-                if (target === 'vote') {
-                    window.location.href = 'contest.html';
-                    return;
-                }
-
-                // 切换展开内容（赛程 / 规则）
-                document.querySelectorAll('.card-expand').forEach(function(el) {
-                    el.style.display = 'none';
-                });
-                var targetEl = document.getElementById('card' + target.charAt(0).toUpperCase() + target.slice(1));
-                if (targetEl) targetEl.style.display = 'block';
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const status = this.dataset.status;
+                renderActivities(status);
             });
         });
+
+        // ===== 初始化 =====
+        renderActivities('upcoming'); // 默认显示“即将开始”
     </script>
 
 </body>
