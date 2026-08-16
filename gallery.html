@@ -18,11 +18,9 @@
     class="statcounter" src="https://c.statcounter.com/13342215/0/1113367e/1/"
     alt="Web Analytics Made Easy - Statcounter"
     referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
-    <!-- End of Statcounter Code -->
     <style>
         /* ========== 主题变量 ========== */
         :root {
-            /* 层次感优化 - 深色模式 */
             --bg-page: #1a2633;
             --bg-card: #2a3a4a;
             --bg-nav: #0f1a24;
@@ -31,7 +29,6 @@
             --border-color: #4a6a8a;
             --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 0 0 var(--border-color);
             --gap-section: 36px;
-
             --text-primary: #f5e6d3;
             --text-secondary: #c9b8a8;
             --text-heading: #f7e8d0;
@@ -52,7 +49,6 @@
             --nav-font-mobile: 14px;
         }
         .light-mode {
-            /* 主色 (60%) - 淡紫灰 + 米白 */
             --bg-page: #f0eef5;
             --bg-card: #fcfaf8;
             --bg-nav: #fcfaf8;
@@ -61,7 +57,6 @@
             --border-color: #c4d0c8;
             --card-shadow: 0 4px 16px rgba(180, 190, 180, 0.12), 0 2px 0 0 var(--border-color);
             --right-title-bg: rgba(196, 208, 200, 0.30);
-
             --text-primary: #2c241c;
             --text-secondary: #6a5e52;
             --text-heading: #1a1a1a;
@@ -73,7 +68,6 @@
             --btn-text: #fcfaf8;
             --text-shadow-enabled: none;
         }
-
         * {
             margin: 0;
             padding: 0;
@@ -226,17 +220,13 @@
         .card .tag.blue { background: #3a5a8a; color: #f5e6d3; }
         .card .tag.purple { background: #6a4a8a; color: #f5e6d3; }
         .card .tag.orange { background: var(--accent-orange); color: #1a2633; }
-
         .card .floral-meaning { font-size: 10px; color: var(--accent-orange); line-height: 1.4; opacity: 0.8; }
 
-        /* ========== 成就卡片 ========== */
         .achv-card .img-wrap { aspect-ratio: 4/1; }
         .achv-card .img-wrap img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
 
-        /* ========== 计数徽标 ========== */
         .count-badge { font-size: 14px; color: var(--text-secondary); margin-left: 8px; font-weight: normal; }
 
-        /* ========== 底部 ========== */
         .footer { margin-top: 40px; border-top: 4px solid var(--border-color); padding: 20px 0 14px; text-align: center; font-size: 14px; color: var(--text-secondary); }
         .footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 6px; }
         .footer-links a { color: var(--text-secondary); font-size: 14px; }
@@ -254,9 +244,7 @@
             padding: 24px;
             backdrop-filter: blur(6px);
         }
-        .welcome-modal.open {
-            display: flex;
-        }
+        .welcome-modal.open { display: flex; }
         .welcome-modal .modal-box {
             background: var(--bg-card);
             border: 6px solid var(--border-color);
@@ -294,9 +282,7 @@
             color: var(--accent-gold);
             font-size: 14px;
         }
-        .welcome-modal .modal-box .rules .highlight {
-            color: var(--accent-gold);
-        }
+        .welcome-modal .modal-box .rules .highlight { color: var(--accent-gold); }
         .welcome-modal .modal-box .btn-row {
             display: flex;
             gap: 16px;
@@ -318,7 +304,7 @@
             text-shadow: none;
         }
         .welcome-modal .modal-box .btn-row button:active {
-            transform: translate(2px, 2px);
+            transform: translate(2px,2px);
             box-shadow: inset 3px 3px 0 #3a1a12, inset -3px -3px 0 #c06a5a;
         }
         .welcome-modal .modal-box .btn-row .btn-accept {
@@ -326,16 +312,10 @@
             border-color: #5aaa5a;
             color: #c0f0c0;
         }
-        .welcome-modal .modal-box .btn-row .btn-accept:hover {
-            background: #4a8a4a;
-        }
         .welcome-modal .modal-box .btn-row .btn-reject {
             background: #7a3a3a;
             border-color: #aa5a5a;
             color: #f0c0c0;
-        }
-        .welcome-modal .modal-box .btn-row .btn-reject:hover {
-            background: #8a4a4a;
         }
 
         /* ========== 响应式 ========== */
@@ -356,21 +336,10 @@
             .accordion-body { padding: 12px 14px 16px; }
             .card .name { font-size: 13px; }
             .card .sub { font-size: 10px; }
-            .welcome-modal .modal-box {
-                padding: 20px 16px 18px;
-                margin: 12px;
-            }
-            .welcome-modal .modal-box h2 {
-                font-size: 19px;
-            }
-            .welcome-modal .modal-box .rules {
-                font-size: 14px;
-                line-height: 2;
-            }
-            .welcome-modal .modal-box .btn-row button {
-                font-size: 14px;
-                padding: 8px 0;
-            }
+            .welcome-modal .modal-box { padding: 20px 16px 18px; margin: 12px; }
+            .welcome-modal .modal-box h2 { font-size: 19px; }
+            .welcome-modal .modal-box .rules { font-size: 14px; line-height: 2; }
+            .welcome-modal .modal-box .btn-row button { font-size: 14px; padding: 8px 0; }
         }
         @media (max-width: 480px) {
             body { font-size: 16px; }
@@ -385,24 +354,11 @@
             .accordion-header { font-size: 15px; padding: 10px 12px; }
             .accordion-body { padding: 10px 10px 12px; }
             .footer-links { flex-direction: column; gap: 6px; }
-            .welcome-modal .modal-box {
-                padding: 16px 12px 14px;
-            }
-            .welcome-modal .modal-box h2 {
-                font-size: 17px;
-            }
-            .welcome-modal .modal-box .rules {
-                font-size: 13px;
-                line-height: 1.9;
-            }
-            .welcome-modal .modal-box .btn-row {
-                flex-direction: row;
-                gap: 10px;
-            }
-            .welcome-modal .modal-box .btn-row button {
-                font-size: 13px;
-                padding: 6px 0;
-            }
+            .welcome-modal .modal-box { padding: 16px 12px 14px; }
+            .welcome-modal .modal-box h2 { font-size: 17px; }
+            .welcome-modal .modal-box .rules { font-size: 13px; line-height: 1.9; }
+            .welcome-modal .modal-box .btn-row { flex-direction: row; gap: 10px; }
+            .welcome-modal .modal-box .btn-row button { font-size: 13px; padding: 6px 0; }
         }
     </style>
 </head>
@@ -452,6 +408,7 @@
         <nav class="sidebar-nav">
             <a href="#plant" class="active">🌱 植物</a>
             <a href="#fish">🐟 鱼类</a>
+            <a href="#eggs">🥚 宠物蛋</a>
             <a href="#achv">🏅 成就</a>
         </nav>
         <div class="sidebar-footer">v1.0 · 像素攻略站</div>
@@ -462,7 +419,7 @@
 
         <div class="page-title">
             <h1>📊 图鉴</h1>
-            <p>植物 · 鱼类 · 成就 — 点击标题展开/收起</p>
+            <p>植物 · 鱼类 · 宠物蛋 · 成就 — 点击标题展开/收起</p>
         </div>
 
         <!-- ===== 植物图鉴 ===== -->
@@ -484,6 +441,17 @@
             </button>
             <div class="accordion-body" id="fishBody">
                 <div class="grid" id="fishGrid"></div>
+            </div>
+        </div>
+
+        <!-- ===== 宠物蛋图鉴 ===== -->
+        <div class="accordion" id="eggs">
+            <button class="accordion-header" data-accordion="eggsBody">
+                <span>🥚 宠物蛋 <span class="count-badge" id="eggCount"></span></span>
+                <span class="arrow" id="eggArrow">▶</span>
+            </button>
+            <div class="accordion-body" id="eggsBody">
+                <div class="grid" id="eggGrid"></div>
             </div>
         </div>
 
@@ -520,39 +488,21 @@
             const modal = document.getElementById('welcomeModal');
             const acceptBtn = document.getElementById('welcomeAccept');
             const rejectBtn = document.getElementById('welcomeReject');
-
             const hasAccepted = localStorage.getItem('n109_welcome_accepted');
-
             if (!hasAccepted) {
                 modal.classList.add('open');
                 document.body.style.overflow = 'hidden';
             }
-
             acceptBtn.addEventListener('click', function() {
                 localStorage.setItem('n109_welcome_accepted', 'true');
                 modal.classList.remove('open');
                 document.body.style.overflow = '';
             });
-
             rejectBtn.addEventListener('click', function() {
                 window.close();
                 if (!window.closed) {
-                    document.body.innerHTML = '';
+                    document.body.innerHTML = '<div style="text-align:center;padding:20px;font-family:\'Press Start 2P\',monospace;font-size:20px;color:#f5e6d3;display:flex;align-items:center;justify-content:center;height:100vh;">👋 已退出<br><span style="font-size:14px;color:#c9b8a8;margin-top:16px;display:block;">你可以关闭此标签页</span></div>';
                     document.body.style.background = '#1a2633';
-                    document.body.style.color = '#f5e6d3';
-                    document.body.style.display = 'flex';
-                    document.body.style.alignItems = 'center';
-                    document.body.style.justifyContent = 'center';
-                    document.body.style.height = '100vh';
-                    document.body.style.fontFamily = "'Press Start 2P', monospace";
-                    document.body.style.fontSize = '20px';
-                    document.body.innerHTML = '<div style="text-align:center;padding:20px;">👋 已退出<br><span style="font-size:14px;color:#c9b8a8;margin-top:16px;display:block;">你可以关闭此标签页</span></div>';
-                }
-            });
-
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    // 不做任何事
                 }
             });
         })();
@@ -591,6 +541,7 @@
             const sections = [
                 { id: 'plant', link: document.querySelector('.sidebar-nav a[href="#plant"]') },
                 { id: 'fish', link: document.querySelector('.sidebar-nav a[href="#fish"]') },
+                { id: 'eggs', link: document.querySelector('.sidebar-nav a[href="#eggs"]') },
                 { id: 'achv', link: document.querySelector('.sidebar-nav a[href="#achv"]') }
             ];
             let timer = null;
@@ -639,10 +590,10 @@
         });
 
         // ============================================================
-        // 3. 数据
+        // 3. 数据定义
         // ============================================================
 
-        // ---- 植物数据（91条目） ----
+        // ---- 植物数据（33种基础 + 异色，共91条目） ----
         const PLANTS = [
             { id: 'qiangwei', name: '蔷薇花', cost: 20, sell: 22, grow: 600000, water: 0.8, yield: 2, unlock: 0, vars: 0,
                 varNames: [], meaning: '浪漫的爱情' },
@@ -660,8 +611,8 @@
                 varNames: ['翡翠白玉', '紫玉'], meaning: '百财' },
             { id: 'xiuqiu', name: '绣球花', cost: 120, sell: 260, grow: 2400000, water: 1.3, yield: 1, unlock: 30, vars: 2,
                 varNames: ['熔岩烈阳', '虹霓暖阳'], meaning: '希望、忠贞' },
-            { id: 'yangmei', name: '琉璃杨梅', cost: 130, sell: 280, grow: 2700000, water: 1.2, yield: 2, unlock: 35, vars: 2,
-                varNames: ['荆棘刺骨', '冰晶日光'], meaning: '吉祥与清雅' },
+            { id: 'yangmei', name: '琉璃杨梅', cost: 130, sell: 280, grow: 2700000, water: 1.2, yield: 2, unlock: 35,
+                vars: 2, varNames: ['荆棘刺骨', '冰晶日光'], meaning: '吉祥与清雅' },
             { id: 'malingshu', name: '香甜马铃薯', cost: 150, sell: 171, grow: 3000000, water: 0.5, yield: 2, unlock: 40,
                 vars: 2, varNames: ['星辉深海', '熔岩炽焰'], meaning: '真诚与希望' },
             { id: 'zhonglou', name: '钟楼风铃草', cost: 240, sell: 510, grow: 3600000, water: 0.4, yield: 1, unlock: 52,
@@ -877,7 +828,6 @@
             boomplay100: { name: '卡奥斯炸炸炸', img: './achv/boomplay100.png', desc: '扫雷玩了 100 局' },
             boom10s: { name: '扫雷界扫地僧', img: './achv/boom10s.png', desc: '扫雷游戏 10 秒内通关' },
             boomfirst: { name: '战术性自爆', img: './achv/boomfirst.png', desc: '开局 3 下之内踩中炸弹结束游戏' },
-            // ===== 五子棋成就（新增）=====
             wuziqi_20: { name: '又唱又跳', img: './achv/又唱又跳.png', desc: '技能五子棋赢20局' },
             wuziqi_50: { name: '力拔山兮', img: './achv/力拔山兮.png', desc: '技能五子棋赢50局' },
             wuziqi_draw: { name: '你们不要再打了啦', img: './achv/你们不要再打了啦.png', desc: '技能五子棋平局20次' },
@@ -885,10 +835,15 @@
             wuziqi_lose: { name: '小臭棋篓', img: './achv/小臭棋篓.png', desc: '技能五子棋输给秦彻50局' }
         };
 
-        // ============================================================
-        // 4. 渲染函数
-        // ============================================================
+        // ---- 宠物蛋数据（暂定2种） ----
+        const EGGS = [
+            { id: 'egg_fire', name: '烈焰龙蛋', img: './eggs/egg_fire.png', desc: '孵化出烈焰龙' },
+            { id: 'egg_ice', name: '霜鳞龙蛋', img: './eggs/egg_ice.png', desc: '孵化出霜鳞龙' }
+        ];
 
+        // ============================================================
+        // 4. 辅助函数
+        // ============================================================
         function fmtGrow(ms) {
             const totalSec = Math.floor(ms / 1000);
             const hours = Math.floor(totalSec / 3600);
@@ -929,6 +884,10 @@
         function fishImgPath(id) { return './fishing_art/f-' + id + '.png'; }
 
         function junkImgPath(id) { return './fishing_art/j-' + id + '.png'; }
+
+        // ============================================================
+        // 5. 渲染函数
+        // ============================================================
 
         // ---- 植物 ----
         function renderPlants() {
@@ -974,7 +933,7 @@
             document.getElementById('plantCount').textContent = '(' + totalItems + '种)';
         }
 
-        // ---- 鱼类（88种）+ 垃圾（30种）= 118种 ----
+        // ---- 鱼类（88种）+ 垃圾（30种） ----
         function renderFish() {
             const grid = document.getElementById('fishGrid');
             let html = '';
@@ -997,7 +956,7 @@
                     </div>
                 `;
             }
-            // 垃圾（30种）
+            // 垃圾
             for (let i = 0; i < JUNK.length; i += 2) {
                 const id = JUNK[i];
                 const name = JUNK[i + 1];
@@ -1017,6 +976,26 @@
             document.getElementById('fishCount').textContent = '(' + (FISH.length / 5 + JUNK.length / 2) + '种)';
         }
 
+        // ---- 宠物蛋 ----
+        function renderEggs() {
+            const grid = document.getElementById('eggGrid');
+            let html = '';
+            EGGS.forEach(egg => {
+                html += `
+                    <div class="card">
+                        <div class="img-wrap">
+                            <img src="${egg.img}" alt="${egg.name}" loading="lazy"
+                                 onerror="this.parentElement.innerHTML='<span style=\\'font-size:12px;color:var(--text-secondary);\\'>${egg.name}</span>'">
+                        </div>
+                        <div class="name">${egg.name}</div>
+                        <div class="sub">${egg.desc}</div>
+                    </div>
+                `;
+            });
+            grid.innerHTML = html;
+            document.getElementById('eggCount').textContent = '(' + EGGS.length + '种)';
+        }
+
         // ---- 成就 ----
         function renderAchievements() {
             const grid = document.getElementById('achvGrid');
@@ -1024,7 +1003,6 @@
             const keys = Object.keys(ACHV_DEFS);
             keys.forEach(key => {
                 const a = ACHV_DEFS[key];
-                const isHidden = a.hidden ? true : false;
                 html += `
                     <div class="card achv-card">
                         <div class="img-wrap">
@@ -1033,7 +1011,6 @@
                         </div>
                         <div class="name">${a.name}</div>
                         <div class="sub">${a.desc || ''}</div>
-                        ${isHidden ? '<span class="tag purple">隐藏</span>' : ''}
                     </div>
                 `;
             });
@@ -1042,19 +1019,25 @@
         }
 
         // ============================================================
-        // 5. 初始化
+        // 6. 初始化
         // ============================================================
-        renderPlants();
-        renderFish();
-        renderAchievements();
+        document.addEventListener('DOMContentLoaded', function() {
+            renderPlants();
+            renderFish();
+            renderEggs();
+            renderAchievements();
 
-        // 默认展开植物，收起鱼类和成就
-        document.getElementById('plantBody').classList.add('open');
-        document.getElementById('plantArrow').classList.add('open');
-        document.getElementById('fishBody').classList.remove('open');
-        document.getElementById('fishArrow').classList.remove('open');
-        document.getElementById('achvBody').classList.remove('open');
-        document.getElementById('achvArrow').classList.remove('open');
+            // 默认展开植物，收起其它
+            document.getElementById('plantBody').classList.add('open');
+            document.getElementById('plantArrow').classList.add('open');
+            // 鱼类、宠物蛋、成就默认收起
+            document.getElementById('fishBody').classList.remove('open');
+            document.getElementById('fishArrow').classList.remove('open');
+            document.getElementById('eggsBody').classList.remove('open');
+            document.getElementById('eggArrow').classList.remove('open');
+            document.getElementById('achvBody').classList.remove('open');
+            document.getElementById('achvArrow').classList.remove('open');
+        });
     </script>
 
 </body>
