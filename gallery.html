@@ -1209,7 +1209,7 @@ function renderMine() {
     MINE_DEX.forEach((m) => {
         const sub = [];
         if (m.val > 0) sub.push('💰 ' + m.val + ' 金币');
-        if (m.frag > 0) sub.push('🧩 碎片 ×' + m.frag);
+        if (m.frag > 0) sub.push('🧩 ' + m.frag + ' 碎片');
         html += `
             <div class="card">
                 <div class="img-wrap">
@@ -1217,7 +1217,8 @@ function renderMine() {
                 </div>
                 <div class="name">${m.name}</div>
                 <div class="sub">${m.cat}</div>
-                <div class="sub">${sub.join(' · ') || '收藏品'}</div>
+                <div class="sub">${sub[0] || ''}</div>
+                <div class="sub">${sub[1] || ''}</div>
             </div>
         `;
     });
