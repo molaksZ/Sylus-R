@@ -547,10 +547,11 @@
                     <div class="guide-content">
                         <p>「龙栖山谷」牧场玩法，孵化并养育你的龙伙伴。</p>
                         <ul>
-                            <li><span class="highlight">藏宝室</span> — 购买神秘的蛋（50000金币）和零食（1000金币/份）</li>
+                            <li><span class="highlight">品种</span> — 目前有「贝利（贝利=彼列 Belial）」与「巴弗」两个品种，蛋池随机出</li>
+                        <li><span class="highlight">藏宝室</span> — 购买神秘的蛋（50000金币）和零食（1000金币/份）</li>
                             <li><span class="highlight">成长阶段</span> — 孵化期 → 幼崽期 → 成长期 → 成年期 → 巨型（收集 3 只同种解锁）</li>
                             <li><span class="highlight">成长值</span> — 吃零食 +10 成长值，每天 2 次</li>
-                            <li><span class="highlight">心情值</span> — 送花（1~10 点，看花的价值）每天 1 次；陪玩 +5 心情值，每天 2 次</li>
+                            <li><span class="highlight">心情值</span> — 送花每天 1 次（心情 +1~10，按花的<b>种子本钱</b>对数分档，异色花额外 +1）；陪玩每天 2 次，每次 +5 心情值</li>
                             <li><span class="highlight">升级</span> — 成长值和心情值各攒满 120 点才升一级</li>
                             <li><span class="highlight">巨型形态</span> — 同一品种养满 3 只后解锁，并替换为该品种的巨型外观</li>
                         </ul>
@@ -558,8 +559,58 @@
                     </div>
                 </div>
             </div>
+                <div class="sub-section">
+                    <button class="sub-header" data-sub="petStageBody"><span>🐉 阶段图鉴</span><span class="arrow">▶</span></button>
+                    <div class="sub-body" id="petStageBody">
+                        <div class="guide-content">
+                            <p>「龙栖山谷」目前共有 <span class="highlight">2 个品种</span>（贝利、巴弗），每个品种各 5 个成长阶段。下图为各阶段的动作帧图（从左到右为动画序列）。</p>
+                            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:12px;">
+                        <div style="border:3px solid var(--border-color);background:var(--bg-card);padding:8px;text-align:center;">
+                            <img src="./ranch_art/r-huo-s0-idle.png" alt="贝利 孵化期" style="width:100%;image-rendering:pixelated;">
+                            <div style="font-size:13px;color:var(--accent-gold);margin-top:8px;">贝利 · 孵化期</div>
+                        </div>
+                        <div style="border:3px solid var(--border-color);background:var(--bg-card);padding:8px;text-align:center;">
+                            <img src="./ranch_art/r-huo-s1-idle.png" alt="贝利 幼崽期" style="width:100%;image-rendering:pixelated;">
+                            <div style="font-size:13px;color:var(--accent-gold);margin-top:8px;">贝利 · 幼崽期</div>
+                        </div>
+                        <div style="border:3px solid var(--border-color);background:var(--bg-card);padding:8px;text-align:center;">
+                            <img src="./ranch_art/r-huo-s2-idle.png" alt="贝利 成长期" style="width:100%;image-rendering:pixelated;">
+                            <div style="font-size:13px;color:var(--accent-gold);margin-top:8px;">贝利 · 成长期</div>
+                        </div>
+                        <div style="border:3px solid var(--border-color);background:var(--bg-card);padding:8px;text-align:center;">
+                            <img src="./ranch_art/r-huo-s3-idle.png" alt="贝利 成年期" style="width:100%;image-rendering:pixelated;">
+                            <div style="font-size:13px;color:var(--accent-gold);margin-top:8px;">贝利 · 成年期</div>
+                        </div>
+                        <div style="border:3px solid var(--border-color);background:var(--bg-card);padding:8px;text-align:center;">
+                            <img src="./ranch_art/r-huo-s4-idle.png" alt="贝利 巨型" style="width:100%;image-rendering:pixelated;">
+                            <div style="font-size:13px;color:var(--accent-gold);margin-top:8px;">贝利 · 巨型</div>
+                        </div>
+                        <div style="border:3px solid var(--border-color);background:var(--bg-card);padding:8px;text-align:center;">
+                            <img src="./ranch_art/r-er-s0-idle.png" alt="巴弗 孵化期" style="width:100%;image-rendering:pixelated;">
+                            <div style="font-size:13px;color:var(--accent-gold);margin-top:8px;">巴弗 · 孵化期</div>
+                        </div>
+                        <div style="border:3px solid var(--border-color);background:var(--bg-card);padding:8px;text-align:center;">
+                            <img src="./ranch_art/r-er-s1-idle.png" alt="巴弗 幼崽期" style="width:100%;image-rendering:pixelated;">
+                            <div style="font-size:13px;color:var(--accent-gold);margin-top:8px;">巴弗 · 幼崽期</div>
+                        </div>
+                        <div style="border:3px solid var(--border-color);background:var(--bg-card);padding:8px;text-align:center;">
+                            <img src="./ranch_art/r-er-s2-idle.png" alt="巴弗 成长期" style="width:100%;image-rendering:pixelated;">
+                            <div style="font-size:13px;color:var(--accent-gold);margin-top:8px;">巴弗 · 成长期</div>
+                        </div>
+                        <div style="border:3px solid var(--border-color);background:var(--bg-card);padding:8px;text-align:center;">
+                            <img src="./ranch_art/r-er-s3-idle.png" alt="巴弗 成年期" style="width:100%;image-rendering:pixelated;">
+                            <div style="font-size:13px;color:var(--accent-gold);margin-top:8px;">巴弗 · 成年期</div>
+                        </div>
+                        <div style="border:3px solid var(--border-color);background:var(--bg-card);padding:8px;text-align:center;">
+                            <img src="./ranch_art/r-er-s4-idle.png" alt="巴弗 巨型" style="width:100%;image-rendering:pixelated;">
+                            <div style="font-size:13px;color:var(--accent-gold);margin-top:8px;">巴弗 · 巨型</div>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <div class="sub-section">
-                <button class="sub-header" data-sub="petGuideBody"><span>🚀 小技巧</span><span class="arrow">▶</span></button>
+                    <button class="sub-header" data-sub="petGuideBody"><span>🚀 小技巧</span><span class="arrow">▶</span></button>
                 <div class="sub-body" id="petGuideBody">
                     <div class="guide-content">
                         <p><span class="highlight">前期准备</span> — 攒够 50000 金币后优先买蛋，第一只龙养成成年后继续买蛋收集不同的龙。</p>
