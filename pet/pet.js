@@ -33,8 +33,8 @@ const SIT_LINES = ['走累了，坐会儿。', '……这沙发不错。', '安�
 
 const mobile = matchMedia('(max-width: 640px)').matches;
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const SPEED = mobile ? 34 : 46;
-const PAUSE_MIN = 1400, PAUSE_MAX = 4200;
+const SPEED = mobile ? 19 : 27;          // 悠闲散步的速度（原来 34/46）
+const PAUSE_MIN = 4500, PAUSE_MAX = 11000;   // 站着发呆的时间拉长
 const WALK_BEFORE_REST = 26000;    // 累计走这么久就去找沙发
 const REST_MS_MIN = 14000, REST_MS_MAX = 26000;
 
@@ -45,7 +45,7 @@ let pos = { x: 0, y: 0 }, target = { x: 0, y: 0 };
 let phase = 'pause', phaseUntil = 0, bubbleTimer = 0, last = 0, facing = 0, facingWant = 0;
 let audioMode = localStorage.getItem(LS_AUDIO) === '1';
 let earphone = localStorage.getItem(LS_EAR) === 'black' ? 'black' : 'red';
-let soundLevel = 0, soundActive = false, analyser = null, audioCtx = null, audioStream = null;
+let soundLevel = 0, soundActive = false, analyser = null, audioCtx = null, audioStream = null, lastHum = 0;
 let sitOffsetY = -2.15, sitOffsetX = 0, sitScaleMul = 0.72, baseScale = 1;
 const testOps = [];
 
@@ -141,7 +141,7 @@ function decorate(t) {
         facing += (facingWant - facing) * 0.10;
         if (viewer.modelPivot) viewer.modelPivot.rotation.y = facing;
         const moving = phase === 'walk' ? 1 : 0.06;
-        const s = Math.sin(t * 6.4);
+        const s = Math.sin(t * 4.4);
         // 摆臂
         addRot(map.upperArmL, s * 0.62 * moving, 0, 0);
         addRot(map.upperArmR, -s * 0.62 * moving, 0, 0);
@@ -157,10 +157,17 @@ function decorate(t) {
             addRot(legBones.ankleR, Math.max(0, s) * 0.22 * moving, 0, 0);
         }
     }
-    // 听歌时轻轻点头
+    // 听歌时：点头 + 用脚打节拍
     if (soundActive && !sitting) {
         addRot(map.head, 0, 0, Math.sin(t * 5.2) * 0.05);
         addRot(map.upperBody, 0, Math.sin(t * 2.6) * 0.03, 0);
+        if (legBones) {
+            const beat = Math.max(0, Math.sin(t * 9.0));
+            const tap = beat * beat * 0.34;              // 脚尖打拍子
+            addRot(legBones.ankleL, -0.22 - tap, 0, 0);
+            addRot(legBones.kneeL, 0.16 + tap * 0.5, 0, 0);
+            addRot(legBones.thighL, 0.10 + tap * 0.12, 0, 0);
+        }
     }
 }
 function size() {
@@ -277,6 +284,7 @@ function tick(now) {
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
     if (now % 400 < 20) sampleAudio();
+    if (soundActive && !sitting && now - lastHum > 26000 && Math.random() < 0.02) { lastHum = now; say('♪ 哼哼……', 2600); }
     if (reduceMotion) return;
 
     if (phase === 'sit') {
@@ -495,6 +503,7 @@ window.__n109Pet = {
     sitY: (v) => { sitOffsetY = v; },
     sitRX: (v) => { sitOffsetX = v; },
     sitScale: (v) => { sitScaleMul = v; },
+    pause: (ms) => { phase = 'pause'; phaseUntil = performance.now() + (ms || 60000); },
     boneNames: () => viewer && viewer.bones ? viewer.bones.map(b => b.name).filter(n => n && n !== '') : [],
     test: (name, x, y, z) => { testOps.push({ name, x, y, z }); return true; },
     clearTest: () => { testOps.length = 0; },
