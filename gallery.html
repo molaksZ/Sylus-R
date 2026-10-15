@@ -583,7 +583,7 @@
                 const body = document.getElementById(targetId);
                 const arrow = this.querySelector('.arrow');
                 if (body) {
-                    body.classList.toggle('open');
+                    body.classList.toggle('open'); if (body.classList.contains('open')) hydrateImages(body);
                     if (arrow) arrow.classList.toggle('open');
                 }
             });
@@ -890,7 +890,15 @@
         // ============================================================
 
         // ---- 植物 ----
-        function renderPlants() {
+        function hydrateImages(root) {
+    /* 折叠板块在 display:none 时，部分浏览器（手机/微信/QQ 内置）不会触发 loading=lazy，
+       所以改成展开时才真正设置 src，确保图片一定出现。 */
+    (root || document).querySelectorAll('img[data-src]').forEach(function (im) {
+        var s = im.getAttribute('data-src');
+        if (s) { im.setAttribute('src', s); im.removeAttribute('data-src'); }
+    });
+}
+function renderPlants() {
             const grid = document.getElementById('plantGrid');
             let html = '';
             let totalItems = 0;
@@ -900,7 +908,7 @@
                 html += `
                     <div class="card">
                         <div class="img-wrap">
-                            <img src="${plantImgPath(p.id, 4, 0)}" alt="${p.name}" loading="lazy"
+                            <img data-src="${plantImgPath(p.id, 4, 0)}" alt="${p.name}"
                                  onerror="this.parentElement.innerHTML='<span style=\\'font-size:12px;color:var(--text-secondary);\\'>${p.name}</span>'">
                         </div>
                         <div class="name">${p.name}</div>
@@ -917,7 +925,7 @@
                     html += `
                         <div class="card">
                             <div class="img-wrap">
-                                <img src="${plantImgPath(p.id, 4, v)}" alt="${vname}" loading="lazy"
+                                <img data-src="${plantImgPath(p.id, 4, v)}" alt="${vname}"
                                      onerror="this.parentElement.innerHTML='<span style=\\'font-size:12px;color:var(--text-secondary);\\'>${vname}</span>'">
                             </div>
                             <div class="name" style="color: var(--accent-gold);">✦ ${vname}</div>
@@ -947,7 +955,7 @@
                 html += `
                     <div class="card">
                         <div class="img-wrap">
-                            <img src="${fishImgPath(id)}" alt="${name}" loading="lazy"
+                            <img data-src="${fishImgPath(id)}" alt="${name}"
                                  onerror="this.parentElement.innerHTML='<span style=\\'font-size:12px;color:var(--text-secondary);\\'>${name}</span>'">
                         </div>
                         <div class="name">${name}</div>
@@ -963,7 +971,7 @@
                 html += `
                     <div class="card">
                         <div class="img-wrap">
-                            <img src="${junkImgPath(id)}" alt="${name}" loading="lazy"
+                            <img data-src="${junkImgPath(id)}" alt="${name}"
                                  onerror="this.parentElement.innerHTML='<span style=\\'font-size:12px;color:var(--text-secondary);\\'>${name}</span>'">
                         </div>
                         <div class="name" style="color: var(--text-secondary);">🗑️ ${name}</div>
@@ -984,7 +992,7 @@
                 html += `
                     <div class="card">
                         <div class="img-wrap">
-                            <img src="${egg.img}" alt="${egg.name}" loading="lazy"
+                            <img data-src="${egg.img}" alt="${egg.name}"
                                  onerror="this.parentElement.innerHTML='<span style=\\'font-size:12px;color:var(--text-secondary);\\'>${egg.name}</span>'">
                         </div>
                         <div class="name">${egg.name}</div>
@@ -1006,7 +1014,7 @@
                 html += `
                     <div class="card achv-card">
                         <div class="img-wrap">
-                            <img src="${a.img || './achv/placeholder.png'}" alt="${a.name}" loading="lazy"
+                            <img data-src="${a.img || './achv/placeholder.png'}" alt="${a.name}"
                                  onerror="this.parentElement.innerHTML='<span style=\\'font-size:12px;color:var(--text-secondary);\\'>${a.name}</span>'">
                         </div>
                         <div class="name">${a.name}</div>
@@ -1026,6 +1034,7 @@
             renderFish();
             renderEggs();
             renderAchievements();
+    hydrateImages(document.getElementById('plantBody'));
 
             // 默认展开植物，收起其它
             document.getElementById('plantBody').classList.add('open');
