@@ -14,6 +14,8 @@
 #n109-pet.ready { opacity: 1; }
 #n109-pet.hidden { display: none; }
 #n109-pet canvas {
+    position: relative;
+    z-index: 3;
     width: 100%;
     height: 100%;
     display: block;
@@ -22,11 +24,34 @@
     filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45));
 }
 #n109-pet canvas:active { cursor: grabbing; }
-#n109-pet.thinking { animation: n109PetBob 0.9s ease-in-out infinite; }
-@keyframes n109PetBob {
-    0%, 100% { transform: translate(var(--px, 0), var(--py, 0)); }
-    50% { transform: translate(var(--px, 0), calc(var(--py, 0px) - 6px)); }
+
+/* 皮质沙发（休息时淡入） */
+#n109-pet-sofa {
+    position: absolute;
+    left: 4%;
+    bottom: 2%;
+    width: 92%;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+    filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.5));
 }
+#n109-pet-sofa.show { opacity: 1; transform: translateY(0) scale(1); }
+
+/* 耳机（听到声音时戴上） */
+#n109-pet-phones {
+    position: absolute;
+    left: 19%;
+    top: 9%;
+    width: 62%;
+    z-index: 4;
+    opacity: 0;
+    transform: translateY(-4px) scale(0.92);
+    transition: opacity 0.28s ease, transform 0.28s ease;
+    pointer-events: none;
+}
+#n109-pet-phones.show { opacity: 1; transform: translateY(0) scale(1); }
 
 #n109-pet-bubble {
     position: absolute;
@@ -46,6 +71,7 @@
     opacity: 0;
     transition: opacity 0.2s ease;
     pointer-events: none;
+    z-index: 5;
 }
 #n109-pet-bubble.show { opacity: 1; }
 #n109-pet-bubble::after {
@@ -58,10 +84,12 @@
     border-top-color: var(--border-color, #4a6a8a);
 }
 
-#n109-pet-toggle {
+/* 右下角按钮组 */
+#n109-pet-toggle,
+#n109-pet-audio,
+#n109-pet-ear {
     position: fixed;
     right: 14px;
-    bottom: 14px;
     z-index: 901;
     width: 46px;
     height: 46px;
@@ -74,12 +102,23 @@
     box-shadow: inset -2px -2px 0 #0a1a2a, inset 2px 2px 0 #3a4a6a;
     transition: 0.12s;
 }
-#n109-pet-toggle:hover { border-color: var(--accent-gold, #e8b84c); }
-#n109-pet-toggle:active { transform: translate(2px, 2px); }
-#n109-pet-toggle.off { opacity: 0.55; filter: grayscale(1); }
+#n109-pet-toggle { bottom: 14px; }
+#n109-pet-ear { bottom: 66px; }
+#n109-pet-audio { bottom: 118px; }
+#n109-pet-toggle:hover,
+#n109-pet-audio:hover,
+#n109-pet-ear:hover { border-color: var(--accent-gold, #e8b84c); }
+#n109-pet-toggle:active,
+#n109-pet-audio:active,
+#n109-pet-ear:active { transform: translate(2px, 2px); }
+#n109-pet-audio.on { border-color: #4a8a4a; color: #8fdb8f; }
+.hidden-btn { display: none !important; }
 
 @media (max-width: 640px) {
     #n109-pet { width: 130px; height: 175px; }
     #n109-pet-bubble { max-width: 150px; font-size: 12px; }
-    #n109-pet-toggle { width: 40px; height: 40px; font-size: 17px; right: 10px; bottom: 10px; }
+    #n109-pet-toggle, #n109-pet-audio, #n109-pet-ear { width: 38px; height: 38px; font-size: 16px; right: 10px; }
+    #n109-pet-toggle { bottom: 10px; }
+    #n109-pet-ear { bottom: 54px; }
+    #n109-pet-audio { bottom: 98px; }
 }
