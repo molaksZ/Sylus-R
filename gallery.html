@@ -410,6 +410,8 @@
             <a href="#fish">🐟 鱼类</a>
             <a href="#eggs">🥚 宠物蛋</a>
             <a href="#achv">🏅 成就</a>
+            <a href="#mine">🎪 夹娃娃</a>
+            <a href="#milk">🍸 调酒</a>
         </nav>
         <div class="sidebar-footer">v1.0 · 像素攻略站</div>
     </aside>
@@ -419,7 +421,7 @@
 
         <div class="page-title">
             <h1>📊 图鉴</h1>
-            <p>植物 · 鱼类 · 宠物蛋 · 成就 — 点击标题展开/收起</p>
+            <p>植物 · 鱼类 · 宠物蛋 · 成就 · 夹娃娃 · 调酒 — 点击标题展开/收起</p>
         </div>
 
         <!-- ===== 植物图鉴 ===== -->
@@ -466,7 +468,32 @@
             </div>
         </div>
 
-        <!-- ===== 底部 ===== -->
+        
+<!-- ===== 夹娃娃图鉴 ===== -->
+<div class="accordion" id="mine">
+<button class="accordion-header" data-accordion="mineBody">
+<span>🎪 夹娃娃图鉴 · 矿区宝藏 <span class="count-badge" id="mineCount"></span></span>
+<span class="arrow" id="mineArrow">▶</span>
+</button>
+<div class="accordion-body" id="mineBody">
+<p style="font-size:13px;color:var(--text-secondary);line-height:1.8;margin-bottom:12px;">「N109: Shiny Rush!」小游戏。矿区共 4 张地图，藏有 96 件可收集物 —— 金块与钻石能换金币，其余为收藏品。图中碎片数为图鉴合成的所需碎片。</p>
+<div class="grid" id="mineGrid"></div>
+</div>
+</div>
+
+<!-- ===== 调酒图鉴 ===== -->
+<div class="accordion" id="milk">
+<button class="accordion-header" data-accordion="milkBody">
+<span>🍸 调酒图鉴 <span class="count-badge" id="milkCount"></span></span>
+<span class="arrow" id="milkArrow">▶</span>
+</button>
+<div class="accordion-body" id="milkBody">
+<p style="font-size:13px;color:var(--text-secondary);line-height:1.8;margin-bottom:12px;">调酒小游戏共 40 款配方。游戏内卡片由瓶型与酒液配色实时绘制，此处以色号标注对应配色组。</p>
+<div class="grid" id="milkGrid"></div>
+</div>
+</div>
+
+<!-- ===== 底部 ===== -->
         <footer class="footer">
             <div style="margin-bottom:8px;">📜 本攻略站由玩家自发维护 · 内容按 <strong>CC BY-NC-SA 4.0</strong> 协议提供</div>
             <div class="footer-links">
@@ -1029,11 +1056,203 @@ function renderPlants() {
         // ============================================================
         // 6. 初始化
         // ============================================================
-        document.addEventListener('DOMContentLoaded', function() {
+        
+// ---- 夹娃娃（矿区）数据 ----
+const MINE_DEX = [
+        { id: "gold_s", name: "小金块", val: 5, frag: 20, min: 0, cat: "金银财宝" },
+        { id: "gold_m", name: "中金块", val: 10, frag: 21, min: 0, cat: "金银财宝" },
+        { id: "gold_l", name: "大金块", val: 15, frag: 22, min: 0, cat: "金银财宝" },
+        { id: "gold_xl", name: "超大金块", val: 20, frag: 24, min: 2, cat: "金银财宝" },
+        { id: "diamond", name: "钻石", val: 25, frag: 26, min: 0, cat: "金银财宝" },
+        { id: "goblet", name: "红酒杯", val: 0, frag: 0, min: 0, cat: "饮品" },
+        { id: "flower", name: "一盆花", val: 0, frag: 22, min: 0, cat: "收藏品" },
+        { id: "cherry", name: "樱桃酒", val: 0, frag: 26, min: 1, cat: "饮品" },
+        { id: "chalice", name: "古董杯子", val: 0, frag: 31, min: 2, cat: "收藏品" },
+        { id: "gun", name: "猎兔700", val: 0, frag: 37, min: 3, cat: "收藏品" },
+        { id: "clock", name: "加时器", val: 0, frag: 0, min: 0, cat: "功能道具" },
+        { id: "pizza", name: "披萨", val: 0, frag: 21, min: 0, cat: "食物" },
+        { id: "salad", name: "沙拉", val: 0, frag: 21, min: 0, cat: "食物" },
+        { id: "steak", name: "牛排", val: 0, frag: 22, min: 0, cat: "食物" },
+        { id: "fish", name: "酸烤鱼", val: 0, frag: 22, min: 0, cat: "食物" },
+        { id: "meat", name: "烤肉", val: 0, frag: 22, min: 0, cat: "食物" },
+        { id: "coffee", name: "雪顶咖啡", val: 0, frag: 23, min: 0, cat: "饮品" },
+        { id: "icecream", name: "红酒冰淇淋", val: 0, frag: 23, min: 1, cat: "食物" },
+        { id: "glove", name: "作战手套", val: 0, frag: 23, min: 0, cat: "收藏品" },
+        { id: "bullet", name: "特殊的子弹", val: 0, frag: 24, min: 1, cat: "收藏品" },
+        { id: "potion", name: "神秘药水", val: 0, frag: 24, min: 1, cat: "收藏品" },
+        { id: "smg", name: "冲锋枪", val: 0, frag: 26, min: 1, cat: "收藏品" },
+        { id: "rifle", name: "突击步枪", val: 0, frag: 27, min: 1, cat: "收藏品" },
+        { id: "katana", name: "长刀", val: 0, frag: 27, min: 1, cat: "收藏品" },
+        { id: "axe", name: "战斧", val: 0, frag: 28, min: 2, cat: "收藏品" },
+        { id: "flail", name: "流星锤", val: 0, frag: 28, min: 2, cat: "收藏品" },
+        { id: "bow", name: "十字弩", val: 0, frag: 28, min: 2, cat: "收藏品" },
+        { id: "claws", name: "利爪手甲", val: 0, frag: 30, min: 2, cat: "收藏品" },
+        { id: "sniper", name: "狙击枪", val: 0, frag: 31, min: 2, cat: "收藏品" },
+        { id: "bounty", name: "悬赏令", val: 0, frag: 31, min: 3, cat: "收藏品" },
+        { id: "flamer", name: "喷火器", val: 0, frag: 32, min: 3, cat: "收藏品" },
+        { id: "rpg", name: "火箭筒", val: 0, frag: 34, min: 3, cat: "收藏品" },
+        { id: "pulse", name: "脉冲枪", val: 0, frag: 36, min: 3, cat: "收藏品" },
+        { id: "belt", name: "红宝石腰带", val: 0, frag: 37, min: 3, cat: "收藏品" },
+        { id: "ring", name: "红宝石戒指", val: 0, frag: 40, min: 4, cat: "收藏品" },
+        { id: "core", name: "芯核", val: 0, frag: 44, min: 4, cat: "收藏品" },
+        { id: "sword", name: "红宝石重剑", val: 0, frag: 47, min: 4, cat: "收藏品" },
+        { id: "crown", name: "红宝石王冠", val: 0, frag: 50, min: 5, cat: "收藏品" },
+        { id: "f_pistol", name: "木柄手枪", val: 0, frag: 27, min: 8, cat: "收藏品" },
+        { id: "f_smg", name: "速射枪", val: 0, frag: 28, min: 9, cat: "收藏品" },
+        { id: "f_carbine", name: "卡宾枪", val: 0, frag: 28, min: 9, cat: "收藏品" },
+        { id: "f_torch", name: "喷灯", val: 0, frag: 28, min: 9, cat: "收藏品" },
+        { id: "f_erifle", name: "能量步枪", val: 0, frag: 31, min: 10, cat: "收藏品" },
+        { id: "f_cannon", name: "电浆炮", val: 0, frag: 37, min: 11, cat: "收藏品" },
+        { id: "f_beam", name: "光束枪", val: 0, frag: 31, min: 10, cat: "收藏品" },
+        { id: "f_taser", name: "电击枪", val: 0, frag: 31, min: 10, cat: "收藏品" },
+        { id: "f_bandage", name: "绷带卷", val: 0, frag: 21, min: 6, cat: "收藏品" },
+        { id: "f_key", name: "铜钥匙", val: 0, frag: 21, min: 6, cat: "收藏品" },
+        { id: "f_helmet", name: "矿灯帽", val: 0, frag: 22, min: 6, cat: "收藏品" },
+        { id: "f_vest", name: "矿工背心", val: 0, frag: 23, min: 7, cat: "收藏品" },
+        { id: "f_gloves", name: "工装手套", val: 0, frag: 22, min: 6, cat: "收藏品" },
+        { id: "f_belt", name: "工具腰带", val: 0, frag: 23, min: 7, cat: "收藏品" },
+        { id: "f_pendant", name: "黄金吊坠", val: 0, frag: 37, min: 11, cat: "收藏品" },
+        { id: "f_ring", name: "黄金戒指", val: 0, frag: 44, min: 11, cat: "收藏品" },
+        { id: "f_cloak", name: "矿工斗篷", val: 0, frag: 23, min: 7, cat: "收藏品" },
+        { id: "f_lantern", name: "提灯", val: 0, frag: 22, min: 6, cat: "收藏品" },
+        { id: "f_bag", name: "工具挎包", val: 0, frag: 23, min: 7, cat: "收藏品" },
+        { id: "f_knife", name: "猎刀", val: 0, frag: 24, min: 7, cat: "收藏品" },
+        { id: "f_knuckle", name: "铜指虎", val: 0, frag: 24, min: 7, cat: "收藏品" },
+        { id: "f_shortsword", name: "短剑", val: 0, frag: 24, min: 7, cat: "收藏品" },
+        { id: "f_saber", name: "弯刀", val: 0, frag: 26, min: 8, cat: "收藏品" },
+        { id: "f_spear", name: "红缨枪", val: 0, frag: 26, min: 8, cat: "收藏品" },
+        { id: "f_hammer", name: "铁锤", val: 0, frag: 26, min: 8, cat: "收藏品" },
+        { id: "f_axe", name: "双刃斧", val: 0, frag: 27, min: 8, cat: "收藏品" },
+        { id: "f_crossbow", name: "木弩", val: 0, frag: 27, min: 8, cat: "收藏品" },
+        { id: "s_hat", name: "海盗帽", val: 0, frag: 30, min: 15, cat: "收藏品" },
+        { id: "s_armor", name: "护胸甲", val: 0, frag: 32, min: 15, cat: "收藏品" },
+        { id: "s_gauntlet", name: "护手甲", val: 0, frag: 30, min: 15, cat: "收藏品" },
+        { id: "s_belt", name: "铆钉腰带", val: 0, frag: 32, min: 15, cat: "收藏品" },
+        { id: "s_necklace", name: "水晶项链", val: 0, frag: 35, min: 16, cat: "收藏品" },
+        { id: "s_ring", name: "星纹戒指", val: 0, frag: 44, min: 17, cat: "收藏品" },
+        { id: "s_skullring", name: "骷髅戒指", val: 0, frag: 44, min: 17, cat: "收藏品" },
+        { id: "s_cloak", name: "毛领斗篷", val: 0, frag: 30, min: 15, cat: "收藏品" },
+        { id: "s_dagger", name: "匕首", val: 0, frag: 23, min: 12, cat: "收藏品" },
+        { id: "s_knuckle", name: "骷髅指虎", val: 0, frag: 23, min: 12, cat: "收藏品" },
+        { id: "s_broadsword", name: "阔剑", val: 0, frag: 24, min: 13, cat: "收藏品" },
+        { id: "s_cutlass", name: "海盗刀", val: 0, frag: 24, min: 13, cat: "收藏品" },
+        { id: "s_halberd", name: "长戟", val: 0, frag: 26, min: 13, cat: "收藏品" },
+        { id: "s_hammer", name: "重锤", val: 0, frag: 26, min: 13, cat: "收藏品" },
+        { id: "s_axe", name: "铁斧", val: 0, frag: 24, min: 13, cat: "收藏品" },
+        { id: "s_crossbow", name: "铁弩", val: 0, frag: 26, min: 13, cat: "收藏品" },
+        { id: "s_pistol", name: "制式手枪", val: 0, frag: 27, min: 14, cat: "收藏品" },
+        { id: "s_smg", name: "微冲", val: 0, frag: 27, min: 14, cat: "收藏品" },
+        { id: "s_mg", name: "重机枪", val: 0, frag: 28, min: 14, cat: "收藏品" },
+        { id: "s_shotgun", name: "霰弹枪", val: 0, frag: 27, min: 14, cat: "收藏品" },
+        { id: "s_sniper", name: "长程步枪", val: 0, frag: 28, min: 14, cat: "收藏品" },
+        { id: "s_flamer", name: "火焰枪", val: 0, frag: 28, min: 14, cat: "收藏品" },
+        { id: "s_smoke", name: "烟雾罐", val: 0, frag: 23, min: 12, cat: "收藏品" },
+        { id: "s_mag", name: "弹匣", val: 0, frag: 22, min: 12, cat: "收藏品" },
+        { id: "s_bullet", name: "穿甲弹", val: 0, frag: 22, min: 12, cat: "收藏品" },
+        { id: "s_crystal", name: "晶簇", val: 0, frag: 35, min: 16, cat: "收藏品" },
+        { id: "s_scroll", name: "卷轴", val: 0, frag: 35, min: 16, cat: "收藏品" },
+        { id: "s_rune", name: "符文石", val: 0, frag: 37, min: 16, cat: "收藏品" },
+        { id: "s_medal", name: "勋章", val: 0, frag: 37, min: 16, cat: "收藏品" },
+        { id: "s_wing", name: "翼徽", val: 0, frag: 50, min: 17, cat: "收藏品" },
+        { id: "ruby", name: "红宝石", val: 0, frag: 0, min: 0, cat: "收藏品" }
+];
+const MINE_IMG = (id) => './mine_art/' + id + '.webp';
+
+// ---- 调酒数据 ----
+const MILK_DEX = [
+        { name: "玛格丽特", color: 1 },
+        { name: "马天尼", color: 2 },
+        { name: "莫希托", color: 3 },
+        { name: "尼格罗尼", color: 4 },
+        { name: "古典", color: 5 },
+        { name: "曼哈顿", color: 6 },
+        { name: "戴绮丽", color: 7 },
+        { name: "威士忌酸", color: 8 },
+        { name: "大都会", color: 1 },
+        { name: "血腥玛丽", color: 2 },
+        { name: "莫斯科骡子", color: 3 },
+        { name: "长岛冰茶", color: 4 },
+        { name: "丛林鸟", color: 5 },
+        { name: "僵尸", color: 6 },
+        { name: "凯匹琳娜", color: 7 },
+        { name: "古典朗姆", color: 8 },
+        { name: "拉莫斯金菲士", color: 1 },
+        { name: "新加坡司令", color: 2 },
+        { name: "暗黑恶魔", color: 3 },
+        { name: "椰林飘香", color: 4 },
+        { name: "椰树林之夜", color: 5 },
+        { name: "汤姆柯林斯", color: 6 },
+        { name: "汤米玛格丽特", color: 7 },
+        { name: "爱尔兰咖啡", color: 8 },
+        { name: "白色佳人", color: 1 },
+        { name: "竹子", color: 2 },
+        { name: "翻云覆雨", color: 3 },
+        { name: "老广场", color: 4 },
+        { name: "荆棘", color: 5 },
+        { name: "萨泽拉克", color: 6 },
+        { name: "蓝湖", color: 7 },
+        { name: "薄荷茱莉普", color: 8 },
+        { name: "边车", color: 1 },
+        { name: "遗言", color: 2 },
+        { name: "金菲士", color: 3 },
+        { name: "金酒骡子", color: 4 },
+        { name: "阿佩罗气泡", color: 5 },
+        { name: "阿玛雷托酸", color: 6 },
+        { name: "飞行", color: 7 },
+        { name: "龙舌兰日出", color: 8 }
+];
+
+function renderMine() {
+    const grid = document.getElementById('mineGrid');
+    if (!grid) return;
+    let html = '';
+    MINE_DEX.forEach((m) => {
+        const sub = [];
+        if (m.val > 0) sub.push('💰 ' + m.val + ' 金币');
+        if (m.frag > 0) sub.push('🧩 碎片 ×' + m.frag);
+        html += `
+            <div class="card">
+                <div class="img-wrap">
+                    <img data-src="${MINE_IMG(m.id)}" alt="${m.name}" onerror="this.parentElement.innerHTML='<span style=\\'font-size:12px;color:var(--text-secondary);\\'>${m.name}</span>'">
+                </div>
+                <div class="name">${m.name}</div>
+                <div class="sub">${m.cat}</div>
+                <div class="sub">${sub.join(' · ') || '收藏品'}</div>
+            </div>
+        `;
+    });
+    grid.innerHTML = html;
+    document.getElementById('mineCount').textContent = '(' + MINE_DEX.length + '件)';
+}
+
+function renderMilk() {
+    const grid = document.getElementById('milkGrid');
+    if (!grid) return;
+    let html = '';
+    MILK_DEX.forEach((d, i) => {
+        const hue = (d.color - 1) * 45;
+        html += `
+            <div class="card">
+                <div class="img-wrap" style="background:linear-gradient(160deg,hsl(${hue},55%,38%),hsl(${hue},45%,22%));">
+                    <span style="font-size:34px;">🍸</span>
+                </div>
+                <div class="name">${d.name}</div>
+                <div class="sub">配色组 ${d.color}</div>
+                <div class="sub">第 ${i + 1} 款</div>
+            </div>
+        `;
+    });
+    grid.innerHTML = html;
+    document.getElementById('milkCount').textContent = '(' + MILK_DEX.length + '款)';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
             renderPlants();
             renderFish();
             renderEggs();
             renderAchievements();
+    renderMine();
+    renderMilk();
     hydrateImages(document.getElementById('plantBody'));
 
             // 默认展开植物，收起其它
