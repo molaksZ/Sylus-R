@@ -42,7 +42,7 @@ let viewer = null, canvas = null, wrap = null, bubble = null, toggle = null, ear
 let sofa = null, phones = null;
 let raf = 0, started = false, sitting = false, sittingUntil = 0, walkedMs = 0, cheer = 0;
 let pos = { x: 0, y: 0 }, target = { x: 0, y: 0 };
-let phase = 'pause', phaseUntil = 0, bubbleTimer = 0, last = 0;
+let phase = 'pause', phaseUntil = 0, bubbleTimer = 0, last = 0, facing = 0, facingWant = 0;
 let audioMode = localStorage.getItem(LS_AUDIO) === '1';
 let earphone = localStorage.getItem(LS_EAR) === 'black' ? 'black' : 'red';
 let soundLevel = 0, soundActive = false, analyser = null, audioCtx = null, audioStream = null;
@@ -86,10 +86,10 @@ function relaxArms() {
         q.set(n[0], n[1], n[2], n[3]);
         bone.quaternion.copy(q);
     };
-    bend(map.upperArmL, -1.24);
-    bend(map.upperArmR, 1.24);
-    bend(map.elbowL, -0.14);
-    bend(map.elbowR, 0.14);
+    bend(map.upperArmL, -1.02);
+    bend(map.upperArmR, 1.02);
+    bend(map.elbowL, -0.20);
+    bend(map.elbowR, 0.20);
 }
 /* 在 viewer 每帧摆完骨之后，叠加走路摆臂 / 听歌点头 */
 function addRot(bone, x, y, z) {
@@ -137,6 +137,9 @@ function decorate(t) {
             addRot(legBones.ankleR, -0.16, 0, 0);
         }
     } else {
+        facingWant = phase === 'walk' ? facingWant : 0;
+        facing += (facingWant - facing) * 0.10;
+        if (viewer.modelPivot) viewer.modelPivot.rotation.y = facing;
         const moving = phase === 'walk' ? 1 : 0.06;
         const s = Math.sin(t * 6.4);
         // 摆臂
@@ -295,6 +298,7 @@ function tick(now) {
         } else {
             pos.x += (dx / dist) * step;
             pos.y += (dy / dist) * step;
+            facingWant = dx >= 0 ? Math.PI / 2 : -Math.PI / 2;   // 面向行进方向
             apply();
         }
     } else if (now >= phaseUntil) {
