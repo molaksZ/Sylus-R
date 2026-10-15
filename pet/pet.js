@@ -431,7 +431,8 @@ let enabled = true;
 function setEnabled(on) {
     enabled = on;
     localStorage.setItem(LS_OFF, on ? '0' : '1');
-    [toggle, audioBtn, earBtn].forEach(b => b && b.classList.toggle('hidden-btn', !on));
+    [audioBtn, earBtn].forEach(b => b && b.classList.toggle('hidden-btn', !on));
+    if (toggle) toggle.classList.toggle('off', !on);
     if (on) {
         wrap.classList.remove('hidden');
         if (!started || !viewer) boot(); else { last = 0; if (!raf) raf = requestAnimationFrame(tick); }
@@ -467,7 +468,7 @@ function schedule() {
         phones = wrap.querySelector('#n109-pet-phones');
         canvas = wrap.querySelector('#n109-pet-canvas');
         toggle = makeButton('n109-pet-toggle', '🐾', '召唤 / 收起 Q版彻');
-        toggle.classList.add('hidden-btn');
+        toggle.classList.add('off');
         audioBtn = makeButton('n109-pet-audio', '🎧', '听声音'); audioBtn.classList.add('hidden-btn');
         earBtn = makeButton('n109-pet-ear', earphone === 'red' ? '🔴' : '⚫', '切换耳机颜色'); earBtn.classList.add('hidden-btn');
         toggle.addEventListener('click', () => setEnabled(true));
