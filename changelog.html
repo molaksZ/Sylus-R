@@ -564,6 +564,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="./pet/pet.css" />
 </head>
 <body>
 
@@ -627,6 +628,16 @@
                 <span class="arrow open" id="guideArrow">▶</span>
             </button>
             <div class="section-body open" id="guideBody">
+<!-- 2026.10.15 小人 -->
+<div class="log-entry">
+<div class="date">📅 2026.10.15 <span class="badge-version">✨ 新增</span></div>
+<ul>
+<li><span class="highlight">新增「Q版彻 · 桌面小人」</span> — 全站页面都会出现一位 Q 版秦彻（常服），他会在页面里自由走动、停下发呆</li>
+<li><span class="highlight">互动</span> — 点击他会挥手并说一句语录；拖动可以旋转视角；偶尔会自己跟你搭话</li>
+<li><span class="highlight">随时收起</span> — 右下角 🐾 按钮可以召唤 / 收起小人，选择会被记住</li>
+<li><span class="highlight">技术说明</span> — 使用官方 Q 版 PMX 模型 + WebGL 实时渲染（three.js + MMDLoader），2048 贴图已压到 1024 节省流量</li>
+</ul>
+</div>
 <!-- 2026.10.15 新增 -->
 <div class="log-entry">
 <div class="date">📅 2026.10.15 <span class="badge-version">✨ 新增</span></div>
@@ -824,5 +835,6 @@
         });
     </script>
 
+    <script type="module" src="./pet/pet.js"></script>
 </body>
 </html>
