@@ -86,10 +86,10 @@ function relaxArms() {
         q.set(n[0], n[1], n[2], n[3]);
         bone.quaternion.copy(q);
     };
-    bend(map.upperArmL, -1.02);
-    bend(map.upperArmR, 1.02);
-    bend(map.elbowL, -0.20);
-    bend(map.elbowR, 0.20);
+    bend(map.upperArmL, -0.86);
+    bend(map.upperArmR, 0.86);
+    bend(map.elbowL, -0.24);
+    bend(map.elbowR, 0.24);
 }
 /* 在 viewer 每帧摆完骨之后，叠加走路摆臂 / 听歌点头 */
 function addRot(bone, x, y, z) {

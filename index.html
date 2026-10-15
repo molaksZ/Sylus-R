@@ -605,10 +605,7 @@
         }
 
         /* 双栏轮播 */
-        .dual-carousel {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
+        .dual-carousel { display: grid; grid-template-columns: minmax(0, 440px); justify-content: center; gap: 18px;
         }
         .dual-item {
             background: var(--bg-card);
@@ -1137,13 +1134,7 @@
 
                 <!-- 双栏轮播 -->
                 <section class="dual-carousel" id="dual">
-                    <div class="dual-item">
-                        <div class="title">🏆 选梅大赛</div>
-                        <div class="inner-carousel" id="contestCarousel">
-                            <div class="slides" id="contestSlides"></div>
-                            <div class="inner-dots" id="contestDots"></div>
-                        </div>
-                    </div>
+            
                     <div class="dual-item">
                         <div class="title">🎨 画廊</div>
                         <div class="inner-carousel" id="artCarousel">
@@ -1523,11 +1514,7 @@
         // ============================================================
         // 4. 主轮播
         // ============================================================
-        const MAIN_CAROUSEL = [
-            { src: './image/activity1.jpg', alt: '活动1', link: 'activities.html' },
-            { src: './image/activity2.jpg', alt: '活动2', link: 'activities.html' },
-            { src: './image/activity3.jpg', alt: '活动3', link: 'activities.html' }
-        ];
+        const MAIN_CAROUSEL = [ { src: './image/banner-1.jpg', alt: '秦彻 · 花园', pos: '50% 52%' }, { src: './image/banner-2.jpg', alt: '秦彻 · 银翼', pos: '50% 38%' }, { src: './image/banner-3.jpg', alt: '秦彻 · 雪夜', pos: '50% 46%' } ];
         let mainIndex = 0,
             mainInterval = null;
 
@@ -1539,10 +1526,11 @@
             MAIN_CAROUSEL.forEach((img, i) => {
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
-                slide.onclick = function() { window.location.href = img.link; };
+                slide.onclick = function() { if (img.link) window.location.href = img.link; };
                 const imgEl = document.createElement('img');
                 imgEl.src = img.src;
                 imgEl.alt = img.alt;
+                if (img.pos) imgEl.style.objectPosition = img.pos;
                 imgEl.onerror = function() {
                     this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="350" viewBox="0 0 800 350"%3E%3Crect width="800" height="350" fill="%232a3a5a"/%3E%3Ctext x="400" y="180" font-size="28" text-anchor="middle" fill="%23e8b84c" font-family="sans-serif"%3E' + img.alt + '%3C/text%3E%3C/svg%3E';
                 };
@@ -1602,12 +1590,6 @@
         // ============================================================
         // 5. 双栏轮播
         // ============================================================
-        const CONTEST_IMAGES = [
-            './image/contest-1.jpg',
-            './image/contest-2.jpg',
-            './image/contest-3.jpg'
-        ];
-
         const ART_IMAGES = [
             './art/1.jpg',
             './art/2.jpg',
@@ -1672,7 +1654,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            renderDualCarousel('contestSlides', 'contestDots', CONTEST_IMAGES, 'activities.html');
+            
             renderDualCarousel('artSlides', 'artDots', ART_IMAGES, 'activities.html');
 
             document.querySelectorAll('.dual-item').forEach(item => {
@@ -1682,12 +1664,12 @@
                         if (window._dualInterval[slidesId]) clearInterval(window._dualInterval[slidesId]);
                     });
                     item.addEventListener('mouseleave', function() {
-                        const images = slidesId === 'contestSlides' ? CONTEST_IMAGES : ART_IMAGES;
+                        const images = ART_IMAGES;
                         if (window._dualInterval[slidesId]) clearInterval(window._dualInterval[slidesId]);
                         window._dualInterval[slidesId] = setInterval(function() {
                             let idx = window._dualIndex[slidesId] || 0;
                             idx = (idx + 1) % images.length;
-                            goDualSlide(slidesId, slidesId === 'contestSlides' ? 'contestDots' : 'artDots',
+                            goDualSlide(slidesId, 'artDots',
                             idx);
                         }, 5000);
                     });
