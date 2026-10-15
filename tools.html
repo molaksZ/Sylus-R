@@ -456,14 +456,16 @@
     <div class="sidebar-title">📌 本页目录</div>
     <nav class="sidebar-nav">
         <a href="#farm">🌱 农场</a>
-        <a href="#pet">🐾 养宠</a>
+        <a href="#tools">🧰 工具/盲盒</a>
+                <a href="#pet">🐾 养宠</a>
         <a href="#fishing">🎣 钓鱼</a>
         <a href="#mine">💥 扫雷</a>
         <a href="#gomoku">♟️ 技能五子棋</a>
         <a href="#sheep">🐑 数羊</a>
         <a href="#race">🏎️ 赛车</a>
         <a href="#book">📖 答案之书</a>
-        <a href="#market">◆ 黑市</a>
+        <a href="#shop">🛒 商店</a>
+                <a href="#market">◆ 黑市</a>
         <a href="#economy">💰 宝石/金币</a>
     </nav>
     <div class="sidebar-footer">v1.0 · 像素攻略站</div>
@@ -473,7 +475,7 @@
 
     <div class="page-title">
         <h1>📝 攻略</h1>
-        <p>农场 · 钓鱼 · 扫雷 · 技能五子棋 · 数羊 · 赛车 · 答案之书 · 黑市 · 经济</p>
+        <p>农场 · 工具与盲盒 · 养宠 · 钓鱼 · 扫雷 · 技能五子棋 · 数羊 · 赛车 · 答案之书 · 商店 · 黑市 · 经济</p>
     </div>
 
     <!-- ===== 农场 ===== -->
@@ -534,7 +536,45 @@
         </div>
     </div>
 
-    <!-- ===== 养宠 ===== -->
+    <!-- ===== 工具与盲盒 ===== -->
+<div class="guide-module" id="tools">
+<button class="module-header" data-module="toolsBody">
+<span>🧰 工具升级与盲盒</span>
+<span class="arrow" id="toolsArrow">▶</span>
+</button>
+<div class="module-body" id="toolsBody">
+<div class="sub-section">
+<button class="sub-header" data-sub="toolsRuleBody"><span>📋 规则</span><span class="arrow">▶</span></button>
+<div class="sub-body" id="toolsRuleBody">
+<div class="guide-content">
+<p>农场里的三件工具与两种盲盒，全部在<b>厨房商店</b>购买。</p>
+<ul>
+<li><span class="highlight">水壶</span> — 浇水加速倍率随等级提升：Lv1 <b>1.5 倍</b> → Lv5 <b>2.1 倍</b>（每级 +0.15）；好气鸦自动浇水同样吃这个加成</li>
+<li><span class="highlight">收获的手</span> — 固定 <b>12%</b> 概率多收一个作物，<b>不需要升级</b></li>
+<li><span class="highlight">铲子</span> — 铲除作物时返还种子</li>
+<li><span class="highlight">升级上限</span> — 工具最高 <b>Lv5</b></li>
+<li><span class="highlight">升级消耗</span> — <b>200 → 600 → 1800 → 5400</b> 金币（逐级约 ×3）</li>
+<li><span class="highlight">升级门槛</span> — 除了金币，还需累计使用次数达标（<b>12 × 目标等级</b> 次）</li>
+<li><span class="highlight">种子盲盒</span> — <b>110 金币 / 4 碎片</b>，随机出前期品种</li>
+<li><span class="highlight">稀有盲盒</span> — <b>1040 金币 / 12 碎片</b>，只出后期稀有品种</li>
+<li><span class="highlight">开盒权重</span> — 越贵的品种越稀有（权重 = 1 ÷ √种子价）；好气鸦专属品种<strong>不进盲盒</strong>，只能在背包与图鉴里见到</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sub-section">
+<button class="sub-header" data-sub="toolsTipBody"><span>🚀 小技巧</span><span class="arrow">▶</span></button>
+<div class="sub-body" id="toolsTipBody">
+<div class="guide-content">
+<p><span class="highlight">顺序建议：</span>先升级好气鸦（离线干活），再考虑水壶；铲子只在需要换作物时才有价值，前期可以完全不升。</p>
+<p><span class="highlight">金币优先买新种子：</span>升级是长线投资，新种子才是图鉴和收益的来源 —— 开荒期把钱花在升级上会拖慢铺图鉴的速度。</p>
+<p><span class="highlight">盲盒别碰：</span>两个盲盒的期望产出都低于直接买种子，只适合图鉴后期缺个别品种时补漏。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ===== 养宠 ===== -->
     <div class="guide-module" id="pet">
         <button class="module-header" data-module="petBody">
             <span>🐾 养宠（龙蛋养成）</span>
@@ -932,7 +972,31 @@
         </div>
     </div>
 
-    <!-- ===== 黑市 ===== -->
+    <!-- ===== 商店 ===== -->
+<div class="guide-module" id="shop">
+<button class="module-header" data-module="shopBody">
+<span>🛒 商店 · 集市</span>
+<span class="arrow" id="shopArrow">▶</span>
+</button>
+<div class="module-body" id="shopBody">
+<div class="sub-section">
+<button class="sub-header" data-sub="shopRuleBody"><span>📋 商品一览</span><span class="arrow">▶</span></button>
+<div class="sub-body" id="shopRuleBody">
+<div class="guide-content">
+<p>集市用<b>红宝石 ◆</b>结算，共 5 件商品，其中 3 件是<b>常驻</b>（可反复购买），2 件是<b>一次性解锁</b>（买过即撤出集市，进收藏册）。</p>
+<ul>
+<li><span class="highlight">塔尔城 · 神秘入场券</span> — ◆5，一次性 · 解锁「龙谷」场景</li>
+<li><span class="highlight">一本神秘的书</span> — ◆5，一次性 · 解锁「教堂 · 答案之书」</li>
+<li><span class="highlight">神秘专属电影票</span> — ◆1，常驻 · 每日限购 1 张，凭票在私人影院放映当期限定片（<b>午夜零点作废</b>，当天要用掉）</li>
+<li><span class="highlight">一杯金菲士</span> — ◆1，常驻 · 送给秦彻能触发厨房互动</li>
+<li><span class="highlight">舞会邀请函</span> — ◆1，常驻 · 递给他即可前往卡萨酒庄点歌、跳一支舞</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ===== 黑市 ===== -->
     <div class="guide-module" id="market">
         <button class="module-header" data-module="marketBody">
             <span>◆ 黑市</span>
